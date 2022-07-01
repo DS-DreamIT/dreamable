@@ -53,6 +53,7 @@
 	<false/>
 	<key>UIAppFonts</key>
 	<array>
+		<string>Roboto-Thin.ttf</string>
 		<string>SCDream5.otf</string>
 	</array>
 </dict>

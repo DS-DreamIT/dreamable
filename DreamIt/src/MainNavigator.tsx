@@ -5,8 +5,8 @@ import Home from './Home'
 import Dream from './Dream'
 import MyPage from './Mypage'
 
-import { ParamListBase, RouteProp } from "@react-navigation/native";
-import { Image, Text } from "react-native";
+import {ParamListBase, RouteProp} from '@react-navigation/native'
+import {Image, Text} from 'react-native'
 
 const Tab = createBottomTabNavigator()
 
