@@ -1,19 +1,18 @@
 import React from 'react'
 import {View, Text, StyleSheet, ImageBackground} from 'react-native'
-import Currentdate from './CurrentDate'
-import TopBar from './TopBar'
-import Uploadfiles from './UploadFiles'
-import Writing from './Writing'
+import Currentdate from '../../components/Write/CurrentDate'
+import TopBar from '../../components/Common/TopBar'
+import Uploadfiles from '../../components/Write/UploadFiles'
+import Writing from '../../components/Write/Writing'
 
-const dateTime = new Date()
-
-export default function WritingDiary() {
+// @ts-ignore
+export default function WritingPage({navigation}) {
   return (
     <View style={styles.flex}>
       <ImageBackground
         style={[styles.flex]}
-        source={require('./assets/images/bg-dreamable.png')}>
-        <TopBar />
+        source={require('../../assets/images/background.png')}>
+        <TopBar navigation={navigation} />
         <Currentdate />
         <Writing />
         <Uploadfiles />

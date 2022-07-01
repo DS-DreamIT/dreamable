@@ -1,16 +1,15 @@
 import React from 'react'
 import {View, Text, StyleSheet, ImageBackground, Image} from 'react-native'
+import TopBar from '../../components/Common/TopBar'
 
-export default function AdvicePage() {
+// @ts-ignore
+export default function AdvicePage({navigation}) {
   return (
     <View style={styles.view}>
       <ImageBackground
         source={require('../../assets/images/background.png')}
         style={styles.bgImage}>
-        <Image
-          source={require('../../assets/icons/arrow-back.png')}
-          style={styles.gobackPNG}
-        />
+        <TopBar navigation={navigation} />
         <Text style={styles.titleText}>Advice for You</Text>
         <View style={styles.TopFlowerView}>
           <Image
@@ -49,10 +48,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-  },
-  gobackPNG: {
-    marginTop: 20,
-    marginLeft: 10,
   },
   titleText: {
     color: '#CE93D8',

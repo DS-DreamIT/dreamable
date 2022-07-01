@@ -1,19 +1,18 @@
 import React from 'react';
 import {View, Text, ImageBackground, Image, StyleSheet, SafeAreaView} from 'react-native'
+import TopBar from '../../components/Common/TopBar'
 
 const title = 'Share your Dreams';
 const smallTitle = 'Personal Dream';
 
-export default function ShareDream() {
+// @ts-ignore
+export default function ShareDream({navigation}) {
   return (
     <SafeAreaView style={styles.flex}>
       <ImageBackground
         style={[styles.flex]}
         source={require('../../assets/images/background.png')}>
-        <Image
-          style={styles.back}
-          source={require('../../assets/icons/arrow-back.png')}
-        />
+        <TopBar navigation={navigation} />
         <View style={[styles.flex, styles.padding89]}>
           <Text style={styles.text}>{title}</Text>
           <View style={styles.sepline} />

@@ -1,20 +1,15 @@
 import React from 'react'
 import {View, Text, StyleSheet, ImageBackground, Image, TouchableHighlight} from 'react-native'
-import SelectCard from '../../components/SelectCard'
+import SelectCard from '../../components/Card/SelectCard'
+import TopBar from '../../components/Common/TopBar'
 
 const background = require('../../assets/images/background.png')
 
+// @ts-ignore
 export default function SelectPage({navigation}) {
   return (
     <ImageBackground source={background} style={styles.bgImage}>
-      <View style={[styles.arrow, styles.button]}>
-        <TouchableHighlight onPress={() => navigation.pop()}>
-          <Image
-            source={require('../../assets/icons/arrow-back.png')}
-            style={[{width: 43}]}
-          />
-        </TouchableHighlight>
-      </View>
+      <TopBar navigation={navigation} />
       <View style={[styles.textView, styles.container]}>
         <Text style={styles.headText}>3일 후에 꿈을 선물해드릴게요 !</Text>
         <Text style={styles.subText}>혹시 더 필요한 게 있으신가요?</Text>
@@ -33,18 +28,10 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
   },
-  button: {
-    paddingLeft: 13,
-    alignItems: 'flex-start',
-  },
   container: {
     padding: 20,
     justifyContent: 'flex-start',
     alignItems: 'center',
-  },
-  arrow: {
-    flex: 0.1,
-    padding: 13,
   },
   textView: {
     flex: 0.2,

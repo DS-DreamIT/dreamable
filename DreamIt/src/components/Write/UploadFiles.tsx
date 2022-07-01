@@ -6,15 +6,15 @@ const Uploadfiles = () => {
     <View style={[styles.align]}>
       <Image
         style={[styles.icon]}
-        source={require('./assets/images/upload-camera.png')}
+        source={require('../../assets/icons/upload-camera.png')}
       />
       <Image
         style={[styles.icon]}
-        source={require('./assets/images/upload-gallery.png')}
+        source={require('../../assets/icons/upload-gallery.png')}
       />
       <Image
         style={[styles.icon]}
-        source={require('./assets/images/upload-music.png')}
+        source={require('../../assets/icons/upload-music.png')}
       />
     </View>
   )
