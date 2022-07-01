@@ -1623,6 +1623,14 @@
   "resolved" "https://registry.npmjs.org/@react-navigation/elements/-/elements-1.3.3.tgz"
   "version" "1.3.3"
 
+"@react-navigation/native-stack@^6.6.2":
+  "integrity" "sha512-pFMuzhxbPml5MBvJVAzHWoaUkQaefAOKpuUnAs/AxNQuHQwwnxRmDit1PQLuIPo7g7DlfwFXagDHE1R0tbnS8Q=="
+  "resolved" "https://registry.npmjs.org/@react-navigation/native-stack/-/native-stack-6.6.2.tgz"
+  "version" "6.6.2"
+  dependencies:
+    "@react-navigation/elements" "^1.3.3"
+    "warn-once" "^0.1.0"
+
 "@react-navigation/native@^6.0.0", "@react-navigation/native@^6.0.10":
   "integrity" "sha512-H6QhLeiieGxNcAJismIDXIPZgf1myr7Og8v116tezIGmincJTOcWavTd7lPHGnMMXaZg94LlVtbaBRIx9cexqw=="
   "resolved" "https://registry.npmjs.org/@react-navigation/native/-/native-6.0.10.tgz"
@@ -1892,7 +1900,15 @@
   "resolved" "https://registry.npmjs.org/@types/prop-types/-/prop-types-15.7.5.tgz"
   "version" "15.7.5"
 
-"@types/react-native@^0.67.3":
+"@types/react-native-vector-icons@^6.4.11":
+  "integrity" "sha512-jUy9CsTu1Cl3k6WRE7GnqBRHbuSv55PRVfMEel+fF73HKpF8g5JmTzTVMBDX8NfY3PlfIY5VlxiqWZxdjm38Pg=="
+  "resolved" "https://registry.npmjs.org/@types/react-native-vector-icons/-/react-native-vector-icons-6.4.11.tgz"
+  "version" "6.4.11"
+  dependencies:
+    "@types/react" "*"
+    "@types/react-native" "*"
+
+"@types/react-native@*", "@types/react-native@^0.67.3":
   "integrity" "sha512-+cw8/0jf+sAFOTmyfzIsXTcjjkqF7hCZZT8sGZNxLFZ4/pzAFyd8IipKUwhu4PJ7hLS60A4SAQQt+Ehl1a6diw=="
   "resolved" "https://registry.npmjs.org/@types/react-native/-/react-native-0.67.11.tgz"
   "version" "0.67.11"
@@ -6544,7 +6560,7 @@
     "css-select" "^4.2.1"
     "css-tree" "^1.0.0-alpha.39"
 
-"react-native-vector-icons@*":
+"react-native-vector-icons@*", "react-native-vector-icons@^9.2.0":
   "integrity" "sha512-wKYLaFuQST/chH3AJRjmOLoLy3JEs1JR6zMNgTaemFpNoXs0ztRnTxcxFD9xhX7cJe1/zoN5BpQYe7kL0m5yyA=="
   "resolved" "https://registry.npmjs.org/react-native-vector-icons/-/react-native-vector-icons-9.2.0.tgz"
   "version" "9.2.0"

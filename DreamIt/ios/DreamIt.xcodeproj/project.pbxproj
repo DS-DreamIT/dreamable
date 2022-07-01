@@ -126,6 +126,7 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				BBD78D7AC51CEA395F1C20DB /* Pods */,
+				B343C367F6A24D5BB626CBB1 /* Resources */,
 				A0DCCBC88F99438DB5B20D32 /* Resources */,
 			);
 			indentWidth = 2;

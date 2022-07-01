@@ -12,7 +12,7 @@ const Tab = createBottomTabNavigator()
 
 // prettier-ignore
 export default function MainNavigator() {
-  type TabBarProps = { focused: boolean, color: string, size: number }
+  type TabBarProps = { focused: boolean, color?: string, size?: number }
 
 
   const screenOptions = ({ route }: { route: RouteProp<ParamListBase, string> }) => {
