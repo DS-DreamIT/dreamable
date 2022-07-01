@@ -1,15 +1,18 @@
 import React from 'react'
-import {View, Text, StyleSheet, ImageBackground, Image, Button, TouchableHighlight} from 'react-native'
-import SelectBox from './SelectBox'
+import {View, Text, StyleSheet, ImageBackground, Image, TouchableHighlight} from 'react-native'
+import SelectCard from '../../components/SelectCard'
 
-const background = require('./assets/background.png')
+const background = require('../../assets/images/background.png')
 
 export default function SelectPage({navigation}) {
   return (
     <ImageBackground source={background} style={styles.bgImage}>
       <View style={[styles.arrow, styles.button]}>
         <TouchableHighlight onPress={() => navigation.pop()}>
-          <Image source={require('./assets/images/arrow-back.png')} style={[{width: 43}]} />
+          <Image
+            source={require('../../assets/icons/arrow-back.png')}
+            style={[{width: 43}]}
+          />
         </TouchableHighlight>
       </View>
       <View style={[styles.textView, styles.container]}>
@@ -17,9 +20,9 @@ export default function SelectPage({navigation}) {
         <Text style={styles.subText}>혹시 더 필요한 게 있으신가요?</Text>
       </View>
       <View style={[styles.boxView, styles.container]}>
-        <SelectBox />
-        <SelectBox />
-        <SelectBox />
+        <SelectCard />
+        <SelectCard />
+        <SelectCard />
       </View>
     </ImageBackground>
   )
@@ -32,7 +35,7 @@ const styles = StyleSheet.create({
   },
   button: {
     paddingLeft: 13,
-    alignItems: 'flex-start'
+    alignItems: 'flex-start',
   },
   container: {
     padding: 20,

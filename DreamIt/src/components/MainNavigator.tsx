@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React from 'react'
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs'
-import Home from './Home'
-import Dream from './Dream'
-import MyPage from './Mypage'
+import Home from '../pages/Home/HomePage'
+import Dream from '../pages/Home/BrowsePage'
+import MyPage from '../pages/My/Mypage'
 
 import {ParamListBase, RouteProp} from '@react-navigation/native'
 import {Image, Text} from 'react-native'
@@ -33,13 +33,13 @@ export default function MainNavigator() {
         switch (name) {
           case 'home':
             return <Image
-              source={focused ? require("./assets/images/home-selected.png") : require("./assets/images/home-default.png")} />
+              source={focused ? require("../assets/icons/home-selected.png") : require("../assets/icons/home-default.png")} />
           case 'travel':
             return <Image
-              source={focused ? require("./assets/images/dream-selected.png") : require("./assets/images/dream-default.png")} />
+              source={focused ? require("../assets/icons/dream-selected.png") : require("../assets/icons/dream-default.png")} />
           case 'my':
             return <Image
-              source={focused ? require("./assets/images/my-selected.png") : require("./assets/images/my-default.png")} />
+              source={focused ? require("../assets/icons/my-selected.png") : require("../assets/icons/my-default.png")} />
         }
       }
     }

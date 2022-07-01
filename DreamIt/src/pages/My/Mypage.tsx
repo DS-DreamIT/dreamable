@@ -1,8 +1,8 @@
 import React from 'react'
-import {View, Text, StyleSheet} from 'react-native'
+import {View, Text, Button, StyleSheet} from 'react-native'
 
 const title = 'MyPage'
-export default function MyPage() {
+export default function MyPage({navigation}) {
   return (
     <View style={styles.view}>
       <Text style={styles.text}>{title}</Text>

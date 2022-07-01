@@ -2,7 +2,7 @@ import React from 'react'
 import {View, Text, StyleSheet} from 'react-native'
 
 const title = 'Home'
-export default function Home() {
+export default function HomePage() {
   return (
     <View style={styles.view}>
       <Text style={styles.text}>{title}</Text>

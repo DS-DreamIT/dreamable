@@ -1,7 +1,7 @@
 import React from 'react'
 import {StyleSheet, View, Text} from 'react-native'
 
-const SelectBox = () => {
+const SelectCard = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.text}>키워드가 비슷한 다른 이들의 꿈을 볼래요</Text>
@@ -27,4 +27,4 @@ const styles = StyleSheet.create({
   },
 })
 
-export default SelectBox
+export default SelectCard
