@@ -1,14 +1,16 @@
 import React from 'react'
-import {View, Text, StyleSheet, ImageBackground, Image} from 'react-native'
+import {View, Text, StyleSheet, ImageBackground, Image, Button, TouchableHighlight} from 'react-native'
 import SelectBox from './SelectBox'
 
 const background = require('./assets/background.png')
 
-export default function SelectPage() {
+export default function SelectPage({navigation}) {
   return (
     <ImageBackground source={background} style={styles.bgImage}>
-      <View style={[styles.arrow, styles.container]}>
-        <Image source={require('./assets/images/arrow-back.png')} style={[{width: 20}]}/>
+      <View style={[styles.arrow, styles.button]}>
+        <TouchableHighlight onPress={() => navigation.pop()}>
+          <Image source={require('./assets/images/arrow-back.png')} style={[{width: 43}]} />
+        </TouchableHighlight>
       </View>
       <View style={[styles.textView, styles.container]}>
         <Text style={styles.headText}>3일 후에 꿈을 선물해드릴게요 !</Text>
@@ -27,6 +29,10 @@ const styles = StyleSheet.create({
   bgImage: {
     width: '100%',
     height: '100%',
+  },
+  button: {
+    paddingLeft: 13,
+    alignItems: 'flex-start'
   },
   container: {
     padding: 20,
