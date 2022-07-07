@@ -40,6 +40,13 @@ export default function MyPage({navigation}) {
         }}>
         <Text>select page</Text>
       </TouchableHighlight>
+      <TouchableHighlight
+        style={styles.button}
+        onPress={() => {
+          navigation.navigate('gallery', {screen: 'gallery'})
+        }}>
+        <Text>갤러리</Text>
+      </TouchableHighlight>
     </View>
   )
 }
