@@ -14,14 +14,14 @@ launchCamera({saveToPhotos:true}, response=>{
 
 const ShowPicker = () => {
   //launchImageLibrary : 사용자 앨범 접근
-  launchImageLibrary({}, res => {
+  launchImageLibrary({mediaType: 'photo'}, res => {
     const formdata = new FormData()
-    formdata.append('file', res.assets[0].uri)
+    formdata.append('file', res.assets && res.assets[0].uri)
     console.log(res)
   })
 }
 
-export default function Community() {
+export default function Gallery() {
   return (
     <View style={{flex: 1, padding: 16}}>
       <Button title="show picker" onPress={ShowPicker}></Button>
