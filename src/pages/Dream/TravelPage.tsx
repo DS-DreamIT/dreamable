@@ -76,8 +76,10 @@ const styles = StyleSheet.create({
     marginTop: 30,
     backgroundColor: '#DDCEFF',
     borderRadius: 5,
+    opacity: 0.7,
   },
   travelText: {
     margin: 5,
+    alignSelf: 'center',
   },
 })
