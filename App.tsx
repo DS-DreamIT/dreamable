@@ -10,6 +10,7 @@ import AdvicePage from './src/pages/Dream/AdvicePage'
 import ShareDream from './src/pages/Dream/ShareDream'
 import TravelPage from './src/pages/Dream/TravelPage'
 import WritingPage from './src/pages/Dream/WritingPage'
+import ResultPage from './src/pages/Dream/ResultPage'
 
 const Stack = createNativeStackNavigator();
 export default function App() {
@@ -25,6 +26,7 @@ export default function App() {
         <Stack.Screen name="ShareDream" component={ShareDream} />
         <Stack.Screen name="TravelPage" component={TravelPage} />
         <Stack.Screen name="WritingPage" component={WritingPage} />
+        <Stack.Screen name="ResultPage" component={ResultPage} />
       </Stack.Navigator>
     </NavigationContainer>
   )
