@@ -7,7 +7,7 @@ const Gift = ({color, date, navigation}) => {
     <View style={[styles.view]}>
       <TouchableOpacity
         onPress={() => {
-          navigation.navigate('Result', {screen: 'Result'})
+          // navigation.navigate('Result', {screen: 'Result'})
         }}>
         <Image
           style={[styles.gift, {tintColor: color}]}
