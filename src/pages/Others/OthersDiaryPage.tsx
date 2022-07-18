@@ -1,9 +1,30 @@
-import React from 'react'
-import {Image, ImageBackground, StyleSheet, Text, View} from 'react-native'
+/* eslint-disable @typescript-eslint/no-shadow */
+import React, {useState} from 'react'
+import {
+  Image,
+  ImageBackground,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native'
 import TopBar from '../../components/Common/TopBar'
 
 // @ts-ignore
 export default function OthersDiaryPage({navigation}) {
+  const [heart, setHeart] = useState(false)
+  const [like, setLike] = useState(0)
+
+  const clickLike = () => {
+    setHeart(false)
+    setLike(prev => prev - 1)
+  }
+
+  const unClickLike = () => {
+    setHeart(true)
+    setLike(prev => prev + 1)
+  }
+
   return (
     <View style={styles.view}>
       <ImageBackground
@@ -15,11 +36,21 @@ export default function OthersDiaryPage({navigation}) {
           <Text style={styles.dreamText}>히히</Text>
         </View>
         <View style={styles.likeView}>
-          <Image
-            source={require('../../assets/icons/like.png')}
-            style={styles.likeImg}
-          />
-          <Text style={styles.likeText}>16</Text>
+          <TouchableOpacity
+            onPress={() => {
+              // heart ? setHeart(false) : setHeart(true)
+              heart ? clickLike() : unClickLike()
+            }}
+            style={styles.likeImg}>
+            <Image
+              source={
+                heart
+                  ? require('../../assets/icons/heart-selected.png')
+                  : require('../../assets/icons/heart-default.png')
+              }
+            />
+          </TouchableOpacity>
+          <Text style={styles.likeText}>{like}</Text>
         </View>
       </ImageBackground>
     </View>
@@ -62,7 +93,7 @@ const styles = StyleSheet.create({
   likeImg: {
     marginTop: 25,
     marginLeft: 35,
-    // tintColor: '#FF0000',  // 색상 빨간색으로?
+    tintColor: '#FFFEB2',
   },
   likeText: {
     color: '#FFFFFF',
