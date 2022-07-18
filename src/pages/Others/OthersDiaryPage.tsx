@@ -38,7 +38,6 @@ export default function OthersDiaryPage({navigation}) {
         <View style={styles.likeView}>
           <TouchableOpacity
             onPress={() => {
-              // heart ? setHeart(false) : setHeart(true)
               heart ? clickLike() : unClickLike()
             }}
             style={styles.likeImg}>
