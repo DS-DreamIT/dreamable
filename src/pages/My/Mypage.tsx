@@ -43,7 +43,7 @@ export default function MyPage({navigation}) {
       <TouchableHighlight
         style={styles.button}
         onPress={() => {
-          navigation.navigate('gallery', {screen: 'gallery'})
+          navigation.navigate('Gallery', {screen: 'Gallery'})
         }}>
         <Text>갤러리</Text>
       </TouchableHighlight>

@@ -10,7 +10,7 @@ import AdvicePage from './src/pages/Dream/AdvicePage'
 import ShareDream from './src/pages/Dream/ShareDream'
 import TravelPage from './src/pages/Dream/TravelPage'
 import WritingPage from './src/pages/Dream/WritingPage'
-import Gallery from './gallery'
+import Gallery from './Gallery'
 
 const Stack = createNativeStackNavigator();
 export default function App() {
