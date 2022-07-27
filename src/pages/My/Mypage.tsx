@@ -47,6 +47,20 @@ export default function MyPage({navigation}) {
         }}>
         <Text>profile page</Text>
       </TouchableHighlight>
+      <TouchableHighlight
+        style={styles.button}
+        onPress={() => {
+          navigation.navigate('LoginPage', {screen: 'LoginPage'})
+        }}>
+        <Text>login page</Text>
+      </TouchableHighlight>
+      <TouchableHighlight
+        style={styles.button}
+        onPress={() => {
+          navigation.navigate('RegisterPage', {screen: 'RegisterPage'})
+        }}>
+        <Text>register page</Text>
+      </TouchableHighlight>
     </View>
   )
 }

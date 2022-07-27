@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {
   Image,
   ImageBackground,
@@ -10,10 +10,52 @@ import {
 
 // @ts-ignore
 export default function OthersMainPage({navigation}) {
+  const moodWord = [
+    '행복',
+    '중립',
+    '슬픔',
+    '공포',
+    '분노',
+    '혐오',
+    '불안',
+    '놀람',
+    '설렘',
+  ]
+
+  const newMoodWord = [...moodWord]
+  const setTextRandomMood: any[] = []
+
+  const getRandomWord = (mood: string[]) => {
+    const moodWordIndex = Math.floor(Math.random() * mood.length)
+    setTextRandomMood.push(newMoodWord[moodWordIndex])
+    newMoodWord.splice(moodWordIndex, 1)
+
+    return setTextRandomMood[setTextRandomMood.length - 1]
+  }
+
+  const [refreshing, setRefreshing] = useState(false)
+
+  const onRefreshFalse = () => {
+    setRefreshing(true)
+  }
+
+  const onRefreshTrue = () => {
+    setRefreshing(false)
+  }
+
   return (
     <ImageBackground
       source={require('../../assets/images/background-others.png')}
       style={styles.bgImage}>
+      <TouchableOpacity
+        onPress={() => {
+          refreshing ? onRefreshTrue() : onRefreshFalse()
+        }}>
+        <Image
+          source={require('../../assets/icons/refresh.png')}
+          style={styles.refreshImg}
+        />
+      </TouchableOpacity>
       <Text style={styles.mainText}>
         하루에 단 한 번,{'\n'} 타인의 꿈을 소개해드려요.
       </Text>
@@ -21,39 +63,51 @@ export default function OthersMainPage({navigation}) {
         <TouchableOpacity
           style={styles.leftCloudy}
           onPress={() => {
-            navigation.navigate('OthersDiaryPage', {screen: 'OthersDiaryPage'})
+            navigation.navigate('OthersDiaryPage', {
+              mood: setTextRandomMood[0],
+            })
           }}>
           <Image
             source={require('../../assets/icons/cloudy.png')}
             style={styles.leftCloudy}
           />
-          <Text style={styles.leftCloudyText}>#슬픔</Text>
+          <Text style={styles.leftCloudyText}>
+            #{getRandomWord(newMoodWord)}
+          </Text>
         </TouchableOpacity>
       </View>
       <View style={styles.rightCloudyView}>
         <TouchableOpacity
           style={styles.rightCloudy}
           onPress={() => {
-            navigation.navigate('OthersDiaryPage', {screen: 'OthersDiaryPage'})
+            navigation.navigate('OthersDiaryPage', {
+              mood: setTextRandomMood[1],
+            })
           }}>
           <Image
             source={require('../../assets/icons/cloudy.png')}
             style={styles.rightCloudy}
           />
-          <Text style={styles.rightCloudyText}>#행복</Text>
+          <Text style={styles.rightCloudyText}>
+            #{getRandomWord(newMoodWord)}
+          </Text>
         </TouchableOpacity>
       </View>
       <View style={styles.leftCloudyView}>
         <TouchableOpacity
           style={styles.leftCloudy}
           onPress={() => {
-            navigation.navigate('OthersDiaryPage', {screen: 'OthersDiaryPage'})
+            navigation.navigate('OthersDiaryPage', {
+              mood: setTextRandomMood[2],
+            })
           }}>
           <Image
             source={require('../../assets/icons/cloudy.png')}
             style={styles.leftCloudy}
           />
-          <Text style={styles.leftCloudyText}>#설렘</Text>
+          <Text style={styles.leftCloudyText}>
+            #{getRandomWord(newMoodWord)}
+          </Text>
         </TouchableOpacity>
       </View>
     </ImageBackground>
@@ -70,11 +124,16 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
   },
+  refreshImg: {
+    marginTop: 10,
+    marginRight: 10,
+    alignSelf: 'flex-end',
+    tintColor: '#FFFFFF',
+  },
   mainText: {
     color: '#FFFFFF',
     textAlign: 'center',
     fontSize: 28,
-    marginTop: 30,
     marginBottom: 10,
   },
   leftCloudyView: {
@@ -91,7 +150,7 @@ const styles = StyleSheet.create({
   leftCloudyText: {
     color: '#000000',
     fontSize: 24,
-    marginTop: 68,
+    marginTop: 65,
     marginLeft: 120,
   },
   rightCloudyView: {
@@ -108,7 +167,7 @@ const styles = StyleSheet.create({
   rightCloudyText: {
     color: '#000000',
     fontSize: 24,
-    marginTop: 68,
-    marginLeft: 215,
+    marginTop: 65,
+    marginLeft: 220,
   },
 })

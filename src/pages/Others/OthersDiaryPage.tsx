@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-shadow */
 import React, {useState} from 'react'
 import {
   Image,
@@ -11,7 +10,7 @@ import {
 import TopBar from '../../components/Common/TopBar'
 
 // @ts-ignore
-export default function OthersDiaryPage({navigation}) {
+export default function OthersDiaryPage({navigation, route}) {
   const [heart, setHeart] = useState(false)
   const [like, setLike] = useState(0)
 
@@ -31,7 +30,7 @@ export default function OthersDiaryPage({navigation}) {
         source={require('../../assets/images/background-others.png')}
         style={styles.bgImage}>
         <TopBar navigation={navigation} />
-        <Text style={styles.moodText}>#슬픔 #쓸쓸</Text>
+        <Text style={styles.moodText}>#{route.params.mood}</Text>
         <View style={styles.dreamBox}>
           <Text style={styles.dreamText}>히히</Text>
         </View>
@@ -68,9 +67,9 @@ const styles = StyleSheet.create({
   },
   moodText: {
     color: '#FFFFFF',
-    fontSize: 26,
+    fontSize: 28,
     alignSelf: 'center',
-    marginTop: 20,
+    marginTop: 15,
     fontWeight: 'bold',
   },
   dreamBox: {
@@ -80,11 +79,13 @@ const styles = StyleSheet.create({
     height: '63%',
     marginTop: 20,
     borderRadius: 5,
-    opacity: 0.7,
+    opacity: 0.8,
   },
   dreamText: {
-    margin: 5,
+    margin: 10,
     alignSelf: 'center',
+    color: '#000000',
+    fontSize: 18,
   },
   likeView: {
     flexDirection: 'row',
