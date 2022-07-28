@@ -1,17 +1,23 @@
 import React from 'react'
-import {NavigationContainer} from '@react-navigation/native'
-import {createNativeStackNavigator} from '@react-navigation/native-stack'
-import OthersMainPage from '../Others/OthersMainPage'
-import OthersDiaryPage from '../Others/OthersDiaryPage'
+import {View, Text, StyleSheet} from 'react-native'
 
-const Stack = createNativeStackNavigator()
+const title = 'Dream'
 export default function Dream() {
   return (
-    <NavigationContainer independent={true}>
-      <Stack.Navigator screenOptions={{headerShown: false}}>
-        <Stack.Screen name="OthersMainPage" component={OthersMainPage} />
-        <Stack.Screen name="OthersDiaryPage" component={OthersDiaryPage} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <View style={styles.view}>
+      <Text style={styles.text}>{title}</Text>
+    </View>
   )
 }
+
+const styles = StyleSheet.create({
+  view: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  text: {
+    fontSize: 30,
+    color: '#000000',
+  },
+})
