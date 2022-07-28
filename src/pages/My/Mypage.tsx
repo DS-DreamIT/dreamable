@@ -47,6 +47,13 @@ export default function MyPage({navigation}) {
         }}>
         <Text>result page</Text>
       </TouchableHighlight>
+      <TouchableHighlight
+        style={styles.button}
+        onPress={() => {
+          navigation.navigate('CalendarPage', {screen: 'CalendarPage'})
+        }}>
+        <Text>calendar page</Text>
+      </TouchableHighlight>
     </View>
   )
 }
