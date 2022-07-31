@@ -87,23 +87,32 @@ export default function ShareDream({navigation}) {
           <View style={styles.sepline} />
           
           <ViewShot ref={captureRef} options={{ format: 'jpg', quality: 0.9 }}>
-            <View style={styles.bigbox}>
-              <Text style={styles.smalltitle}>{smallTitle}</Text>
-              <Image
-                style={[styles.image]}
-                source={require('../../assets/icons/cloudy.png')}
-              />
-              <View style={styles.smallbox} />
+            <View>
+              <View style={styles.bigbox}>
+                <Text style={styles.smalltitle}>{smallTitle}</Text>
+                <Image
+                  style={[styles.image]}
+                  source={require('../../assets/icons/cloudy.png')}
+                />
+                <View style={styles.smallbox} />
+              </View>
             </View>
           </ViewShot>
           
           <View style={styles.sepunderline} />
           <View style={styles.iconstyle}>
-            <Image source={require('../../assets/icons/share-kakao.png')} />
-            <Image
-              style={styles.icon}
-              source={require('../../assets/icons/share-instagram.png')}
-            />
+            <TouchableHighlight onPress={() => onCapture(Share.Social.FACEBOOK)}>
+              <Image
+                source={require('../../assets/icons/share-facebook.png')}
+              />
+            </TouchableHighlight>
+            <TouchableHighlight onPress={() => onCapture(Share.Social.INSTAGRAM)}>
+              <Image
+                style={styles.icon}
+                source={require('../../assets/icons/share-instagram.png')}
+              />
+            </TouchableHighlight>
+            
             <TouchableHighlight onPress={() => onSave}>
                 <Image
                 style={styles.icon}
@@ -120,7 +129,13 @@ export default function ShareDream({navigation}) {
 
 const styles = StyleSheet.create({
   flex: {flex: 1},
-  text: {textAlign: 'center', fontSize: 40, color: '#ce93d8', marginBottom: 10},
+  text: {
+    textAlign: 'center', 
+    fontSize: 40, 
+    color: '#ce93d8', 
+    marginBottom: 10,
+    fontFamily: "Roboto-LightItalic"
+  },
   padding89: {padding: 25, paddingLeft: 0, paddingRight: 0},
   sepline: {
     borderWidth: 1,
