@@ -60,6 +60,10 @@ export default function MyPage({navigation}) {
           navigation.navigate('RegisterPage', {screen: 'RegisterPage'})
         }}>
         <Text>register page</Text>
+      </TouchableHighlight>
+      <TouchableHighlight
+        style={styles.button}
+        onPress={() => {
           navigation.navigate('ResultPage', {screen: 'ResultPage'})
         }}>
         <Text>result page</Text>
