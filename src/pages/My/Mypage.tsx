@@ -43,6 +43,34 @@ export default function MyPage({navigation}) {
       <TouchableHighlight
         style={styles.button}
         onPress={() => {
+          navigation.navigate('Gallery', {screen: 'Gallery'})
+        }}>
+        <Text>갤러리</Text>
+      </TouchableHighlight>
+      <TouchableHighlight
+        style={styles.button}
+        onPress={() => {
+          navigation.navigate('MyProfilePage', {screen: 'MyProfilePage'})
+        }}>
+        <Text>profile page</Text>
+      </TouchableHighlight>
+      <TouchableHighlight
+        style={styles.button}
+        onPress={() => {
+          navigation.navigate('LoginPage', {screen: 'LoginPage'})
+        }}>
+        <Text>login page</Text>
+      </TouchableHighlight>
+      <TouchableHighlight
+        style={styles.button}
+        onPress={() => {
+          navigation.navigate('RegisterPage', {screen: 'RegisterPage'})
+        }}>
+        <Text>register page</Text>
+      </TouchableHighlight>
+      <TouchableHighlight
+        style={styles.button}
+        onPress={() => {
           navigation.navigate('ResultPage', {screen: 'ResultPage'})
         }}>
         <Text>result page</Text>
