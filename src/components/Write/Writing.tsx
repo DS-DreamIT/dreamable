@@ -1,10 +1,15 @@
 import React from 'react'
 import {View, TextInput, StyleSheet} from 'react-native'
 
-const Writing = () => {
+const Writing = (props: any) => {
   return (
     <View style={[styles.view]}>
-      <TextInput style={styles.text} multiline={true} />
+      <TextInput
+        style={styles.text}
+        multiline={true}
+        placeholder="당신의 꿈 내용을 적어주세요."
+        onChangeText={text => props.setContent(text)}
+      />
     </View>
   )
 }
