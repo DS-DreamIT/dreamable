@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import {
   View,
   Text,
@@ -12,12 +12,14 @@ import TopBar from '../../components/Common/TopBar'
 import Uploadfiles from '../../components/Write/UploadFiles'
 import Writing from '../../components/Write/Writing'
 import Config from 'react-native-config'
+import * as Progress from 'react-native-progress'
 
 // @ts-ignore
 export default function WritingPage({navigation}) {
   let data = new FormData()
   const [content, setContent] = useState('')
   const [diary, setDiary] = useState([])
+  const [spinner, setSpinner] = useState(false)
 
   const handleClick = () => {
     if (content.length > 8) {
@@ -25,6 +27,7 @@ export default function WritingPage({navigation}) {
     } else {
       Alert.alert('Warning', '충분한 분석을 위해 30글자 이상 입력해주세요.')
     }
+    setSpinner(true)
     fetch(`${Config.TEMP_API_URL}/api/diary/user/62df4bc8f1ff31b19db9ace9`, {
       method: 'POST',
       headers: {},
@@ -34,7 +37,11 @@ export default function WritingPage({navigation}) {
       .then(response => {
         if (response.success) {
           console.log(response.diary)
-          setDiary(response.diary)
+          navigation.navigate('SelectPage', {
+            screen: 'SelectPage',
+            diary: response.diary,
+          })
+          setSpinner(false)
         }
       })
   }
@@ -49,11 +56,21 @@ export default function WritingPage({navigation}) {
         <Writing content={content} setContent={setContent} />
         <Uploadfiles data={data} />
         <View style={[styles.line]} />
-        <TouchableOpacity onPress={() => handleClick()}>
-          <Text style={[styles.writingText]}>
-            선물상자에 {'\n'}나의 꿈 담기
-          </Text>
-        </TouchableOpacity>
+        {spinner ? (
+          <View style={[styles.spinner]}>
+            <Progress.Circle
+              size={30}
+              indeterminate={true}
+              borderColor={'#ffffff'}
+            />
+          </View>
+        ) : (
+          <TouchableOpacity onPress={() => handleClick()}>
+            <Text style={[styles.writingText]}>
+              선물상자에 {'\n'}나의 꿈 담기
+            </Text>
+          </TouchableOpacity>
+        )}
       </ImageBackground>
     </View>
   )
@@ -82,5 +99,10 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 24,
     color: '#ffffff',
+  },
+  spinner: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 })
