@@ -1,84 +1,90 @@
-import React from 'react'
-import {View, Text, StyleSheet, TouchableHighlight} from 'react-native'
+import React, {useContext} from 'react'
+import {View, Text, StyleSheet, TouchableHighlight} from 'react-native';
+import {AuthContext} from '../../components/Login/context'
 
 // @ts-ignore
 export default function MyPage({navigation}) {
+  const {signOut} = useContext(AuthContext)
+
   return (
     <View style={styles.view}>
+      <TouchableHighlight style={styles.button} onPress={() => signOut()}>
+        <Text>Sign Out</Text>
+      </TouchableHighlight>
       <TouchableHighlight
         style={styles.button}
         onPress={() => {
-          navigation.navigate('WritingPage', {screen: 'WritingPage'})
+          navigation.navigate('WritingPage', {screen: 'WritingPage'});
         }}>
         <Text>writing page</Text>
       </TouchableHighlight>
       <TouchableHighlight
         style={styles.button}
         onPress={() => {
-          navigation.navigate('AdvicePage', {screen: 'AdvicePage'})
+          navigation.navigate('AdvicePage', {screen: 'AdvicePage'});
         }}>
         <Text>advice page</Text>
       </TouchableHighlight>
       <TouchableHighlight
         style={styles.button}
         onPress={() => {
-          navigation.navigate('ShareDream', {screen: 'ShareDream'})
+          navigation.navigate('ShareDream', {screen: 'ShareDream'});
         }}>
         <Text>ShareDream</Text>
       </TouchableHighlight>
       <TouchableHighlight
         style={styles.button}
         onPress={() => {
-          navigation.navigate('TravelPage', {screen: 'TravelPage'})
+          navigation.navigate('TravelPage', {screen: 'TravelPage'});
         }}>
         <Text>travel page</Text>
       </TouchableHighlight>
       <TouchableHighlight
         style={styles.button}
         onPress={() => {
-          navigation.navigate('SelectPage', {screen: 'SelectPage'})
+          navigation.navigate('SelectPage', {screen: 'SelectPage'});
         }}>
         <Text>select page</Text>
       </TouchableHighlight>
       <TouchableHighlight
         style={styles.button}
         onPress={() => {
-          navigation.navigate('Gallery', {screen: 'Gallery'})
+          navigation.navigate('Gallery', {screen: 'Gallery'});
         }}>
         <Text>갤러리</Text>
       </TouchableHighlight>
       <TouchableHighlight
         style={styles.button}
         onPress={() => {
-          navigation.navigate('MyProfilePage', {screen: 'MyProfilePage'})
+          navigation.navigate('MyProfilePage', {screen: 'MyProfilePage'});
         }}>
         <Text>profile page</Text>
       </TouchableHighlight>
       <TouchableHighlight
         style={styles.button}
         onPress={() => {
-          navigation.navigate('LoginPage', {screen: 'LoginPage'})
+          navigation.navigate('LoginPage', {screen: 'LoginPage'});
         }}>
         <Text>login page</Text>
       </TouchableHighlight>
       <TouchableHighlight
         style={styles.button}
         onPress={() => {
-          navigation.navigate('RegisterPage', {screen: 'RegisterPage'})
+          navigation.navigate('RegisterPage', {screen: 'RegisterPage'});
         }}>
         <Text>register page</Text>
       </TouchableHighlight>
       <TouchableHighlight
         style={styles.button}
         onPress={() => {
-          navigation.navigate('ResultPage', {screen: 'ResultPage'})
+          navigation.navigate('ResultPage', {screen: 'ResultPage'});
         }}>
         <Text>result page</Text>
       </TouchableHighlight>
       <TouchableHighlight
         style={styles.button}
         onPress={() => {
-          navigation.navigate('CalendarPage', {screen: 'CalendarPage'})
+          navigation.navigate('CalendarPage', {screen: 'CalendarPage'});
         }}>
         <Text>calendar page</Text>
       </TouchableHighlight>
@@ -103,4 +109,4 @@ const styles = StyleSheet.create({
     color: '#000000',
     backgroundColor: 'yellow',
   },
-})
+});
