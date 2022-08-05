@@ -1,16 +1,10 @@
-import React, {useContext} from 'react'
-import {View, Text, StyleSheet, TouchableHighlight} from 'react-native';
-import {AuthContext} from '../../components/Login/context'
+import React from 'react'
+import {View, Text, StyleSheet, TouchableHighlight} from 'react-native'
 
 // @ts-ignore
 export default function MyPage({navigation}) {
-  const {signOut} = useContext(AuthContext)
-
   return (
     <View style={styles.view}>
-      <TouchableHighlight style={styles.button} onPress={() => signOut()}>
-        <Text>Sign Out</Text>
-      </TouchableHighlight>
       <TouchableHighlight
         style={styles.button}
         onPress={() => {
