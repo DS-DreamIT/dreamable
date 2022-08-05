@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, {useState} from 'react'
 import {
   View,
   Text,
@@ -13,13 +13,14 @@ import Uploadfiles from '../../components/Write/UploadFiles'
 import Writing from '../../components/Write/Writing'
 import Config from 'react-native-config'
 import * as Progress from 'react-native-progress'
+import ReleaseCheckBox from '../../components/Write/ReleaseCheckBox'
 
 // @ts-ignore
 export default function WritingPage({navigation}) {
   let data = new FormData()
   const [content, setContent] = useState('')
-  const [diary, setDiary] = useState([])
   const [spinner, setSpinner] = useState(false)
+  const [isSelected, setSelected] = useState(true)
 
   const handleClick = () => {
     if (content.length > 8) {
@@ -53,6 +54,7 @@ export default function WritingPage({navigation}) {
         source={require('../../assets/images/background.png')}>
         <TopBar navigation={navigation} />
         <Currentdate />
+        <ReleaseCheckBox selected={isSelected} setSelected={setSelected} />
         <Writing content={content} setContent={setContent} />
         <Uploadfiles data={data} />
         <View style={[styles.line]} />
@@ -99,6 +101,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 24,
     color: '#ffffff',
+    marginBottom: 12,
   },
   spinner: {
     flex: 1,
