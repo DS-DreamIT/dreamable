@@ -8,16 +8,43 @@ import {
 } from 'react-native'
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker'
 
-const Uploadfiles = () => {
-  const [upload, setUpload] = useState(false)
-
-  const ShowPicker = () => {
-    launchImageLibrary({mediaType: 'photo'}, res => {
-      const formdata = new FormData()
-      formdata.append('file', res.assets && res.assets[0].uri)
-      console.log(res)
-      setUpload(true)
+const Uploadfiles = props => {
+  const [img, setImg] = useState(false)
+  const ShowPicker = async () => {
+    // launchImageLibrary({mediaType: 'photo'}, res => {
+    //   const formdata = new FormData()
+    //   formdata.append('file', res.assets && res.assets[0].uri)
+    //   console.log(res)
+    //   setUpload(true)
+    // })
+    type imageType = {
+      uri: string
+      type: string
+      name: string
+    }
+    const image: imageType = {
+      uri: '',
+      type: '',
+      name: '',
+    }
+    await launchImageLibrary({}, res => {
+      if (res.didCancel) {
+        console.log('User cancelled image picker')
+      } else if (res.errorCode) {
+        console.log('ImagePicker Error: ', res.errorCode)
+      } else if (res.assets) {
+        //정상적으로 사진을 반환 받았을 때
+        console.log('ImagePicker res', res)
+        image.name = res.assets[0]?.fileName
+        image.type = res.assets[0]?.type
+        image.uri =
+          Platform.OS === 'android'
+            ? res.assets[0]?.uri
+            : res.assets[0]?.uri?.replace('file://', '')
+      }
     })
+    setImg(true)
+    props.data.append('Image', image)
   }
 
   const requestCameraPermission = async () => {
@@ -66,7 +93,7 @@ const Uploadfiles = () => {
         <Image
           style={[styles.icon]}
           source={
-            upload
+            img
               ? require('../../assets/icons/upload-gallery-selected.png')
               : require('../../assets/icons/upload-gallery-default.png')
           }

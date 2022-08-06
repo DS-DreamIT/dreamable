@@ -1,5 +1,12 @@
 import React from 'react'
-import {View, Text, StyleSheet, ImageBackground, Image, TouchableHighlight} from 'react-native'
+import {
+  View,
+  Text,
+  StyleSheet,
+  ImageBackground,
+  Image,
+  TouchableHighlight,
+} from 'react-native'
 import SelectCard from '../../components/Card/SelectCard'
 import TopBar from '../../components/Common/TopBar'
 
@@ -7,6 +14,7 @@ const background = require('../../assets/images/background.png')
 
 // @ts-ignore
 export default function SelectPage({navigation}) {
+  console.log(navigation.diary)
   return (
     <ImageBackground source={background} style={styles.bgImage}>
       <TopBar navigation={navigation} />
