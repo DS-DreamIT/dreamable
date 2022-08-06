@@ -7,9 +7,8 @@ import DayResult from '../../pages/My/DayResult'
 const date = new Date()
 
 // @ts-ignore
-const CalendarView = ({markedDates, selectedDate, onSelectDate}) => {
+const CalendarView = ({markedDates, selectedDate, getDatas, navigation}) => {
   const [selected, setSelected] = useState(format(date, 'yyyy-MM-dd'))
-
   // @ts-ignore
   const onDayPress = useCallback(day => {
     setSelected(day.dateString)
@@ -76,7 +75,13 @@ const CalendarView = ({markedDates, selectedDate, onSelectDate}) => {
           disableAllTouchEventsForDisabledDays={true}
           enableSwipeMonths={true}
         />
-        <DayResult selectedDate={selected.toString()} />
+        <View style={styles.resultView}>
+          <DayResult
+            selectedDate={selected.toString()}
+            getDatas={getDatas}
+            navigation={navigation}
+          />
+        </View>
       </View>
     </View>
   )
@@ -128,9 +133,14 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: '#00BBF2',
   },
-
   flex: {
     flex: 1,
+  },
+  resultView: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'flex-start',
+    marginBottom: 'auto',
   },
 })
 

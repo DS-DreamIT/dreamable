@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
 })
 
 TopBar.defaultProps = {
-  date: '2022-07-10'
+  date: '',
 }
 
 export default TopBar

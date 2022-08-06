@@ -1,6 +1,6 @@
 //방법 1
 import React from 'react'
-import {Text, View, Button, StyleSheet} from 'react-native'
+import {Text, View, Button, StyleSheet, Platform} from 'react-native'
 
 import {launchImageLibrary} from 'react-native-image-picker'
 
@@ -12,19 +12,50 @@ launchCamera({saveToPhotos:true}, response=>{
 })
 */
 
-const ShowPicker = () => {
-  //launchImageLibrary : 사용자 앨범 접근
-  launchImageLibrary({mediaType: 'photo'}, res => {
-    const formdata = new FormData()
-    formdata.append('file', res.assets && res.assets[0].uri)
-    console.log(res)
+// const ShowPicker = () => {
+//   //launchImageLibrary : 사용자 앨범 접근
+//   launchImageLibrary({mediaType: 'photo'}, res => {
+//     const formdata = new FormData()
+//     formdata.append('file', res.assets && res.assets[0].uri)
+//     console.log(res)
+//   })
+// }
+
+const UploadImage = async () => {
+  type imageType = {
+    uri: string
+    type: string
+    name: string
+  }
+  const image: imageType = {
+    uri: '',
+    type: '',
+    name: '',
+  }
+  await launchImageLibrary({}, res => {
+    if (res.didCancel) {
+      console.log('User cancelled image picker')
+    } else if (res.errorCode) {
+      console.log('ImagePicker Error: ', res.errorCode)
+    } else if (res.assets) {
+      //정상적으로 사진을 반환 받았을 때
+      console.log('ImagePicker res', res)
+      image.name = res.assets[0]?.fileName
+      image.type = res.assets[0]?.type
+      image.uri =
+        Platform.OS === 'android'
+          ? res.assets[0]?.uri
+          : res.assets[0]?.uri?.replace('file://', '')
+    }
   })
+  const formdata = new FormData()
+  formdata.append('img', image)
 }
 
 export default function Gallery() {
   return (
     <View style={{flex: 1, padding: 16}}>
-      <Button title="show picker" onPress={ShowPicker}></Button>
+      <Button title="show picker" onPress={UploadImage}></Button>
       <View style={styles.view}>
         <Text>카테고리</Text>
       </View>
