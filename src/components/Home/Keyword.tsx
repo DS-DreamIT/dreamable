@@ -47,6 +47,7 @@ const styles = StyleSheet.create({
     marginTop: 43,
     fontSize: 30,
     color: '#BFA9D7',
+    fontFamily: 'SCDream5-Regular',
   },
   info: {
     position: 'absolute',
@@ -54,9 +55,11 @@ const styles = StyleSheet.create({
     marginTop: 135,
     fontSize: 19,
     color: '#000000',
+    fontFamily: 'SCDream3',
   },
   keyword: {
     fontWeight: 'bold',
+    fontFamily: 'SCDream5-Regular',
   },
 })
 

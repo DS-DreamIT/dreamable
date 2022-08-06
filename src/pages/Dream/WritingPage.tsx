@@ -29,7 +29,7 @@ export default function WritingPage({navigation}) {
       Alert.alert('Warning', '충분한 분석을 위해 30글자 이상 입력해주세요.')
     }
     setSpinner(true)
-    fetch(`${Config.TEMP_API_URL}/api/diary/user/62df4bc8f1ff31b19db9ace9`, {
+    fetch(`${Config.API_URL}/api/diary/user/62df4bc8f1ff31b19db9ace9`, {
       method: 'POST',
       headers: {},
       body: data,
@@ -101,7 +101,8 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 24,
     color: '#ffffff',
-    marginBottom: 12,
+    marginBottom: 20,
+    fontFamily: 'SCDream3',
   },
   spinner: {
     flex: 1,

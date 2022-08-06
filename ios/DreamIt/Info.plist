@@ -53,8 +53,15 @@
 	<false/>
 	<key>UIAppFonts</key>
 	<array>
-		<string>Roboto-Thin.ttf</string>
+		<string>RobotoThin.ttf</string>
 		<string>SCDream5.otf</string>
+		<string>RobotoLightItalic.ttf</string>
+		<string>RobotoThin.ttf</string>
+		<string>SCDream3.otf</string>
+		<string>SCDream4.otf</string>
+		<string>SCDream5-Regular.otf</string>
+		<string>SCDream6.otf</string>
+		<string>SCDream7.otf</string>
 	</array>
 </dict>
 </plist>

@@ -28,6 +28,7 @@ const styles = StyleSheet.create({
     marginLeft: 41,
     fontSize: 28,
     color: '#ffffff',
+    fontFamily: 'SCDream6',
   },
 })
 

@@ -39,6 +39,7 @@ const styles = StyleSheet.create({
     fontStyle: 'italic',
     textAlign: 'center',
     fontSize: 20,
+    fontFamily: 'RobotoLightItalic',
   },
 })
 

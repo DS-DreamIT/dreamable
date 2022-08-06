@@ -39,6 +39,7 @@ const styles = StyleSheet.create({
     color: '#fff',
     marginRight: 8,
     fontSize: 14,
+    fontFamily: 'SCDream3',
   },
 })
 

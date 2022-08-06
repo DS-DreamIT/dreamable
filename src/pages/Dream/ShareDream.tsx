@@ -138,7 +138,7 @@ const styles = StyleSheet.create({
     fontSize: 40,
     color: '#ce93d8',
     marginBottom: 10,
-    fontFamily: 'Roboto-LightItalic',
+    fontFamily: 'RobotoLightItalic',
   },
   padding89: {padding: 25, paddingLeft: 0, paddingRight: 0},
   sepline: {

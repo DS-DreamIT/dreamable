@@ -29,6 +29,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#000000',
     padding: 12,
+    fontFamily: 'SCDream5',
   },
 })
 

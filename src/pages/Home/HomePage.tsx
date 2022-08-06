@@ -85,6 +85,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     margin: -30,
     color: '#ffffff',
+    fontFamily: 'SCDream3',
   },
   icon: {
     marginLeft: 330,
