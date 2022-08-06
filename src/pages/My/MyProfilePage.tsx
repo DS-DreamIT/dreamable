@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import {
   View,
   Text,
@@ -8,9 +8,12 @@ import {
   TouchableOpacity,
   Alert,
 } from 'react-native'
+import {AuthContext} from '../../components/Login/context'
 
 // @ts-ignore
 export default function MyProfilePage({}) {
+  const {signOut} = useContext(AuthContext)
+
   return (
     <View style={styles.view}>
       <ImageBackground
@@ -18,11 +21,8 @@ export default function MyProfilePage({}) {
         style={styles.bgImage}>
         <View style={styles.titleView}>
           <Text style={styles.titleText}>Profile</Text>
-          <TouchableOpacity onPress={() => Alert.alert('message', '설정')}>
-            <Image
-              source={require('../../assets/icons/setting.png')}
-              style={styles.settingImg}
-            />
+          <TouchableOpacity onPress={() => signOut()}>
+            <Text style={styles.logOut}>Logout</Text>
           </TouchableOpacity>
         </View>
         <Image
@@ -105,15 +105,16 @@ const styles = StyleSheet.create({
   titleText: {
     color: '#FFFFFF',
     textAlign: 'center',
+    alignSelf: 'center',
     fontSize: 30,
     marginTop: 8,
-    marginRight: 115,
+    marginRight: 95,
   },
-  settingImg: {
-    marginTop: 8,
-    marginRight: 5,
-    height: 40,
-    width: 40,
+  logOut: {
+    marginTop: 16,
+    marginRight: 12,
+    fontSize: 18,
+    color: '#FFFFFF',
   },
   lineImg: {
     width: '100%',
