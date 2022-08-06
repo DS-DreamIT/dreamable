@@ -1,8 +1,8 @@
 import {format} from 'date-fns'
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import {View, StyleSheet, ImageBackground, Text} from 'react-native'
 import CalendarView from '../../components/Calendar/CalendarView'
-import data from './data.json'
+import Config from 'react-native-config'
 
 const happy = {key: 'happy', color: '#FFD233'}
 const neutrality = {key: 'neutrality', color: '#000470'}
@@ -13,16 +13,53 @@ const unrest = {key: 'unrest', color: '#00D33B'}
 const surprised = {key: 'surprised', color: '#F49D5D'}
 const flutter = {key: 'flutter', color: '#F8A5CF'}
 
-// data를 배열 형태로 받아오기
-const getEntries = Object.entries(data).map((entrie, idx) => {
-  return entrie
-})
-
 // @ts-ignore
 export default function CalendarPage({navigation}) {
   const [selectedDate, setSelectedDate] = useState(
     format(new Date(), 'yyyy-MM-dd'),
   )
+  const [diaries, setDiaries] = useState([])
+  const userId = '62df4bc8f1ff31b19db9ace9' // 임시
+  const [markedDates, setMarkedDates] = useState({})
+
+  // 사용자가 작성한 일기 데이터
+  useEffect(() => {
+    // data를 배열 형태로 받아오기
+    if (diaries.length != 0) {
+      const getEntries = Object.entries(diaries).map((entrie, idx) => {
+        return entrie
+      })
+
+      // reduce를 사용하여 객체 처리
+      let mark = getEntries.reduce((acc, current) => {
+        //@ts-ignore
+        const formattedDate = format(
+          new Date(current[1].createdAt),
+          'yyyy-MM-dd',
+        )
+        // @ts-ignore
+        acc[formattedDate] = {dots: getEomtions(current)}
+        return acc
+      }, {})
+      setMarkedDates(mark)
+    }
+  }, [diaries])
+
+  useEffect(() => {
+    fetch(`${Config.API_URL}/api/diary/user/${userId}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then(response => response.json())
+      .then(response => {
+        if (response.success) {
+          // 유저 다이어리 목록 불러옴
+          setDiaries(response.diaries)
+        }
+      })
+  }, [])
 
   // @ts-ignore
   const getEomtions = day => {
@@ -40,14 +77,6 @@ export default function CalendarPage({navigation}) {
     return emotions
   }
 
-  // reduce를 사용하여 객체 처리
-  const markedDates = getEntries.reduce((acc, current) => {
-    const formattedDate = format(new Date(current[1].date), 'yyyy-MM-dd')
-    // @ts-ignore
-    acc[formattedDate] = {dots: getEomtions(current)}
-    return acc
-  }, {})
-
   return (
     <View style={styles.flex}>
       <ImageBackground
@@ -55,11 +84,16 @@ export default function CalendarPage({navigation}) {
         source={require('../../assets/images/background.png')}>
         <Text style={styles.text}>Calendar</Text>
         <View style={styles.line} />
-        <CalendarView
-          markedDates={markedDates}
-          selectedDate={selectedDate}
-          onSelectDate={setSelectedDate}
-        />
+        {Object.keys(markedDates).length ? (
+          <CalendarView
+            navigation={navigation}
+            markedDates={markedDates}
+            selectedDate={selectedDate}
+            getDatas={diaries}
+          />
+        ) : (
+          <></>
+        )}
       </ImageBackground>
     </View>
   )

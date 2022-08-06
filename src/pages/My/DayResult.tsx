@@ -1,11 +1,8 @@
+import {format} from 'date-fns'
+import React from 'react'
 import {View, StyleSheet, Text, Image, TouchableOpacity} from 'react-native'
-import data from './data.json'
 
 const date = new Date()
-
-const getDates = Object.entries(data).map((entrie, idx) => {
-  return entrie[1].date
-})
 
 // @ts-ignore
 const todayFunc = selectedDate => {
@@ -17,10 +14,11 @@ const todayFunc = selectedDate => {
 }
 
 // @ts-ignore
-const dataIndex = selectedDate => {
-  const datas = Object.values(data)
+const dataIndex = (selectedDate, getDatas) => {
+  const datas = Object.values(getDatas)
   for (let i = 0; i < datas.length; i++) {
-    if (datas[i].date == selectedDate) {
+    // @ts-ignore
+    if (format(new Date(datas[i].createdAt), 'yyyy-MM-dd') == selectedDate) {
       return i
     }
   }
@@ -45,13 +43,12 @@ const registerDate = selectedDate => {
 }
 
 // @ts-ignore
-const todayEmotion = selectedDate => {
-  const index = dataIndex(selectedDate)
-  const datas = Object.values(data)
+const todayEmotion = (selectedDate, getDatas, navigation) => {
+  const index = dataIndex(selectedDate, getDatas)
   let emotions = ''
 
   if (index != -1) {
-    emotions = PrintDayEmotion(datas[index].emotion)
+    emotions = PrintDayEmotion(getDatas[index].emotion)
   }
 
   return index == -1 ? (
@@ -60,11 +57,22 @@ const todayEmotion = selectedDate => {
     </View>
   ) : registerDate(selectedDate) > 5 ? (
     <View>
-      <Text style={{fontSize: 20}}>
-        이 날은 <Text style={{fontWeight: '700'}}>{emotions}</Text>감정의 꿈을
-        꾸셨네요!
-      </Text>
-      <TouchableOpacity style={[styles.goto]}>
+      {emotions ? (
+        <Text style={{fontSize: 20}}>
+          이 날은 <Text style={{fontWeight: '700'}}>{emotions}</Text>감정의 꿈을
+          꾸셨네요!
+        </Text>
+      ) : (
+        <Text style={{fontSize: 20}}>감정이 없는 꿈을 꾸었어요!</Text>
+      )}
+      <TouchableOpacity
+        style={[styles.goto]}
+        onPress={() => {
+          navigation.navigate('ResultPage', {
+            screen: 'ResultPage',
+            date: selectedDate,
+          })
+        }}>
         <Text style={[styles.gotoText]}>꿈조각 살펴보기</Text>
         <Image source={require('../../assets/icons/arrow-go.png')} />
       </TouchableOpacity>
@@ -79,11 +87,11 @@ const todayEmotion = selectedDate => {
 }
 
 // @ts-ignore
-const DayResult = ({selectedDate}) => {
+const DayResult = ({selectedDate, getDatas, navigation}) => {
   return (
     <View style={styles.view}>
       {todayFunc(selectedDate)}
-      {todayEmotion(selectedDate)}
+      {todayEmotion(selectedDate, getDatas, navigation)}
     </View>
   )
 }
