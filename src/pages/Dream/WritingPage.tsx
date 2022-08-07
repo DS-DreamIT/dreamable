@@ -40,7 +40,9 @@ export default function WritingPage({navigation}) {
           console.log(response.diary)
           navigation.navigate('SelectPage', {
             screen: 'SelectPage',
-            diary: response.diary,
+            id: response.diary._id,
+            emotion: response.diary.emotion,
+            keyword: response.diary.keyword,
           })
           setSpinner(false)
         }

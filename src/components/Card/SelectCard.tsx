@@ -1,10 +1,19 @@
 import React from 'react'
 import {StyleSheet, View, Text} from 'react-native'
+import {TouchableOpacity} from 'react-native-gesture-handler'
 
-const SelectCard = () => {
+type PropTypes = {
+  keyword: string[]
+  emotion: string[]
+  text: string
+  _onClick: Function
+}
+const SelectCard = (props: PropTypes) => {
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>키워드가 비슷한 다른 이들의 꿈을 볼래요</Text>
+      <TouchableOpacity>
+        <Text style={styles.text}>{props.text}</Text>
+      </TouchableOpacity>
     </View>
   )
 }

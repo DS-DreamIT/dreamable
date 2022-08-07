@@ -1,20 +1,15 @@
 import React from 'react'
-import {
-  View,
-  Text,
-  StyleSheet,
-  ImageBackground,
-  Image,
-  TouchableHighlight,
-} from 'react-native'
+import {View, Text, StyleSheet, ImageBackground} from 'react-native'
 import SelectCard from '../../components/Card/SelectCard'
 import TopBar from '../../components/Common/TopBar'
 
 const background = require('../../assets/images/background.png')
 
 // @ts-ignore
-export default function SelectPage({navigation}) {
-  console.log(navigation.diary)
+export default function SelectPage({navigation, route}) {
+  const keyword = route.params.keyword
+  const emotion = route.params.emotion
+
   return (
     <ImageBackground source={background} style={styles.bgImage}>
       <TopBar navigation={navigation} />
@@ -23,9 +18,24 @@ export default function SelectPage({navigation}) {
         <Text style={styles.subText}>혹시 더 필요한 게 있으신가요?</Text>
       </View>
       <View style={[styles.boxView, styles.container]}>
-        <SelectCard />
-        <SelectCard />
-        <SelectCard />
+        <SelectCard
+          keyword={keyword}
+          emotion={emotion}
+          text={''}
+          _onClick={() => {}}
+        />
+        <SelectCard
+          keyword={keyword}
+          emotion={emotion}
+          text={''}
+          _onClick={() => {}}
+        />
+        <SelectCard
+          keyword={keyword}
+          emotion={emotion}
+          text={''}
+          _onClick={() => {}}
+        />
       </View>
     </ImageBackground>
   )
