@@ -18,6 +18,7 @@ import LoginPage from './src/pages/Login/LoginPage'
 import RegisterPage from './src/pages/Login/RegisterPage'
 import ResultPage from './src/pages/Dream/ResultPage'
 import CalendarPage from './src/pages/My/CalendarPage'
+import SelectCard from './src/components/Card/SelectCard'
 
 import {AuthContext} from './src/components/Login/context'
 import AsyncStorage from '@react-native-async-storage/async-storage'
@@ -72,6 +73,7 @@ export default function App() {
     () => ({
       signIn: async (email: string | null, password: string | null) => {
         let userToken: string | null
+        let userId: string | null
         fetch(`${Config.API_URL}/api/user/login`, {
           method: 'POST',
           headers: {
@@ -86,10 +88,19 @@ export default function App() {
           .then(async response => {
             if (response && response.success) {
               userToken = response.token
+              userId = response.user._id
               try {
-                await AsyncStorage.setItem('userToken', userToken, () => {
-                  dispatch({type: 'LOGIN', id: email, token: userToken})
-                })
+                await AsyncStorage.setItem(
+                  'user',
+                  JSON.stringify({
+                    userToken: userToken,
+                    id: userId,
+                    email: email,
+                  }),
+                  () => {
+                    dispatch({type: 'LOGIN', id: userId, token: userToken})
+                  },
+                )
               } catch (e) {
                 console.log(e)
               }
@@ -104,7 +115,7 @@ export default function App() {
       },
       signOut: async () => {
         try {
-          await AsyncStorage.removeItem('userToken')
+          await AsyncStorage.removeItem('user')
         } catch (e) {
           console.log(e)
         }
@@ -113,6 +124,7 @@ export default function App() {
       signUp: async (nickname: any, email: any, password: any) => {
         let userToken: string | null
         userToken = null
+        let userId: string | null
         fetch(`${Config.API_URL}/api/user/register`, {
           method: 'POST',
           headers: {
@@ -128,11 +140,22 @@ export default function App() {
           .then(async response => {
             if (response && response.success) {
               userToken = response.token
+              userId = response.user._id
               try {
-                await AsyncStorage.setItem('userToken', userToken, () => {
-                  dispatch({type: 'REGISTER', id: email, token: userToken})
-                  Alert.alert('Success', '회원가입 성공!')
-                })
+                await AsyncStorage.setItem(
+                  'user',
+                  JSON.stringify({
+                    userToken: userToken,
+                    id: userId,
+                    name: nickname,
+                    email: email,
+                    password: password,
+                  }),
+                  () => {
+                    dispatch({type: 'REGISTER', id: userId, token: userToken})
+                    Alert.alert('Success', '회원가입 성공!')
+                  },
+                )
               } catch (e) {
                 console.log(e)
                 Alert.alert('Failed', '회원가입 실패')
@@ -149,7 +172,7 @@ export default function App() {
       let userToken
       userToken = null
       try {
-        userToken = await AsyncStorage.getItem('userToken')
+        userToken = await AsyncStorage.getItem('user')
       } catch (e) {
         console.log(e)
       }
@@ -199,6 +222,7 @@ export default function App() {
             <Stack.Screen name="MyProfilePage" component={MyProfilePage} />
             <Stack.Screen name="ResultPage" component={ResultPage} />
             <Stack.Screen name="CalendarPage" component={CalendarPage} />
+            <Stack.Screen name="SelectCard" component={SelectCard} />
           </Stack.Navigator>
         ) : (
           <Stack.Navigator screenOptions={{headerShown: false}}>
