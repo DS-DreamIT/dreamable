@@ -54,7 +54,7 @@ export default function WritingPage({navigation}) {
       <ImageBackground
         style={[styles.flex]}
         source={require('../../assets/images/background.png')}>
-        <TopBar navigation={navigation} />
+        <TopBar navigation={navigation} type={'BACK'} />
         <Currentdate />
         <ReleaseCheckBox selected={isSelected} setSelected={setSelected} />
         <Writing content={content} setContent={setContent} />

@@ -58,7 +58,7 @@ export default function OthersDiaryPage({navigation, route}) {
       <ImageBackground
         source={require('../../assets/images/background-others.png')}
         style={styles.bgImage}>
-        <TopBar navigation={navigation} />
+        <TopBar navigation={navigation} type={'BACK'} />
         <Text style={styles.moodText}>#{route.params.mood}</Text>
         <View style={styles.dreamBox}>
           <Text style={styles.dreamText}>{diary.content}</Text>

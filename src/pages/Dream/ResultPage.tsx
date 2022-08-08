@@ -26,7 +26,7 @@ export default function ResultPage({navigation, route}) {
       <ImageBackground
         style={[styles.flex]}
         source={require('../../assets/images/background.png')}>
-        <TopBar navigation={navigation} date={day} />
+        <TopBar navigation={navigation} type={'BACK'} date={day} />
         <View style={[styles.flex]}>
           <Text style={styles.title}>{title}</Text>
           <View style={styles.wordContainer}>

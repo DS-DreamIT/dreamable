@@ -84,7 +84,7 @@ export default function ShareDream({navigation}) {
       <ImageBackground
         style={[styles.flex]}
         source={require('../../assets/images/background.png')}>
-        <TopBar navigation={navigation} />
+        <TopBar navigation={navigation} type={'HOME'} />
         <View style={[styles.flex, styles.padding89]}>
           <Text style={styles.text}>{title}</Text>
           <View style={styles.sepline} />

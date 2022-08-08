@@ -12,7 +12,7 @@ export default function SelectPage({navigation, route}) {
 
   return (
     <ImageBackground source={background} style={styles.bgImage}>
-      <TopBar navigation={navigation} />
+      <TopBar navigation={navigation} type={'HOME'} />
       <View style={[styles.textView, styles.container]}>
         <Text style={styles.headText}>3일 후에 꿈을 선물해드릴게요 !</Text>
         <Text style={styles.subText}>혹시 더 필요한 게 있으신가요?</Text>

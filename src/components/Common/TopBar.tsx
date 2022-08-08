@@ -2,16 +2,28 @@ import React, {useCallback} from 'react'
 import {StyleSheet, View, Image, Text, TouchableOpacity} from 'react-native'
 
 // @ts-ignore
-const TopBar = ({navigation, date}) => {
+const TopBar = ({navigation, type, date}) => {
   const goBack = useCallback(() => navigation.pop(), []) // 오류
-
+  const goHome = useCallback(() => navigation.navigate('Home'), [])
+  // https://joylee-developer.tistory.com/175
   return (
-    <TouchableOpacity onPress={goBack}>
-      <View style={styles.view}>
-        <Image source={require('../../assets/icons/arrow-back.png')} />
-        <Text style={styles.text}>{date}</Text>
-      </View>
-    </TouchableOpacity>
+    <>
+      {type === 'HOME' ? (
+        <TouchableOpacity onPress={goHome}>
+          <View style={styles.view}>
+            <Image source={require('../../assets/icons/arrow-back.png')} />
+            <Text style={styles.text}>{date}</Text>
+          </View>
+        </TouchableOpacity>
+      ) : (
+        <TouchableOpacity onPress={goBack}>
+          <View style={styles.view}>
+            <Image source={require('../../assets/icons/arrow-back.png')} />
+            <Text style={styles.text}>{date}</Text>
+          </View>
+        </TouchableOpacity>
+      )}
+    </>
   )
 }
 

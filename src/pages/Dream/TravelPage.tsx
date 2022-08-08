@@ -83,7 +83,7 @@ export default function TravelPage({navigation}) {
       <ImageBackground
         source={require('../../assets/images/background.png')}
         style={styles.bgImage}>
-        <TopBar navigation={navigation} />
+        <TopBar navigation={navigation} type={'HOME'} />
         <View>
           <Image
             source={require('../../assets/icons/flight.png')}
