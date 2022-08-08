@@ -131,6 +131,7 @@ const styles = StyleSheet.create({
     tintColor: '#FFFFFF',
   },
   mainText: {
+    fontFamily: 'SCDream5-Regular',
     color: '#FFFFFF',
     textAlign: 'center',
     fontSize: 28,
@@ -148,10 +149,11 @@ const styles = StyleSheet.create({
     position: 'absolute',
   },
   leftCloudyText: {
-    color: '#000000',
+    color: '#271F50',
     fontSize: 24,
     marginTop: 65,
     marginLeft: 120,
+    fontFamily: 'SCDream3',
   },
   rightCloudyView: {
     alignItems: 'flex-end',
@@ -165,9 +167,10 @@ const styles = StyleSheet.create({
     position: 'absolute',
   },
   rightCloudyText: {
-    color: '#000000',
+    color: '#271F50',
     fontSize: 24,
     marginTop: 65,
     marginLeft: 220,
+    fontFamily: 'SCDream3',
   },
 })

@@ -3,6 +3,7 @@ import React, {useState, useEffect} from 'react'
 import {View, StyleSheet, ImageBackground, Text} from 'react-native'
 import CalendarView from '../../components/Calendar/CalendarView'
 import Config from 'react-native-config'
+import TopBar from '../../components/Common/TopBar'
 
 const happy = {key: 'happy', color: '#FFD233'}
 const neutrality = {key: 'neutrality', color: '#000470'}
@@ -82,8 +83,8 @@ export default function CalendarPage({navigation}) {
       <ImageBackground
         style={[styles.flex]}
         source={require('../../assets/images/background.png')}>
+        <TopBar navigation={navigation} type={'BACK'} />
         <Text style={styles.text}>Calendar</Text>
-        <View style={styles.line} />
         {Object.keys(markedDates).length ? (
           <CalendarView
             navigation={navigation}
@@ -103,7 +104,6 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 30,
     textAlign: 'center',
-    marginTop: 15,
     color: '#ffffff',
   },
   line: {

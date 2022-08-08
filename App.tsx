@@ -2,23 +2,10 @@ import React, {useEffect, useMemo, useReducer} from 'react'
 import {Alert, View} from 'react-native'
 import {ActivityIndicator} from 'react-native-paper'
 import {NavigationContainer} from '@react-navigation/native'
-import MainNavigator from './src/components/Common/MainNavigator'
 import {createNativeStackNavigator} from '@react-navigation/native-stack'
-import Home from './src/pages/Home/HomePage'
-import BrowsePage from './src/pages/Home/BrowsePage'
-import MyPage from './src/pages/My/Mypage'
-import SelectPage from './src/pages/Dream/SelectPage'
-import AdvicePage from './src/pages/Dream/AdvicePage'
-import ShareDream from './src/pages/Dream/ShareDream'
-import TravelPage from './src/pages/Dream/TravelPage'
-import WritingPage from './src/pages/Dream/WritingPage'
-import Gallery from './Gallery'
-import MyProfilePage from './src/pages/My/MyProfilePage'
+import MainNavigator from './src/navigation/MainNavigator'
 import LoginPage from './src/pages/Login/LoginPage'
 import RegisterPage from './src/pages/Login/RegisterPage'
-import ResultPage from './src/pages/Dream/ResultPage'
-import CalendarPage from './src/pages/My/CalendarPage'
-import SelectCard from './src/components/Card/SelectCard'
 
 import {AuthContext} from './src/components/Login/context'
 import AsyncStorage from '@react-native-async-storage/async-storage'
@@ -192,38 +179,39 @@ export default function App() {
     <AuthContext.Provider value={authContext}>
       <NavigationContainer>
         {loginState.userToken?.length > 0 ? (
-          <Stack.Navigator screenOptions={{headerShown: false}}>
-            <Stack.Screen name="MainNavigator" component={MainNavigator} />
-            <Stack.Screen
-              name="Home"
-              component={Home}
-              options={{title: 'Home'}}
-            />
-            <Stack.Screen
-              name="BrowsePage"
-              component={BrowsePage}
-              options={{title: 'Browse'}}
-            />
-            <Stack.Screen
-              name="Mypage"
-              component={MyPage}
-              options={{title: 'Mypage'}}
-            />
-            <Stack.Screen
-              name="SelectPage"
-              component={SelectPage}
-              options={{title: 'SelectPage'}}
-            />
-            <Stack.Screen name="AdvicePage" component={AdvicePage} />
-            <Stack.Screen name="ShareDream" component={ShareDream} />
-            <Stack.Screen name="TravelPage" component={TravelPage} />
-            <Stack.Screen name="WritingPage" component={WritingPage} />
-            <Stack.Screen name="Gallery" component={Gallery} />
-            <Stack.Screen name="MyProfilePage" component={MyProfilePage} />
-            <Stack.Screen name="ResultPage" component={ResultPage} />
-            <Stack.Screen name="CalendarPage" component={CalendarPage} />
-            <Stack.Screen name="SelectCard" component={SelectCard} />
-          </Stack.Navigator>
+          // <Stack.Navigator screenOptions={{headerShown: false}}>
+          //   <Stack.Screen name="MainNavigator" component={MainNavigator} />
+          //   <Stack.Screen
+          //     name="Home"
+          //     component={Home}
+          //     options={{title: 'Home'}}
+          //   />
+          //   <Stack.Screen
+          //     name="BrowsePage"
+          //     component={BrowsePage}
+          //     options={{title: 'Browse'}}
+          //   />
+          //   <Stack.Screen
+          //     name="Mypage"
+          //     component={MyPage}
+          //     options={{title: 'Mypage'}}
+          //   />
+          //   <Stack.Screen
+          //     name="SelectPage"
+          //     component={SelectPage}
+          //     options={{title: 'SelectPage'}}
+          //   />
+          //   <Stack.Screen name="AdvicePage" component={AdvicePage} />
+          //   <Stack.Screen name="ShareDream" component={ShareDream} />
+          //   <Stack.Screen name="TravelPage" component={TravelPage} />
+          //   <Stack.Screen name="WritingPage" component={WritingPage} />
+          //   <Stack.Screen name="Gallery" component={Gallery} />
+          //   <Stack.Screen name="MyProfilePage" component={MyProfilePage} />
+          //   <Stack.Screen name="ResultPage" component={ResultPage} />
+          //   <Stack.Screen name="CalendarPage" component={CalendarPage} />
+          //   <Stack.Screen name="SelectCard" component={SelectCard} />
+          // </Stack.Navigator>
+          <MainNavigator />
         ) : (
           <Stack.Navigator screenOptions={{headerShown: false}}>
             <Stack.Screen name="LoginPage" component={LoginPage} />

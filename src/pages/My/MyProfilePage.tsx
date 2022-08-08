@@ -11,7 +11,7 @@ import {
 import {AuthContext} from '../../components/Login/context'
 
 // @ts-ignore
-export default function MyProfilePage({}) {
+export default function MyProfilePage({navigation}) {
   const {signOut} = useContext(AuthContext)
 
   return (
@@ -40,7 +40,7 @@ export default function MyProfilePage({}) {
         </View>
         <View style={styles.calendarBoxView}>
           <TouchableOpacity
-            onPress={() => Alert.alert('message', '선물상자 캘린더')}
+            onPress={() => navigation.navigate('CalendarPage')}
             style={styles.touchBox}>
             <Image
               source={require('../../assets/icons/box.png')}
@@ -109,12 +109,14 @@ const styles = StyleSheet.create({
     fontSize: 30,
     marginTop: 8,
     marginRight: 95,
+    fontFamily: 'SCDream4',
   },
   logOut: {
     marginTop: 16,
     marginRight: 12,
     fontSize: 18,
     color: '#FFFFFF',
+    fontFamily: 'SCDream3',
   },
   lineImg: {
     width: '100%',
@@ -131,14 +133,17 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
     fontSize: 30,
     marginTop: 5,
+    fontFamily: 'SCDream3',
   },
   email: {
     color: '#DDDDDD',
+    fontFamily: 'SCDream3',
   },
   dreamDay: {
     fontSize: 25,
     color: '#FFFFFF',
     marginTop: 20,
+    fontFamily: 'SCDream4',
   },
   touchBox: {
     alignSelf: 'center',
@@ -161,6 +166,7 @@ const styles = StyleSheet.create({
     marginLeft: 35,
     marginTop: 40,
     position: 'absolute',
+    fontFamily: 'SCDream4',
   },
   arrowImg: {
     marginTop: 48,
@@ -192,5 +198,6 @@ const styles = StyleSheet.create({
     fontSize: 22,
     marginTop: 43,
     marginLeft: 10,
+    fontFamily: 'SCDream4',
   },
 })
