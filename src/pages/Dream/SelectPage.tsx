@@ -9,6 +9,7 @@ const background = require('../../assets/images/background.png')
 export default function SelectPage({navigation, route}) {
   const keyword = route.params.keyword
   const emotion = route.params.emotion
+  const move = ['TravelPage', 'AdvicePage', 'ShareDream']
 
   return (
     <ImageBackground source={background} style={styles.bgImage}>
@@ -21,20 +22,23 @@ export default function SelectPage({navigation, route}) {
         <SelectCard
           keyword={keyword}
           emotion={emotion}
-          text={''}
-          _onClick={() => {}}
+          text={'내 꿈과 비슷한 \n다른 이들의 꿈을 볼래요'}
+          move={move[0]}
+          navigation={navigation}
         />
         <SelectCard
           keyword={keyword}
           emotion={emotion}
-          text={''}
-          _onClick={() => {}}
+          text={'꿈 분석 결과를 \n미리 보고 싶어요'}
+          move={move[1]}
+          navigation={navigation}
         />
         <SelectCard
           keyword={keyword}
           emotion={emotion}
-          text={''}
-          _onClick={() => {}}
+          text={'꿈을 나누고 싶어요'}
+          move={move[2]}
+          navigation={navigation}
         />
       </View>
     </ImageBackground>

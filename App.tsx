@@ -61,6 +61,7 @@ export default function App() {
       signIn: async (email: string | null, password: string | null) => {
         let userToken: string | null
         let userId: string | null
+        let nickname: string
         fetch(`${Config.API_URL}/api/user/login`, {
           method: 'POST',
           headers: {
@@ -76,6 +77,7 @@ export default function App() {
             if (response && response.success) {
               userToken = response.token
               userId = response.user._id
+              nickname = response.user.name
               try {
                 await AsyncStorage.setItem(
                   'user',
@@ -83,11 +85,13 @@ export default function App() {
                     userToken: userToken,
                     id: userId,
                     email: email,
+                    name: nickname,
                   }),
                   () => {
                     dispatch({type: 'LOGIN', id: userId, token: userToken})
                   },
                 )
+                await AsyncStorage.setItem('nickname', nickname)
               } catch (e) {
                 console.log(e)
               }

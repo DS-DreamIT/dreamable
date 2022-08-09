@@ -1,4 +1,4 @@
-import React, {useRef} from 'react'
+import React, {useEffect, useRef, useState} from 'react'
 import {
   View,
   Text,
@@ -14,13 +14,15 @@ import TopBar from '../../components/Common/TopBar'
 import Share from 'react-native-share'
 import ViewShot from 'react-native-view-shot'
 import CameraRoll from '@react-native-community/cameraroll'
+import EmotionData from '../../assets/data/EmotionData'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 const title = 'Share your Dreams'
 const smallTitle = 'Personal Dream'
 
 // @ts-ignore
 //const captureRef = useRef<any | undefined | null>()
-export default function ShareDream({navigation}) {
+export default function ShareDream({navigation, route}) {
   const captureRef = useRef(null)
   const getPhotoUri = async (): Promise<string> => {
     // @ts-ignore
@@ -79,6 +81,43 @@ export default function ShareDream({navigation}) {
     console.log('result', result)
   }
 
+  const [nickname, setNickname] = useState('')
+
+  useEffect(() => {
+    AsyncStorage.getItem('nickname').then(nickname => {
+      const name = JSON.stringify(nickname)
+      setNickname(name.substring(1, nickname?.length - 1))
+    })
+  }, [nickname])
+
+  const advice = () => {
+    const emotion = route.params.emotion[0]
+    if (emotion === '놀람') {
+      return EmotionData[0].short
+    }
+    if (emotion === '설렘') {
+      return EmotionData[1].short
+    }
+    if (emotion === '행복') {
+      return EmotionData[2].short
+    }
+    if (emotion === '중립') {
+      return EmotionData[3].short
+    }
+    if (emotion === '슬픔') {
+      return EmotionData[4].short
+    }
+    if (emotion === '공포') {
+      return EmotionData[5].short
+    }
+    if (emotion === '분노') {
+      return EmotionData[6].short
+    }
+    if (emotion === '불안') {
+      return EmotionData[7].short
+    }
+  }
+
   return (
     <SafeAreaView style={styles.flex}>
       <ImageBackground
@@ -93,11 +132,65 @@ export default function ShareDream({navigation}) {
             <View>
               <View style={styles.bigbox}>
                 <Text style={styles.smalltitle}>{smallTitle}</Text>
-                <Image
-                  style={[styles.image]}
-                  source={require('../../assets/icons/cloudy.png')}
-                />
-                <View style={styles.smallbox} />
+                <View>
+                  <Image
+                    style={[styles.image]}
+                    source={require('../../assets/icons/cloudy.png')}
+                  />
+                  {route.params.emotion.length === 0 ||
+                  route.params.emotion.length === undefined ? (
+                    <></>
+                  ) : (
+                    <></>
+                  )}
+                  {route.params.emotion.length === 1 ? (
+                    <Text style={styles.oneMoodText}>
+                      #{route.params.emotion[0]}
+                    </Text>
+                  ) : (
+                    <></>
+                  )}
+                  {route.params.emotion.length === 2 ? (
+                    <>
+                      <Text style={styles.twoFirstMoodText}>
+                        #{route.params.emotion[0]}
+                      </Text>
+                      <Text style={styles.twoSecondMoodText}>
+                        #{route.params?.emotion[1]}
+                      </Text>
+                    </>
+                  ) : (
+                    <></>
+                  )}
+                  {route.params.emotion.length === 3 ? (
+                    <>
+                      <Text style={styles.threeFirstMoodText}>
+                        #{route.params.emotion[0]}
+                      </Text>
+                      <Text style={styles.threeSecondMoodText}>
+                        #{route.params?.emotion[1]}
+                      </Text>
+                      <Text style={styles.threeThirdMoodText}>
+                        #{route.params?.emotion[2]}
+                      </Text>
+                    </>
+                  ) : (
+                    <></>
+                  )}
+                </View>
+                <View style={styles.smallbox}>
+                  <Text style={styles.smallBoxText}>
+                    오늘 {nickname}님의 꿈에서는{' '}
+                    {route.params?.emotion.map(emotion => (
+                      <Text style={styles.smallBoxText}>'{emotion}' </Text>
+                    ))}
+                    의 감정이 느껴져요.{' '}
+                    {route.params?.keyword.map(keyword => (
+                      <Text style={styles.keywordText}>'{keyword}' </Text>
+                    ))}
+                    에 관한 꿈을 꾸셨네요. {advice()}
+                  </Text>
+                </View>
               </View>
             </View>
           </ViewShot>
@@ -140,7 +233,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     fontFamily: 'RobotoLightItalic',
   },
-  padding89: {padding: 25, paddingLeft: 0, paddingRight: 0},
+  padding89: {padding: 10, paddingLeft: 0, paddingRight: 0},
   sepline: {
     borderWidth: 1,
     borderColor: '#ffffff',
@@ -161,15 +254,35 @@ const styles = StyleSheet.create({
     marginTop: 27,
     opacity: 0.65,
   },
-  image: {paddingLeft: 0, paddingRight: 0, marginTop: 25, marginLeft: 20},
+  image: {
+    paddingLeft: 0,
+    paddingRight: 0,
+    marginTop: 25,
+    marginLeft: 20,
+    position: 'absolute',
+  },
   smalltitle: {fontSize: 30, marginTop: 21, paddingLeft: 34, color: '#ffffff'},
   smallbox: {
     width: 254,
     height: 150,
     backgroundColor: '#ded9ed',
-    opacity: 0.57,
-    marginTop: 0,
+    marginTop: 235,
     marginLeft: 20,
+    position: 'absolute',
+  },
+  smallBoxText: {
+    margin: 5,
+    color: '#000000',
+    fontSize: 16,
+    fontFamily: 'SCDream4',
+    lineHeight: 20,
+  },
+  keywordText: {
+    margin: 5,
+    color: '#000000',
+    fontSize: 16,
+    fontFamily: 'SCDream5-Regular',
+    lineHeight: 20,
   },
   iconstyle: {
     flexDirection: 'row',
@@ -179,4 +292,45 @@ const styles = StyleSheet.create({
   },
   icon: {marginLeft: 40},
   back: {marginTop: 30, marginLeft: 20},
+  oneMoodText: {
+    alignSelf: 'center',
+    marginTop: 73,
+    fontSize: 24,
+    fontFamily: 'SCDream5-Regular',
+    color: '#000470',
+  },
+  twoFirstMoodText: {
+    marginTop: 58,
+    marginLeft: 155,
+    fontSize: 24,
+    fontFamily: 'SCDream5-Regular',
+    color: '#665AA6',
+  },
+  twoSecondMoodText: {
+    marginTop: 5,
+    marginLeft: 80,
+    fontSize: 24,
+    fontFamily: 'SCDream5-Regular',
+    color: '#4D5C92',
+  },
+  threeFirstMoodText: {
+    marginTop: 50,
+    marginLeft: 165,
+    fontSize: 20,
+    fontFamily: 'SCDream5-Regular',
+    color: '#665AA6',
+  },
+  threeSecondMoodText: {
+    marginLeft: 70,
+    fontSize: 20,
+    fontFamily: 'SCDream5-Regular',
+    color: '#4D5C92',
+  },
+  threeThirdMoodText: {
+    marginLeft: 145,
+    marginTop: 5,
+    fontSize: 20,
+    fontFamily: 'SCDream5-Regular',
+    color: '#000470',
+  },
 })

@@ -135,7 +135,7 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
     textAlign: 'center',
     fontSize: 28,
-    marginBottom: 10,
+    marginBottom: 30,
   },
   leftCloudyView: {
     alignItems: 'flex-start',

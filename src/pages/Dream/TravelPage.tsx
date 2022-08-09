@@ -1,82 +1,49 @@
-import {format} from 'date-fns'
 import React, {useEffect, useState} from 'react'
 import {View, Text, StyleSheet, ImageBackground, Image} from 'react-native'
 import TopBar from '../../components/Common/TopBar'
 import Config from 'react-native-config'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 // @ts-ignore
-export default function TravelPage({navigation}) {
-  const [othersDiary, setOthersDiary] = useState({}) // 다른 사용자 일기
-  const [emotion, setEmotion] = useState('')
-  const userId = '62df4bc8f1ff31b19db9ace9' // 임시
+export default function TravelPage({navigation, route}) {
+  const [othersDiary, setOthersDiary] = useState([]) // 다른 사용자 일기
+  const [userId, setUserId] = useState('')
 
-  useEffect(() => {
-    console.log(emotion)
-  }, [emotion])
-
-  useEffect(() => {
-    // 가장 최근에 작성한 일기의 감정
-    fetch(`${Config.API_URL}/api/diary/recent/user/${userId}`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-      .then(response => response.json())
-      .then(response => {
-        if (response.success) {
-          // 사용자의 감정 중 임의로 한 가지와 관련된 일기를 가져오고자 함
-          if (response.diary.emotion == null) {
-            // emotion이 없을 때
-            setOthersDiary('해당하는 감정의 일기가 없습니다.')
-          } else {
-            console.log(response.diary.emotion?.length)
-            getOthersDiary(
-              response.diary.emotion[
-                createRandomNum(response.diary.emotion?.length)
-              ],
-            )
-          }
-        }
-      })
-  }, [])
-
-  //@ts-ignore
-  const createRandomNum = arraySize => {
-    let num = Math.floor(Math.random() * arraySize)
+  const createRandomNum = () => {
+    let num = Math.floor(Math.random() * route.params.emotion.length)
 
     return num
   }
 
-  // @ts-ignore
-  const getOthersEmotion = emotionArray => {
-    // 비슷한 키워드: 타인의 일기에 해당, 비슷한 감정
-    let emotionText = ''
-
-    for (let i = 0; i < emotionArray.length; i++) {
-      emotionText += '#' + emotionArray[i] + ' '
-    }
-    setEmotion(emotionText)
-  }
-
-  // @ts-ignore
-  const getOthersDiary = emotion => {
-    fetch(`${Config.API_URL}/api/diary/emotion/${emotion}`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
+  useEffect(() => {
+    AsyncStorage.getItem('user').then(user => {
+      setUserId(JSON.parse(user).id)
     })
+  }, [])
+
+  useEffect(() => {
+    fetch(
+      `${Config.API_URL}/api/diary/emotion/${
+        route.params.emotion[createRandomNum()]
+      }`,
+      {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      },
+    )
       .then(response => response.json())
       .then(response => {
         if (response.success) {
-          // + if 넣어서 작성자가 사용자 id와 다른 일기 가져오기
-          console.log(response.diary)
-          setOthersDiary(response.diary)
-          getOthersEmotion(response.diary.emotion)
+          console.log(othersDiary)
+          if (othersDiary.length === 0) {
+            console.log(response.diary)
+            setOthersDiary(response.diary)
+          }
         }
       })
-  }
+  }, [userId])
 
   return (
     <View style={styles.view}>
@@ -92,18 +59,25 @@ export default function TravelPage({navigation}) {
           <Text style={styles.titleText}>타인의 꿈 여행하기</Text>
         </View>
         <View style={styles.feelingsView}>
-          {emotion ? <Text style={styles.feelingsText}>{emotion}</Text> : <></>}
-          <Image
-            source={require('../../assets/icons/line.png')}
-            style={styles.line}
-          />
+          {route.params?.emotion.map(emotion => (
+            <Text style={styles.feelingsText}>#{emotion} </Text>
+          ))}
         </View>
         <View style={styles.travelView}>
-          <Text style={styles.travelText}>{othersDiary.content}</Text>
+          {othersDiary.length < 1 ? (
+            <Text style={styles.travelText}>
+              {route.params?.emotion.map(emotion => (
+                <Text style={styles.travelText}>'{emotion}' </Text>
+              ))}
+              에 해당하는 꿈이 아직 없어요
+            </Text>
+          ) : (
+            <Text style={styles.travelText}>{othersDiary.content}</Text>
+          )}
         </View>
         <Image
           source={require('../../assets/icons/line.png')}
-          style={styles.line}
+          style={styles.bottomLine}
         />
       </ImageBackground>
     </View>
@@ -132,16 +106,18 @@ const styles = StyleSheet.create({
   },
   feelingsView: {
     flexDirection: 'row',
-    justifyContent: 'flex-end',
+    marginLeft: 40,
   },
   feelingsText: {
     color: '#FFFFFF',
     marginTop: 25,
-    marginLeft: 41,
     fontSize: 22,
-    marginRight: 'auto',
   },
-  line: {
+  TopLine: {
+    marginTop: 40,
+    marginLeft: 85,
+  },
+  bottomLine: {
     marginTop: 40,
   },
   travelView: {
@@ -154,7 +130,9 @@ const styles = StyleSheet.create({
     opacity: 0.7,
   },
   travelText: {
-    margin: 5,
+    margin: 10,
     alignSelf: 'center',
+    color: '#000000',
+    fontFamily: 'SCDream4',
   },
 })
