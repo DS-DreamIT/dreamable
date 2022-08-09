@@ -3,6 +3,7 @@ import React, {useState, useEffect} from 'react'
 import {View, StyleSheet, ImageBackground, Text} from 'react-native'
 import CalendarView from '../../components/Calendar/CalendarView'
 import Config from 'react-native-config'
+import * as Progress from 'react-native-progress'
 
 const happy = {key: 'happy', color: '#FFD233'}
 const neutrality = {key: 'neutrality', color: '#000470'}
@@ -21,6 +22,7 @@ export default function CalendarPage({navigation}) {
   const [diaries, setDiaries] = useState([])
   const userId = '62df4bc8f1ff31b19db9ace9' // 임시
   const [markedDates, setMarkedDates] = useState({})
+  const [spinner, setSpinner] = useState(false)
 
   // 사용자가 작성한 일기 데이터
   useEffect(() => {
@@ -29,7 +31,7 @@ export default function CalendarPage({navigation}) {
       const getEntries = Object.entries(diaries).map((entrie, idx) => {
         return entrie
       })
-
+      setSpinner(true)
       // reduce를 사용하여 객체 처리
       let mark = getEntries.reduce((acc, current) => {
         //@ts-ignore
@@ -84,7 +86,7 @@ export default function CalendarPage({navigation}) {
         source={require('../../assets/images/background.png')}>
         <Text style={styles.text}>Calendar</Text>
         <View style={styles.line} />
-        {Object.keys(markedDates).length ? (
+        {spinner ? (
           <CalendarView
             navigation={navigation}
             markedDates={markedDates}
@@ -92,7 +94,13 @@ export default function CalendarPage({navigation}) {
             getDatas={diaries}
           />
         ) : (
-          <></>
+          <View style={[styles.spinner]}>
+            <Progress.Circle
+              size={30}
+              indeterminate={true}
+              borderColor={'#ffffff'}
+            />
+          </View>
         )}
       </ImageBackground>
     </View>
@@ -105,6 +113,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginTop: 15,
     color: '#ffffff',
+    fontFamily: 'SCDream5-Regular',
   },
   line: {
     borderBottomWidth: 2,
@@ -114,5 +123,10 @@ const styles = StyleSheet.create({
   },
   flex: {
     flex: 1,
+  },
+  spinner: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 })

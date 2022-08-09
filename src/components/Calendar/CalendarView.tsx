@@ -5,6 +5,7 @@ import {Calendar} from 'react-native-calendars'
 import DayResult from '../../pages/My/DayResult'
 
 const date = new Date()
+const maxdate = format(date, 'yyyy-MM-dd')
 
 // @ts-ignore
 const CalendarView = ({markedDates, selectedDate, getDatas, navigation}) => {
@@ -38,10 +39,11 @@ const CalendarView = ({markedDates, selectedDate, getDatas, navigation}) => {
 
   return (
     <View style={styles.flex}>
-      <View>
+      <View style={styles.flex}>
         <Calendar
           markingType={'multi-dot'}
           markedDates={marked}
+          maxDate={maxdate}
           style={styles.layout}
           theme={{
             calendarBackground: '#ffffff00',
@@ -53,17 +55,15 @@ const CalendarView = ({markedDates, selectedDate, getDatas, navigation}) => {
             arrowColor: 'white',
             monthTextColor: 'white',
             indicatorColor: 'white',
-            textDayFontWeight: '300',
-            textMonthFontWeight: 'bold',
-            textDayHeaderFontWeight: '300',
+            textMonthFontFamily: 'SCDream6',
+            textDayFontFamily: 'SCDream3',
+            textDayHeaderFontFamily: 'SCDream4',
             textDayFontSize: 16,
             textMonthFontSize: 16,
-            textDayHeaderFontSize: 16,
+            textDayHeaderFontSize: 14,
           }}
+          headerStyle={styles.customHeader}
           onDayPress={onDayPress}
-          onDayLongPress={day => {
-            console.log('selected day', day)
-          }}
           monthFormat={'yyyy MMMM'}
           onMonthChange={month => {
             console.log('month changed', month)
@@ -90,7 +90,7 @@ const CalendarView = ({markedDates, selectedDate, getDatas, navigation}) => {
 const styles = StyleSheet.create({
   layout: {
     marginHorizontal: 35,
-    marginTop: 65,
+    marginTop: 75,
     marginBottom: 50,
   },
   calendar: {
@@ -102,45 +102,20 @@ const styles = StyleSheet.create({
     backgroundColor: 'lightgrey',
     fontSize: 16,
   },
-  disabledText: {
-    color: 'grey',
-  },
-  defaultText: {
-    color: 'purple',
-  },
-  customCalendar: {
-    height: 250,
-    borderBottomWidth: 1,
-    borderBottomColor: 'lightgrey',
-  },
-  customDay: {
-    textAlign: 'center',
-  },
   customHeader: {
-    backgroundColor: '#FCC',
-    flexDirection: 'row',
+    flexDirection: 'column',
     justifyContent: 'space-around',
-    marginHorizontal: -4,
-    padding: 8,
-  },
-  customTitleContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    padding: 10,
-  },
-  customTitle: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    color: '#00BBF2',
+    marginHorizontal: -20,
+    padding: 5,
   },
   flex: {
     flex: 1,
+    flexDirection: 'column',
   },
   resultView: {
-    display: 'flex',
-    flexDirection: 'column',
     justifyContent: 'flex-start',
-    marginBottom: 'auto',
+    marginTop: 'auto',
+    marginBottom: 10,
   },
 })
 
