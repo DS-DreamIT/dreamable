@@ -76,13 +76,13 @@ export default function MyProfilePage({navigation}) {
             />
           </TouchableOpacity>
         </View>
-        <View style={styles.statisticsView}>
+        {/* <View style={styles.statisticsView}>
           <Image
             source={require('../../assets/icons/graph.png')}
             style={styles.statisticsImg}
           />
           <Text style={styles.keywordText}>키워드 통계</Text>
-        </View>
+        </View> */}
       </ImageBackground>
     </View>
   )

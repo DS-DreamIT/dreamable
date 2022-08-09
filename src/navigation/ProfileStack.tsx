@@ -3,6 +3,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack'
 import React from 'react'
 import CalendarPage from '../pages/My/CalendarPage'
 import MyProfilePage from '../pages/My/MyProfilePage'
+import ResultPage from '../pages/Dream/ResultPage'
 
 const Stack = createNativeStackNavigator()
 export default function HomeStack() {
@@ -13,6 +14,7 @@ export default function HomeStack() {
         screenOptions={{headerShown: false}}>
         <Stack.Screen name="ProfilePage" component={MyProfilePage} />
         <Stack.Screen name="CalendarPage" component={CalendarPage} />
+        <Stack.Screen name="ResultPage" component={ResultPage} />
       </Stack.Navigator>
     </NavigationContainer>
   )
