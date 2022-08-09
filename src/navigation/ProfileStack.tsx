@@ -4,6 +4,7 @@ import React from 'react'
 import CalendarPage from '../pages/My/CalendarPage'
 import MyProfilePage from '../pages/My/MyProfilePage'
 import ResultPage from '../pages/Dream/ResultPage'
+import BadgePage from '../pages/My/BadgePage'
 
 const Stack = createNativeStackNavigator()
 export default function HomeStack() {
@@ -15,6 +16,7 @@ export default function HomeStack() {
         <Stack.Screen name="ProfilePage" component={MyProfilePage} />
         <Stack.Screen name="CalendarPage" component={CalendarPage} />
         <Stack.Screen name="ResultPage" component={ResultPage} />
+        <Stack.Screen name="BadgePage" component={BadgePage} />
       </Stack.Navigator>
     </NavigationContainer>
   )
