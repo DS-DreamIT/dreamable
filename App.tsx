@@ -10,12 +10,13 @@ import AdvicePage from './src/pages/Dream/AdvicePage'
 import ShareDream from './src/pages/Dream/ShareDream'
 import TravelPage from './src/pages/Dream/TravelPage'
 import WritingPage from './src/pages/Dream/WritingPage'
-import Gallery from './Gallery'
+//import Gallery from './Gallery'
 import MyProfilePage from './src/pages/My/MyProfilePage'
 import LoginPage from './src/pages/Login/LoginPage'
 import RegisterPage from './src/pages/Login/RegisterPage'
 import ResultPage from './src/pages/Dream/ResultPage'
 import CalendarPage from './src/pages/My/CalendarPage'
+import BadgePage from './src/pages/My/BadgePage'
 
 const Stack = createNativeStackNavigator()
 export default function App() {
@@ -43,13 +44,15 @@ export default function App() {
         <Stack.Screen name="ShareDream" component={ShareDream} />
         <Stack.Screen name="TravelPage" component={TravelPage} />
         <Stack.Screen name="WritingPage" component={WritingPage} />
-        <Stack.Screen name="Gallery" component={Gallery} />
+        
         <Stack.Screen name="MyProfilePage" component={MyProfilePage} />
         <Stack.Screen name="LoginPage" component={LoginPage} />
         <Stack.Screen name="RegisterPage" component={RegisterPage} />
         <Stack.Screen name="ResultPage" component={ResultPage} />
         <Stack.Screen name="CalendarPage" component={CalendarPage} />
+        <Stack.Screen name="BadgePage" component={BadgePage} />
       </Stack.Navigator>
     </NavigationContainer>
   )
 }
+//<Stack.Screen name="Gallery" component={Gallery} />

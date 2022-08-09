@@ -82,6 +82,13 @@ export default function MyPage({navigation}) {
         }}>
         <Text>calendar page</Text>
       </TouchableHighlight>
+      <TouchableHighlight
+        style={styles.button}
+        onPress={() => {
+          navigation.navigate('BadgePage', {screen: 'BadgePage'})
+        }}>
+        <Text>badge page</Text>
+      </TouchableHighlight>
     </View>
   )
 }
