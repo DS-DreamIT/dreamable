@@ -10,8 +10,8 @@ const Gift = ({data, color, date, navigation}) => {
         onPress={() => {
           navigation.navigate('ResultPage', {
             screen: 'ResultPage',
-            diaryId: data[1]._id,
-            date: format(new Date(data[1].createdAt), 'yyyy-MM-dd'),
+            diaryID: data[1]._id,
+            day: format(new Date(data[1].createdAt), 'yyyy-MM-dd'),
           })
         }}>
         <Image

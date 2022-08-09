@@ -69,31 +69,39 @@ export default function HomePage({navigation}) {
           />
         </TouchableOpacity>
         <View style={[styles.text]}>
-          {keywords.length > 0 && <Keyword name={name} keywords={keywords} />}
+          <Keyword name={name} keywords={keywords} />
           <Text style={[styles.sentence]}>
             잠은 최고의 명상 {'\n'}- 달라이 라마
           </Text>
         </View>
-        <View style={[styles.view]}>
-          <View style={[styles.exhibit]}>
-            <View style={[styles.table]} />
-            <View style={[styles.gifts]}>
-              {Object.entries(diaries1).length > 0 && (
-                <GiftList data={diaries1} navigation={navigation} />
-              )}
+        {Object.entries(diaries2).length > 0 ? (
+          <>
+            <View style={[styles.view]}>
+              <View style={[styles.exhibit]}>
+                <View style={[styles.table]} />
+                <View style={[styles.gifts]}>
+                  {Object.entries(diaries1).length > 0 && (
+                    <GiftList data={diaries1} navigation={navigation} />
+                  )}
+                </View>
+              </View>
             </View>
-          </View>
-        </View>
-        <View style={[styles.view]}>
-          <View style={[styles.exhibit, {margin: 50}]}>
-            <View style={[styles.table]} />
-            <View style={[styles.gifts]}>
-              {Object.entries(diaries2).length > 0 && (
-                <GiftList data={diaries2} navigation={navigation} />
-              )}
+            <View style={[styles.view]}>
+              <View style={[styles.exhibit, {margin: 50}]}>
+                <View style={[styles.table]} />
+                <View style={[styles.gifts]}>
+                  <GiftList data={diaries2} navigation={navigation} />
+                </View>
+              </View>
             </View>
+          </>
+        ) : (
+          <View style={[styles.view, {marginTop: 150}]}>
+            <Text style={[styles.text, styles.warning]}>
+              아직 보여줄 꿈이 없어요
+            </Text>
           </View>
-        </View>
+        )}
       </ImageBackground>
     </View>
   )
@@ -116,6 +124,11 @@ const styles = StyleSheet.create({
   text: {
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  warning: {
+    color: '#FFD233',
+    fontSize: 20,
+    fontFamily: 'SCDream3',
   },
   view: {
     justifyContent: 'center',

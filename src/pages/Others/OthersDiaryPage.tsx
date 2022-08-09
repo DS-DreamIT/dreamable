@@ -14,16 +14,25 @@ import * as Progress from 'react-native-progress'
 
 // @ts-ignore
 export default function OthersDiaryPage({navigation, route}) {
+  const [userId, setUserId] = useState('')
   const [heart, setHeart] = useState(false)
   const [like, setLike] = useState(0)
   const [diary, setDiary] = useState([])
   const [spinner, setSpinner] = useState(true)
-  let userId: string = ''
+
+  useEffect(() => {
+    AsyncStorage.getItem('user').then(user => {
+      setUserId(JSON.parse(user).id)
+      setSpinner(false)
+    })
+  }, [])
 
   const updateHeart = () => {
-    fetch(`${Config.API_URL}/api/diary/${diary._id}/likes/user/${userId}`, {
-      method: 'PUT',
-    }).then(response => console.log(response))
+    if (userId) {
+      fetch(`${Config.API_URL}/api/diary/${diary._id}/likes/user/${userId}`, {
+        method: 'PUT',
+      }).then(response => console.log(response.user))
+    }
   }
   const clickLike = () => {
     setHeart(false)
@@ -38,27 +47,30 @@ export default function OthersDiaryPage({navigation, route}) {
   }
 
   useEffect(() => {
-    AsyncStorage.getItem('user').then(user => (userId = JSON.parse(user).id))
-    fetch(`${Config.API_URL}/api/diary/emotion/${route.params.mood}`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-      .then(response => response.json())
-      .then(response => {
-        if (response.success) {
-          setDiary(response.diary)
-          setLike(response.diary.likes)
-          setSpinner(false)
-          if (response.like_list.includes(userId)) {
-            setHeart(true)
+    if (userId) {
+      fetch(
+        `${Config.API_URL}/api/diary/emotion/${route.params.mood}/user/${userId}`,
+        {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        },
+      )
+        .then(response => response.json())
+        .then(response => {
+          if (response.success) {
+            setDiary(response.diary)
+            setLike(response.diary.likes)
+            if (response.like_list.includes(userId)) {
+              setHeart(true)
+            }
+          } else {
+            setSpinner(false)
           }
-        } else {
-          setSpinner(false)
-        }
-      })
-  }, [])
+        })
+    }
+  }, [userId])
 
   return (
     <View style={styles.view}>
@@ -128,7 +140,7 @@ const styles = StyleSheet.create({
   },
   warningText: {
     color: '#FFFFFF',
-    fontSize: 40,
+    fontSize: 20,
     alignSelf: 'center',
     marginTop: 15,
     margin: 30,

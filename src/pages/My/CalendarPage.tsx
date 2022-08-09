@@ -5,6 +5,7 @@ import CalendarView from '../../components/Calendar/CalendarView'
 import Config from 'react-native-config'
 import TopBar from '../../components/Common/TopBar'
 import * as Progress from 'react-native-progress'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 const happy = {key: 'happy', color: '#FFD233'}
 const neutrality = {key: 'neutrality', color: '#000470'}
@@ -19,12 +20,19 @@ const none = {key: 'none', color: '#858585'}
 // @ts-ignore
 export default function CalendarPage({navigation}) {
   const [spinner, setSpinner] = useState(true)
+  const [userId, setUserId] = useState('')
   const [selectedDate, setSelectedDate] = useState(
     format(new Date(), 'yyyy-MM-dd'),
   )
   const [diaries, setDiaries] = useState([])
-  const userId = '62df4bc8f1ff31b19db9ace9' // 임시
+
   const [markedDates, setMarkedDates] = useState({})
+
+  useEffect(() => {
+    AsyncStorage.getItem('user').then(user => {
+      setUserId(JSON.parse(user).id)
+    })
+  }, [])
 
   // 사용자가 작성한 일기 데이터
   useEffect(() => {
@@ -51,20 +59,22 @@ export default function CalendarPage({navigation}) {
   }, [diaries])
 
   useEffect(() => {
-    fetch(`${Config.API_URL}/api/diary/user/${userId}`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-      .then(response => response.json())
-      .then(response => {
-        if (response.success) {
-          // 유저 다이어리 목록 불러옴
-          setDiaries(response.diaries)
-        }
+    if (userId) {
+      fetch(`${Config.API_URL}/api/diary/user/${userId}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
       })
-  }, [])
+        .then(response => response.json())
+        .then(response => {
+          if (response.success) {
+            // 유저 다이어리 목록 불러옴
+            setDiaries(response.diaries)
+          }
+        })
+    }
+  }, [userId])
 
   // @ts-ignore
   const getEomtions = day => {

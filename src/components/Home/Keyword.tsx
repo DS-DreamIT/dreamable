@@ -23,11 +23,17 @@ const Keyword = ({name, keywords}) => {
       />
       <Text style={[styles.title]}>#꿈분석</Text>
       <View style={[styles.line]} />
-      <Text style={[styles.info]}>
-        이번 달 {name}님의 꿈 키워드는 {'\n'}
-        <Text style={[styles.keyword]}>{keywords.length > 0 && keyword}</Text>
-        이에요.
-      </Text>
+      {keywords.length > 0 ? (
+        <Text style={[styles.info]}>
+          이번 달 {name}님의 꿈 키워드는 {'\n'}
+          <Text style={[styles.keyword]}>{keywords.length > 0 && keyword}</Text>
+          이에요.
+        </Text>
+      ) : (
+        <Text style={[styles.info]}>
+          {name}님의 꿈 키워드가 {'\n'}아직 없어요.
+        </Text>
+      )}
     </View>
   )
 }

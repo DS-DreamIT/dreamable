@@ -25,7 +25,7 @@ export default function TravelPage({navigation, route}) {
     fetch(
       `${Config.API_URL}/api/diary/emotion/${
         route.params.emotion[createRandomNum()]
-      }`,
+      }/user/${userId}`,
       {
         method: 'GET',
         headers: {

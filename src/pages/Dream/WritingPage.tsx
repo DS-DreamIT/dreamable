@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import {
   View,
   Text,
@@ -14,22 +14,31 @@ import Writing from '../../components/Write/Writing'
 import Config from 'react-native-config'
 import * as Progress from 'react-native-progress'
 import ReleaseCheckBox from '../../components/Write/ReleaseCheckBox'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 // @ts-ignore
 export default function WritingPage({navigation}) {
   let data = new FormData()
+  const [userId, setUserId] = useState('')
   const [content, setContent] = useState('')
   const [spinner, setSpinner] = useState(false)
   const [isSelected, setSelected] = useState(true)
+
+  useEffect(() => {
+    AsyncStorage.getItem('user').then(user => {
+      setUserId(JSON.parse(user).id)
+    })
+  }, [])
 
   const handleClick = () => {
     if (content.length > 8) {
       data.append('content', content)
       setSpinner(true)
     } else {
-      Alert.alert('Warning', '충분한 분석을 위해 30글자 이상 입력해주세요.')
+      Alert.alert('Warning', '충분한 분석을 위해 10글자 이상 입력해주세요.')
     }
-    fetch(`${Config.API_URL}/api/diary/user/62df4bc8f1ff31b19db9ace9`, {
+    console.log(userId)
+    fetch(`${Config.API_URL}/api/diary/user/${userId}`, {
       method: 'POST',
       headers: {},
       body: data,
