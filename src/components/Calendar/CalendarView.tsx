@@ -2,7 +2,7 @@ import {format} from 'date-fns'
 import React, {useState, useCallback, useMemo} from 'react'
 import {View, StyleSheet} from 'react-native'
 import {Calendar} from 'react-native-calendars'
-import DayResult from '../../pages/My/DayResult'
+import DayResult from './DayResult'
 
 const date = new Date()
 const maxdate = format(date, 'yyyy-MM-dd')
@@ -90,8 +90,8 @@ const CalendarView = ({markedDates, selectedDate, getDatas, navigation}) => {
 const styles = StyleSheet.create({
   layout: {
     marginHorizontal: 35,
-    marginTop: 75,
-    marginBottom: 50,
+    marginTop: 15,
+    marginBottom: 10,
   },
   calendar: {
     marginBottom: 10,

@@ -25,10 +25,10 @@ export default function WritingPage({navigation}) {
   const handleClick = () => {
     if (content.length > 8) {
       data.append('content', content)
+      setSpinner(true)
     } else {
       Alert.alert('Warning', '충분한 분석을 위해 30글자 이상 입력해주세요.')
     }
-    setSpinner(true)
     fetch(`${Config.API_URL}/api/diary/user/62df4bc8f1ff31b19db9ace9`, {
       method: 'POST',
       headers: {},

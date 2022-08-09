@@ -1,13 +1,18 @@
 import React from 'react'
 import {View, Image, StyleSheet, Text, TouchableOpacity} from 'react-native'
+import {format} from 'date-fns'
 
 // @ts-ignore
-const Gift = ({color, date, navigation}) => {
+const Gift = ({data, color, date, navigation}) => {
   return (
     <View style={[styles.view]}>
       <TouchableOpacity
         onPress={() => {
-          // navigation.navigate('Result', {screen: 'Result'})
+          navigation.navigate('ResultPage', {
+            screen: 'ResultPage',
+            diaryId: data[1]._id,
+            date: format(new Date(data[1].createdAt), 'yyyy-MM-dd'),
+          })
         }}>
         <Image
           style={[styles.gift, {tintColor: color}]}
