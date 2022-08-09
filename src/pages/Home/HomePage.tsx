@@ -6,6 +6,7 @@ import {
   ImageBackground,
   Image,
   TouchableOpacity,
+  Alert,
 } from 'react-native'
 import Config from 'react-native-config'
 import Keyword from '../../components/Home/Keyword'
@@ -19,6 +20,7 @@ export default function HomePage({navigation}) {
   const [diaries1, setDiaries1] = useState([])
   const [diaries2, setDiaries2] = useState([])
   const [keywords, setKeywords] = useState([])
+  const [writeRight, setWriteRight] = useState(true) // 임시
   //@ts-ignore
   useEffect(() => {
     AsyncStorage.getItem('user').then(user => {
@@ -51,6 +53,19 @@ export default function HomePage({navigation}) {
           setDiaries1(temp1)
           setDiaries2(temp2)
         })
+      fetch(`${Config.API_URL}/api/diary/recent/user/${userId}`)
+        .then(response => response.json())
+        .then(response => {
+          if (response.success) {
+            let today = new Date()
+            let createdAt = new Date(response.diary.createdAt)
+            const diff = Math.floor(
+              (today.getDate() - createdAt.getDate()) / (1000 * 60 * 60 * 24),
+            )
+            if (diff > 0) setWriteRight(true)
+            console.log(diff)
+          }
+        })
     }
   }, [userId])
 
@@ -61,7 +76,14 @@ export default function HomePage({navigation}) {
         source={require('../../assets/images/background.png')}>
         <TouchableOpacity
           onPress={() => {
-            navigation.navigate('WritingPage', {screen: 'WritingPage'})
+            {
+              writeRight
+                ? navigation.navigate('WritingPage', {screen: 'WritingPage'})
+                : Alert.alert(
+                    '잠시만요 !',
+                    '하루에 한 번만 일기를 작성할 수 있습니다.',
+                  )
+            }
           }}>
           <Image
             style={[styles.icon]}
@@ -74,7 +96,7 @@ export default function HomePage({navigation}) {
             잠은 최고의 명상 {'\n'}- 달라이 라마
           </Text>
         </View>
-        {Object.entries(diaries2).length > 0 ? (
+        {Object.entries(diaries1).length > 0 ? (
           <>
             <View style={[styles.view]}>
               <View style={[styles.exhibit]}>

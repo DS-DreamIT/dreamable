@@ -1,5 +1,5 @@
 import {Image, StyleSheet, Text, View} from 'react-native'
-import MoodData from '../../assets/data/MoodData'
+import EmotionData from '../../assets/data/EmotionData'
 import React from 'react'
 
 type Props = {
@@ -7,7 +7,7 @@ type Props = {
 }
 
 const MoodCard = ({type}: Props) => {
-  const mood = MoodData.find(data => data.kor === type)
+  const mood = EmotionData.find(data => data.kor === type)
   return (
     <View style={dstyles.container}>
       {mood && (
