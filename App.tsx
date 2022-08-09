@@ -9,6 +9,9 @@ import {AuthContext} from './src/components/Login/context'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import Config from 'react-native-config'
 import MainNavigator from './src/navigation/MainNavigator'
+import ResultPage from './src/pages/Dream/ResultPage'
+import CalendarPage from './src/pages/My/CalendarPage'
+import BadgePage from './src/pages/My/BadgePage'
 
 const Stack = createNativeStackNavigator()
 export default function App() {
