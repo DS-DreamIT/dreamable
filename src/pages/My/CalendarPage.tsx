@@ -33,7 +33,7 @@ export default function CalendarPage({navigation}) {
       const getEntries = Object.entries(diaries).map((entrie, idx) => {
         return entrie
       })
-
+      setSpinner(true)
       // reduce를 사용하여 객체 처리
       let mark = getEntries.reduce((acc, current) => {
         //@ts-ignore
@@ -116,6 +116,7 @@ const styles = StyleSheet.create({
     fontSize: 30,
     textAlign: 'center',
     color: '#ffffff',
+    fontFamily: 'SCDream5-Regular',
   },
   flex: {
     flex: 1,

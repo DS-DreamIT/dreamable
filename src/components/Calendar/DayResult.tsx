@@ -8,7 +8,7 @@ const date = new Date()
 const todayFunc = selectedDate => {
   return (
     <View>
-      <Text style={styles.today}>Day {selectedDate} </Text>
+      <Text style={styles.today}>DAY {selectedDate} </Text>
     </View>
   )
 }
@@ -53,24 +53,29 @@ const todayEmotion = (selectedDate, getDatas, navigation) => {
 
   return index == -1 ? (
     <View>
-      <Text style={{fontSize: 20}}>이 날은 꾼 꿈이 없네요!</Text>
+      <Text style={{fontSize: 20, fontFamily: 'SCDream3'}}>
+        이 날은 꾼 꿈이 없네요!
+      </Text>
     </View>
   ) : registerDate(selectedDate) > 5 ? (
-    <View>
+    <View style={styles.flex}>
       {emotions ? (
-        <Text style={{fontSize: 20}}>
+        <Text style={{fontSize: 20, fontFamily: 'SCDream3'}}>
           이 날은 <Text style={{fontWeight: '700'}}>{emotions}</Text>감정의 꿈을
           꾸셨네요!
         </Text>
       ) : (
-        <Text style={{fontSize: 20}}>감정이 없는 꿈을 꾸었어요!</Text>
+        <Text style={{fontSize: 20, fontFamily: 'SCDream3'}}>
+          감정이 없는 꿈을 꾸었어요!
+        </Text>
       )}
       <TouchableOpacity
         style={[styles.goto]}
         onPress={() => {
           navigation.navigate('ResultPage', {
             screen: 'ResultPage',
-            date: selectedDate,
+            diaryID: getDatas[index]._id,
+            day: selectedDate,
           })
         }}>
         <Text style={[styles.gotoText]}>꿈조각 살펴보기</Text>
@@ -79,7 +84,7 @@ const todayEmotion = (selectedDate, getDatas, navigation) => {
     </View>
   ) : (
     <View>
-      <Text style={{fontSize: 20}}>
+      <Text style={{fontSize: 20, fontFamily: 'SCDream3'}}>
         꿈 열어보기까지 D-{5 - registerDate(selectedDate)}
       </Text>
     </View>
@@ -97,9 +102,15 @@ const DayResult = ({selectedDate, getDatas, navigation}) => {
 }
 
 const styles = StyleSheet.create({
+  flex: {
+    flex: 1,
+    flexDirection: 'column',
+  },
   today: {
     fontSize: 20,
     color: '#ffffff',
+    fontFamily: 'SCDream4',
+    marginBottom: 5,
   },
   view: {
     backgroundColor: '#ffffff44',
@@ -112,10 +123,13 @@ const styles = StyleSheet.create({
   goto: {
     flexDirection: 'row',
     alignItems: 'center',
+    marginTop: 'auto',
+    marginLeft: 'auto',
   },
   gotoText: {
     fontSize: 20,
     marginRight: 10,
+    fontFamily: 'SCDream4',
   },
 })
 
