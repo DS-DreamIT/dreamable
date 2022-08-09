@@ -28,13 +28,15 @@ const styles = (color: any) =>
     content: {
       color: color,
       tintColor: color,
+      fontFamily: 'SCDream4',
     },
   })
 
 const dstyles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    margin: 10,
+    marginLeft: 7,
+    margin: 6,
   },
   margin: {
     marginRight: 3,

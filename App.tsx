@@ -3,13 +3,12 @@ import {Alert, View} from 'react-native'
 import {ActivityIndicator} from 'react-native-paper'
 import {NavigationContainer} from '@react-navigation/native'
 import {createNativeStackNavigator} from '@react-navigation/native-stack'
-import MainNavigator from './src/navigation/MainNavigator'
 import LoginPage from './src/pages/Login/LoginPage'
 import RegisterPage from './src/pages/Login/RegisterPage'
-
 import {AuthContext} from './src/components/Login/context'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import Config from 'react-native-config'
+import MainNavigator from './src/navigation/MainNavigator'
 
 const Stack = createNativeStackNavigator()
 export default function App() {

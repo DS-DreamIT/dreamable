@@ -20,7 +20,7 @@ export default function MainNavigator() {
     return {
       headerShown: false, // 헤더 삭제
       tabBarLabel: ({ focused, color, size }: TabBarProps) => {
-        switch (name) {
+        switch (name) { 
           case 'home':
             return <Text style={{ color: focused ? 'purple' : color, fontSize: 10, marginBottom: 3 }}>메인</Text>
           case 'travel':

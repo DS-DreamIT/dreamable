@@ -59,7 +59,7 @@ export default function MyProfilePage({navigation}) {
         </View>
         <View style={styles.moodBadgeView}>
           <TouchableOpacity
-            onPress={() => Alert.alert('message', '감정 뱃지')}
+            onPress={() => navigation.navigate('BadgePage')}
             style={styles.touchBox}>
             <Image
               source={require('../../assets/icons/box.png')}
@@ -76,13 +76,6 @@ export default function MyProfilePage({navigation}) {
             />
           </TouchableOpacity>
         </View>
-        {/* <View style={styles.statisticsView}>
-          <Image
-            source={require('../../assets/icons/graph.png')}
-            style={styles.statisticsImg}
-          />
-          <Text style={styles.keywordText}>키워드 통계</Text>
-        </View> */}
       </ImageBackground>
     </View>
   )

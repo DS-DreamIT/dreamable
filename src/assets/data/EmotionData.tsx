@@ -3,6 +3,8 @@ const EmotionData = [
     id: 1,
     kor: '놀람',
     eng: 'surprised',
+    short: '놀람!',
+    long: '놀람!',
     color: '#F49D5D',
   },
   {
