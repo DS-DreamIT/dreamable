@@ -1,6 +1,5 @@
-import React, {useState} from 'react'
+import React, {useContext, useState} from 'react'
 import {
-  Alert,
   Image,
   ImageBackground,
   StyleSheet,
@@ -9,11 +8,12 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native'
+import {AuthContext} from '../../components/Login/context'
 
 // @ts-ignore
-export default function LoginPage() {
+export default function LoginPage({navigation}) {
   const [email, setEmail] = useState('')
-  const [pw, setPw] = useState('')
+  const [password, setPw] = useState('')
 
   const inputEmail = (newText: React.SetStateAction<string>) => {
     setEmail(newText)
@@ -21,6 +21,12 @@ export default function LoginPage() {
 
   const inputPw = (newText: React.SetStateAction<string>) => {
     setPw(newText)
+  }
+
+  const {signIn} = useContext(AuthContext)
+
+  const loginHandle = (email, password) => {
+    signIn(email, password)
   }
 
   return (
@@ -48,16 +54,21 @@ export default function LoginPage() {
           <View style={styles.inputBox}>
             <TextInput
               onChangeText={inputPw}
-              value={pw}
+              value={password}
               style={styles.input}
               secureTextEntry={true}
             />
           </View>
         </View>
-        <TouchableOpacity style={styles.loginView}>
+        <TouchableOpacity
+          style={styles.loginView}
+          onPress={() => loginHandle(email, password)}>
           <Text style={styles.loginText}>Login</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => Alert.alert('message', '만들어야댄')}>
+        <TouchableOpacity
+          onPress={() =>
+            navigation.navigate('RegisterPage', {screen: 'RegisterPage'})
+          }>
           <Text style={styles.registerText}>회원가입</Text>
         </TouchableOpacity>
       </ImageBackground>

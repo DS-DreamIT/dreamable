@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import {
   View,
   Text,
@@ -8,9 +8,12 @@ import {
   TouchableOpacity,
   Alert,
 } from 'react-native'
+import {AuthContext} from '../../components/Login/context'
 
 // @ts-ignore
-export default function MyProfilePage({}) {
+export default function MyProfilePage({navigation}) {
+  const {signOut} = useContext(AuthContext)
+
   return (
     <View style={styles.view}>
       <ImageBackground
@@ -18,11 +21,8 @@ export default function MyProfilePage({}) {
         style={styles.bgImage}>
         <View style={styles.titleView}>
           <Text style={styles.titleText}>Profile</Text>
-          <TouchableOpacity onPress={() => Alert.alert('message', '설정')}>
-            <Image
-              source={require('../../assets/icons/setting.png')}
-              style={styles.settingImg}
-            />
+          <TouchableOpacity onPress={() => signOut()}>
+            <Text style={styles.logOut}>Logout</Text>
           </TouchableOpacity>
         </View>
         <Image
@@ -40,7 +40,7 @@ export default function MyProfilePage({}) {
         </View>
         <View style={styles.calendarBoxView}>
           <TouchableOpacity
-            onPress={() => Alert.alert('message', '선물상자 캘린더')}
+            onPress={() => navigation.navigate('CalendarPage')}
             style={styles.touchBox}>
             <Image
               source={require('../../assets/icons/box.png')}
@@ -76,13 +76,13 @@ export default function MyProfilePage({}) {
             />
           </TouchableOpacity>
         </View>
-        <View style={styles.statisticsView}>
+        {/* <View style={styles.statisticsView}>
           <Image
             source={require('../../assets/icons/graph.png')}
             style={styles.statisticsImg}
           />
           <Text style={styles.keywordText}>키워드 통계</Text>
-        </View>
+        </View> */}
       </ImageBackground>
     </View>
   )
@@ -105,15 +105,18 @@ const styles = StyleSheet.create({
   titleText: {
     color: '#FFFFFF',
     textAlign: 'center',
+    alignSelf: 'center',
     fontSize: 30,
     marginTop: 8,
-    marginRight: 115,
+    marginRight: 95,
+    fontFamily: 'SCDream4',
   },
-  settingImg: {
-    marginTop: 8,
-    marginRight: 5,
-    height: 40,
-    width: 40,
+  logOut: {
+    marginTop: 16,
+    marginRight: 12,
+    fontSize: 18,
+    color: '#FFFFFF',
+    fontFamily: 'SCDream3',
   },
   lineImg: {
     width: '100%',
@@ -130,14 +133,17 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
     fontSize: 30,
     marginTop: 5,
+    fontFamily: 'SCDream3',
   },
   email: {
     color: '#DDDDDD',
+    fontFamily: 'SCDream3',
   },
   dreamDay: {
     fontSize: 25,
     color: '#FFFFFF',
     marginTop: 20,
+    fontFamily: 'SCDream4',
   },
   touchBox: {
     alignSelf: 'center',
@@ -160,6 +166,7 @@ const styles = StyleSheet.create({
     marginLeft: 35,
     marginTop: 40,
     position: 'absolute',
+    fontFamily: 'SCDream4',
   },
   arrowImg: {
     marginTop: 48,
@@ -191,5 +198,6 @@ const styles = StyleSheet.create({
     fontSize: 22,
     marginTop: 43,
     marginLeft: 10,
+    fontFamily: 'SCDream4',
   },
 })

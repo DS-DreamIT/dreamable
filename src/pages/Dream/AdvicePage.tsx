@@ -9,7 +9,7 @@ export default function AdvicePage({navigation}) {
       <ImageBackground
         source={require('../../assets/images/background.png')}
         style={styles.bgImage}>
-        <TopBar navigation={navigation} />
+        <TopBar navigation={navigation} type={'HOME'} />
         <Text style={styles.titleText}>Advice for You</Text>
         <View style={styles.TopFlowerView}>
           <Image

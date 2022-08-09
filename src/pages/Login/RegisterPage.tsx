@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useContext, useState} from 'react'
 import {
   Alert,
   Image,
@@ -10,11 +10,16 @@ import {
   View,
 } from 'react-native'
 import {isEmail, isNickname, isPassword} from '../../regular/check'
+import {AuthContext} from '../../components/Login/context'
+import Config from 'react-native-config'
 
-export default function RegisterPage({}) {
+export default function RegisterPage() {
   const [nickname, setNickname] = useState('')
   const [email, setEmail] = useState('')
-  const [pw, setPw] = useState('')
+  const [password, setPw] = useState('')
+  const [checkE, setCheckE] = useState(false)
+
+  const {signUp} = useContext(AuthContext)
 
   const inputNickname = (newText: React.SetStateAction<string>) => {
     setNickname(newText)
@@ -29,18 +34,38 @@ export default function RegisterPage({}) {
   }
 
   const checkEmail = () => {
-    console.log(isEmail(email))
-    if (!isEmail(email)) {
-      Alert.alert('Warning', '이메일 형식이 옳지 않습니다.')
-      setEmail('')
-    } else {
-      return true
-    }
+    fetch(`${Config.API_URL}/api/user/register`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        userEmail: email,
+      }),
+    })
+      .then(response => response.json())
+      .then(response => {
+        if (!isEmail(email) && response.registerSuccess === undefined) {
+          Alert.alert('Warning', '이메일 형식이 옳지 않습니다.')
+          setEmail('')
+          setCheckE(false)
+        } else if (
+          !response.registerSuccess &&
+          response.registerSuccess !== undefined
+        ) {
+          Alert.alert('Warning', response.message)
+          setEmail('')
+          setCheckE(false)
+        } else if (response.registerSuccess === undefined) {
+          Alert.alert('가능', '사용 가능한 이메일입니다.')
+          setCheckE(true)
+        }
+      })
   }
 
-  const entireCheck = () => {
-    if (isNickname(nickname) && checkEmail() && isPassword(pw)) {
-      Alert.alert('Success', '회원가입 완료')
+  const registerHandle = (nickname, email, password) => {
+    if (isNickname(nickname) && isPassword(password) && checkE) {
+      signUp(nickname, email, password)
     } else {
       Alert.alert('Failed', 'nickname or email or password 확인')
     }
@@ -90,7 +115,7 @@ export default function RegisterPage({}) {
           <View style={styles.inputBox}>
             <TextInput
               onChangeText={inputPw}
-              value={pw}
+              value={password}
               style={styles.input}
               secureTextEntry={true}
               placeholder="비밀번호를 입력하세요."
@@ -98,7 +123,9 @@ export default function RegisterPage({}) {
             />
           </View>
         </View>
-        <TouchableOpacity style={styles.registerView} onPress={entireCheck}>
+        <TouchableOpacity
+          style={styles.registerView}
+          onPress={() => registerHandle(nickname, email, password)}>
           <Text style={styles.registerText}>Register</Text>
         </TouchableOpacity>
       </ImageBackground>

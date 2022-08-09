@@ -84,7 +84,7 @@ export default function ShareDream({navigation}) {
       <ImageBackground
         style={[styles.flex]}
         source={require('../../assets/images/background.png')}>
-        <TopBar navigation={navigation} />
+        <TopBar navigation={navigation} type={'HOME'} />
         <View style={[styles.flex, styles.padding89]}>
           <Text style={styles.text}>{title}</Text>
           <View style={styles.sepline} />
@@ -138,7 +138,7 @@ const styles = StyleSheet.create({
     fontSize: 40,
     color: '#ce93d8',
     marginBottom: 10,
-    fontFamily: 'Roboto-LightItalic',
+    fontFamily: 'RobotoLightItalic',
   },
   padding89: {padding: 25, paddingLeft: 0, paddingRight: 0},
   sepline: {

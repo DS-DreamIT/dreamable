@@ -1,4 +1,5 @@
-import React from 'react';
+import {format} from 'date-fns'
+import React from 'react'
 import {
   View,
   Text,
@@ -7,22 +8,25 @@ import {
   SafeAreaView,
 } from 'react-native'
 import TopBar from '../../components/Common/TopBar'
-import MoodCard from '../../components/Card/MoodCard';
+import MoodCard from '../../components/Card/MoodCard'
 
 const title = '당신의 꿈은 어땠을까요?'
 const word = '꿈 단어'
 const analysis = '꿈 분석'
 const story = 'Dream Story'
 const analresult = '분석 결과'
+const date = format(new Date(), 'yyyy-MM-dd')
 
 // @ts-ignore
-export default function ResultPage({navigation}) {
+export default function ResultPage({navigation, route}) {
+  const day = route.params.date
+  console.log(day)
   return (
     <SafeAreaView style={styles.flex}>
       <ImageBackground
         style={[styles.flex]}
         source={require('../../assets/images/background.png')}>
-        <TopBar navigation={navigation} date={'2022.02.14'} />
+        <TopBar navigation={navigation} type={'BACK'} date={day} />
         <View style={[styles.flex]}>
           <Text style={styles.title}>{title}</Text>
           <View style={styles.wordContainer}>

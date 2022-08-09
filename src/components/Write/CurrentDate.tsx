@@ -26,9 +26,9 @@ const styles = StyleSheet.create({
   },
   date: {
     marginLeft: 41,
-    marginTop: 13,
     fontSize: 28,
     color: '#ffffff',
+    fontFamily: 'SCDream6',
   },
 })
 

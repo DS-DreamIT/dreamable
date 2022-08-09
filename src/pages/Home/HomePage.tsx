@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import {
   View,
   Text,
@@ -7,11 +7,53 @@ import {
   Image,
   TouchableOpacity,
 } from 'react-native'
-import Gift from '../../components/Home/Gift'
+import Config from 'react-native-config'
 import Keyword from '../../components/Home/Keyword'
+import AsyncStorage from '@react-native-async-storage/async-storage'
+import GiftList from '../../components/Home/GiftList'
 
 // @ts-ignore
 export default function HomePage({navigation}) {
+  const [userId, setUserId] = useState('')
+  const [name, setName] = useState('')
+  const [diaries1, setDiaries1] = useState([])
+  const [diaries2, setDiaries2] = useState([])
+  const [keywords, setKeywords] = useState([])
+  //@ts-ignore
+  useEffect(() => {
+    AsyncStorage.getItem('user').then(user => {
+      setUserId(JSON.parse(user).id)
+    })
+  }, [])
+
+  useEffect(() => {
+    if (userId) {
+      fetch(`${Config.API_URL}/api/user/${userId}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+        .then(response => response.json())
+        .then(response => {
+          let temp1 = []
+          let temp2 = []
+          //@ts-ignore
+          response.diary_list.forEach((entrie, idx) => {
+            if (idx < 3) {
+              temp1.push(entrie)
+            } else {
+              temp2.push(entrie)
+            }
+          })
+          setName(response.user.name)
+          setKeywords(response.user.keywords)
+          setDiaries1(temp1)
+          setDiaries2(temp2)
+        })
+    }
+  }, [userId])
+
   return (
     <View style={styles.flex}>
       <ImageBackground
@@ -27,7 +69,7 @@ export default function HomePage({navigation}) {
           />
         </TouchableOpacity>
         <View style={[styles.text]}>
-          <Keyword name="꾸미" />
+          {keywords.length > 0 && <Keyword name={name} keywords={keywords} />}
           <Text style={[styles.sentence]}>
             잠은 최고의 명상 {'\n'}- 달라이 라마
           </Text>
@@ -36,9 +78,9 @@ export default function HomePage({navigation}) {
           <View style={[styles.exhibit]}>
             <View style={[styles.table]} />
             <View style={[styles.gifts]}>
-              <Gift color={'#E03333'} date="12/20" navigation={navigation} />
-              <Gift color={'#FFD233'} date="01/18" navigation={navigation} />
-              <Gift color={'#F8A5CF'} date="01/27" navigation={navigation} />
+              {Object.entries(diaries1).length > 0 && (
+                <GiftList data={diaries1} navigation={navigation} />
+              )}
             </View>
           </View>
         </View>
@@ -46,9 +88,9 @@ export default function HomePage({navigation}) {
           <View style={[styles.exhibit, {margin: 50}]}>
             <View style={[styles.table]} />
             <View style={[styles.gifts]}>
-              <Gift color={'#5E9BE2'} date="02/02" navigation={navigation} />
-              <Gift color={'#000470'} date="02/08" navigation={navigation} />
-              <Gift color={'#000000'} date="02/14" navigation={navigation} />
+              {Object.entries(diaries2).length > 0 && (
+                <GiftList data={diaries2} navigation={navigation} />
+              )}
             </View>
           </View>
         </View>
@@ -85,6 +127,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     margin: -30,
     color: '#ffffff',
+    fontFamily: 'SCDream3',
   },
   icon: {
     marginLeft: 330,

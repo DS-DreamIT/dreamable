@@ -2,7 +2,15 @@ import React from 'react'
 import {View, Image, StyleSheet, Text} from 'react-native'
 
 // @ts-ignore
-const Keyword = ({name}) => {
+const Keyword = ({name, keywords}) => {
+  //@ts-ignore
+  let keyword = keywords.reduce((acc, current, idx) => {
+    acc = acc + current
+    if (idx < keywords.length - 1) {
+      acc += ', '
+    }
+    return acc
+  }, '')
   return (
     <View>
       <Image
@@ -17,7 +25,7 @@ const Keyword = ({name}) => {
       <View style={[styles.line]} />
       <Text style={[styles.info]}>
         이번 달 {name}님의 꿈 키워드는 {'\n'}
-        <Text style={[styles.keyword]}>행복, 과자, 주말</Text>
+        <Text style={[styles.keyword]}>{keywords.length > 0 && keyword}</Text>
         이에요.
       </Text>
     </View>
@@ -47,6 +55,7 @@ const styles = StyleSheet.create({
     marginTop: 43,
     fontSize: 30,
     color: '#BFA9D7',
+    fontFamily: 'SCDream5-Regular',
   },
   info: {
     position: 'absolute',
@@ -54,9 +63,11 @@ const styles = StyleSheet.create({
     marginTop: 135,
     fontSize: 19,
     color: '#000000',
+    fontFamily: 'SCDream3',
   },
   keyword: {
     fontWeight: 'bold',
+    fontFamily: 'SCDream5-Regular',
   },
 })
 

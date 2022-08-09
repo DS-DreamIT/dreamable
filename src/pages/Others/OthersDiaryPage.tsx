@@ -1,3 +1,4 @@
+import AsyncStorage from '@react-native-async-storage/async-storage'
 import React, {useEffect, useState} from 'react'
 import {
   Image,
@@ -9,13 +10,15 @@ import {
 } from 'react-native'
 import Config from 'react-native-config'
 import TopBar from '../../components/Common/TopBar'
+import * as Progress from 'react-native-progress'
 
 // @ts-ignore
 export default function OthersDiaryPage({navigation, route}) {
   const [heart, setHeart] = useState(false)
   const [like, setLike] = useState(0)
   const [diary, setDiary] = useState([])
-  const userId = '62df4bc8f1ff31b19db9ace9' // 임시
+  const [spinner, setSpinner] = useState(true)
+  let userId: string = ''
 
   const updateHeart = () => {
     fetch(`${Config.API_URL}/api/diary/${diary._id}/likes/user/${userId}`, {
@@ -35,6 +38,7 @@ export default function OthersDiaryPage({navigation, route}) {
   }
 
   useEffect(() => {
+    AsyncStorage.getItem('user').then(user => (userId = JSON.parse(user).id))
     fetch(`${Config.API_URL}/api/diary/emotion/${route.params.mood}`, {
       method: 'GET',
       headers: {
@@ -46,9 +50,12 @@ export default function OthersDiaryPage({navigation, route}) {
         if (response.success) {
           setDiary(response.diary)
           setLike(response.diary.likes)
+          setSpinner(false)
           if (response.like_list.includes(userId)) {
             setHeart(true)
           }
+        } else {
+          setSpinner(false)
         }
       })
   }, [])
@@ -58,27 +65,47 @@ export default function OthersDiaryPage({navigation, route}) {
       <ImageBackground
         source={require('../../assets/images/background-others.png')}
         style={styles.bgImage}>
-        <TopBar navigation={navigation} />
+        <TopBar navigation={navigation} type={'BACK'} />
         <Text style={styles.moodText}>#{route.params.mood}</Text>
-        <View style={styles.dreamBox}>
-          <Text style={styles.dreamText}>{diary.content}</Text>
-        </View>
-        <View style={styles.likeView}>
-          <TouchableOpacity
-            onPress={() => {
-              heart ? clickLike() : unClickLike()
-            }}
-            style={styles.likeImg}>
-            <Image
-              source={
-                heart
-                  ? require('../../assets/icons/heart-selected.png')
-                  : require('../../assets/icons/heart-default.png')
-              }
-            />
-          </TouchableOpacity>
-          <Text style={styles.likeText}>{like}</Text>
-        </View>
+        {diary.length < 1 ? (
+          <>
+            {spinner ? (
+              <View style={[styles.spinner]}>
+                <Progress.Circle
+                  size={30}
+                  indeterminate={true}
+                  borderColor={'#ffffff'}
+                />
+              </View>
+            ) : (
+              <Text style={styles.warningText}>
+                {route.params.mood}에 해당하는 꿈이 아직 없어요
+              </Text>
+            )}
+          </>
+        ) : (
+          <>
+            <View style={styles.dreamBox}>
+              <Text style={styles.dreamText}>{diary.content}</Text>
+            </View>
+            <View style={styles.likeView}>
+              <TouchableOpacity
+                onPress={() => {
+                  heart ? clickLike() : unClickLike()
+                }}
+                style={styles.likeImg}>
+                <Image
+                  source={
+                    heart
+                      ? require('../../assets/icons/heart-selected.png')
+                      : require('../../assets/icons/heart-default.png')
+                  }
+                />
+              </TouchableOpacity>
+              <Text style={styles.likeText}>{like}</Text>
+            </View>
+          </>
+        )}
       </ImageBackground>
     </View>
   )
@@ -94,12 +121,24 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
   },
+  spinner: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  warningText: {
+    color: '#FFFFFF',
+    fontSize: 40,
+    alignSelf: 'center',
+    marginTop: 15,
+    margin: 30,
+  },
   moodText: {
     color: '#FFFFFF',
     fontSize: 28,
     alignSelf: 'center',
     marginTop: 15,
-    fontWeight: 'bold',
+    fontFamily: 'SCDream5-Regular',
   },
   dreamBox: {
     backgroundColor: '#D4CCE8',
@@ -111,6 +150,7 @@ const styles = StyleSheet.create({
     opacity: 0.8,
   },
   dreamText: {
+    fontFamily: 'SCDream3',
     margin: 10,
     alignSelf: 'center',
     color: '#000000',
