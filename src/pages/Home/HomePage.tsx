@@ -53,6 +53,7 @@ export default function HomePage({navigation}) {
           setDiaries1(temp1)
           setDiaries2(temp2)
         })
+        
       fetch(`${Config.API_URL}/api/diary/recent/user/${userId}`)
         .then(response => response.json())
         .then(response => {
