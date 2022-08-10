@@ -38,6 +38,13 @@ export default function MyProfilePage({navigation}) {
           if (response.success) {
             // 유저 정보 불러옴
             setUser(response.user)
+          }
+        })
+      fetch(`${Config.API_URL}/api/user/${userId}/totalDiaryCount`)
+        .then(response => response.json())
+        .then(response => {
+          if (response.success) {
+            console.log(response.diary_count)
             setCount(response.diary_count)
           }
         })

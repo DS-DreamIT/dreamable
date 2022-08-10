@@ -72,7 +72,7 @@ const EmotionData = [
   {
     id: 8,
     kor: '불안',
-    eng: 'anxiety',
+    eng: 'unrest',
     color: '#00D33B',
     src: require('../../assets/icons/happy.png'),
     short:

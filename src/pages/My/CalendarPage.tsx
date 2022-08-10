@@ -12,7 +12,7 @@ const neutrality = {key: 'neutrality', color: '#000470'}
 const sad = {key: 'sad', color: '#5E9BE2'}
 const fear = {key: 'fear', color: '#000000'}
 const anger = {key: 'anger', color: '#E14A4A'}
-const anxiety = {key: 'anxiety', color: '#00D33B'}
+const unrest = {key: 'unrest', color: '#00D33B'}
 const surprised = {key: 'surprised', color: '#F49D5D'}
 const flutter = {key: 'flutter', color: '#F8A5CF'}
 const none = {key: 'none', color: '#858585'}
@@ -84,8 +84,8 @@ export default function CalendarPage({navigation}) {
     if (loadEmotions.includes('중립')) emotions.push(neutrality)
     if (loadEmotions.includes('슬픔')) emotions.push(sad)
     if (loadEmotions.includes('공포')) emotions.push(fear)
-    if (loadEmotions.includes('화남')) emotions.push(anger)
-    if (loadEmotions.includes('긴장')) emotions.push(anxiety)
+    if (loadEmotions.includes('분노')) emotions.push(anger)
+    if (loadEmotions.includes('불안')) emotions.push(unrest)
     if (loadEmotions.includes('놀람')) emotions.push(surprised)
     if (loadEmotions.includes('설렘')) emotions.push(flutter)
     if (loadEmotions.length === 0) emotions.push(none)
