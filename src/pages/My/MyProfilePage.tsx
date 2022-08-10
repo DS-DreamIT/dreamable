@@ -1,4 +1,4 @@
-import React, {useContext} from 'react'
+import React, {useContext, useEffect, useState} from 'react'
 import {
   View,
   Text,
@@ -9,10 +9,40 @@ import {
   Alert,
 } from 'react-native'
 import {AuthContext} from '../../components/Login/context'
+import Config from 'react-native-config'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 // @ts-ignore
 export default function MyProfilePage({navigation}) {
   const {signOut} = useContext(AuthContext)
+  const [userId, setUserId] = useState('')
+  const [user, setUser] = useState([])
+  const [count, setCount] = useState(0)
+
+  useEffect(() => {
+    AsyncStorage.getItem('user').then(user => {
+      setUserId(JSON.parse(user).id)
+    })
+  }, [])
+
+  useEffect(() => {
+    if (userId) {
+      fetch(`${Config.API_URL}/api/user/${userId}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+        .then(response => response.json())
+        .then(response => {
+          if (response.success) {
+            // 유저 정보 불러옴
+            setUser(response.user)
+            setCount(response.diary_count)
+          }
+        })
+    }
+  }, [userId])
 
   return (
     <View style={styles.view}>
@@ -30,22 +60,41 @@ export default function MyProfilePage({navigation}) {
           style={styles.lineImg}
         />
         <View style={styles.profile}>
-          <Image
-            source={require('../../assets/icons/profilePhoto.png')}
-            style={styles.profileImg}
-          />
-          <Text style={styles.nickname}>Nickname</Text>
-          <Text style={styles.email}>email@gmail.com</Text>
-          <Text style={styles.dreamDay}>꿈 꾼 날 12일</Text>
+          {count <= 5 ? (
+            <Image
+              source={require('../../assets/images/moon-until-5.png')}
+              style={styles.profileImg}
+            />
+          ) : count <= 10 ? (
+            <Image
+              source={require('../../assets/images/moon-until-10.png')}
+              style={styles.profileImg}
+            />
+          ) : count <= 15 ? (
+            <Image
+              source={require('../../assets/images/moon-until-15.png')}
+              style={styles.profileImg}
+            />
+          ) : count <= 20 ? (
+            <Image
+              source={require('../../assets/images/moon-until-20.png')}
+              style={styles.profileImg}
+            />
+          ) : (
+            <Image
+              source={require('../../assets/images/moon-until-25.png')}
+              style={styles.profileImg}
+            />
+          )}
+
+          <Text style={styles.nickname}>{user.name}</Text>
+          <Text style={styles.email}>{user.email}</Text>
+          <Text style={styles.dreamDay}>꿈 꾼 날 {count}일</Text>
         </View>
         <View style={styles.calendarBoxView}>
           <TouchableOpacity
             onPress={() => navigation.navigate('CalendarPage')}
             style={styles.touchBox}>
-            <Image
-              source={require('../../assets/icons/box.png')}
-              style={styles.calendarBoxImg}
-            />
             <Image
               source={require('../../assets/icons/gift.png')}
               style={styles.giftImg}
@@ -61,10 +110,6 @@ export default function MyProfilePage({navigation}) {
           <TouchableOpacity
             onPress={() => navigation.navigate('BadgePage')}
             style={styles.touchBox}>
-            <Image
-              source={require('../../assets/icons/box.png')}
-              style={styles.calendarBoxImg}
-            />
             <Image
               source={require('../../assets/icons/badge.png')}
               style={styles.badgeImg}
@@ -101,7 +146,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     fontSize: 30,
     marginTop: 8,
-    marginRight: 95,
+    marginRight: 79,
     fontFamily: 'SCDream4',
   },
   logOut: {
@@ -118,6 +163,8 @@ const styles = StyleSheet.create({
   },
   profile: {
     alignItems: 'center',
+    marginBottom: 50,
+    marginTop: 24,
   },
   profileImg: {
     marginTop: 20,
@@ -125,7 +172,7 @@ const styles = StyleSheet.create({
   nickname: {
     color: '#FFFFFF',
     fontSize: 30,
-    marginTop: 5,
+    marginTop: 10,
     fontFamily: 'SCDream3',
   },
   email: {
@@ -140,30 +187,35 @@ const styles = StyleSheet.create({
   },
   touchBox: {
     alignSelf: 'center',
+    backgroundColor: '#ffffff66',
+    borderRadius: 15,
+    height: 60,
+    width: 324,
   },
   calendarBoxView: {
     alignItems: 'flex-start',
+    marginBottom: 11,
   },
   calendarBoxImg: {
-    marginTop: 30,
     alignSelf: 'center',
     position: 'absolute',
   },
   giftImg: {
-    marginTop: 46,
+    marginTop: 20,
+    marginLeft: 16,
     position: 'absolute',
   },
   boxText: {
     fontSize: 24,
     color: '#000000',
-    marginLeft: 35,
-    marginTop: 40,
+    marginLeft: 48,
+    marginTop: 14,
     position: 'absolute',
     fontFamily: 'SCDream4',
   },
   arrowImg: {
-    marginTop: 48,
-    marginLeft: 270,
+    marginTop: 20,
+    marginLeft: 282,
   },
   moodBadgeView: {
     alignItems: 'flex-start',
@@ -174,7 +226,8 @@ const styles = StyleSheet.create({
     position: 'absolute',
   },
   badgeImg: {
-    marginTop: 44,
+    marginTop: 17,
+    marginLeft: 16,
     position: 'absolute',
   },
   statisticsView: {
