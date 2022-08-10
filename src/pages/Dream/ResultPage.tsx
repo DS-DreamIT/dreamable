@@ -153,17 +153,19 @@ export default function ResultPage({navigation, route}) {
           <View style={styles.diaryContainer}>
             <Text style={styles.text}>{analresult}</Text>
             <ScrollView style={styles.resultBox}>
-              {Object.keys(diary).length ? (
-                diary.emotion.length == 0 ? (
-                  <Text style={styles.diaryText}>
-                    감정이 없는 꿈을 꾸었기에 분석 결과가 없어요.
-                  </Text>
+              <View style={styles.result}>
+                {Object.keys(diary).length ? (
+                  diary.emotion.length == 0 ? (
+                    <Text style={styles.diaryText}>
+                      감정이 없는 꿈을 꾸었기에 분석 결과가 없어요.
+                    </Text>
+                  ) : (
+                    <Text style={styles.diaryText}>{result.long}</Text>
+                  )
                 ) : (
-                  <Text style={styles.diaryText}>{result.long}</Text>
-                )
-              ) : (
-                <></>
-              )}
+                  <></>
+                )}
+              </View>
             </ScrollView>
           </View>
         </View>
@@ -174,6 +176,9 @@ export default function ResultPage({navigation, route}) {
 
 const styles = StyleSheet.create({
   flex: {flex: 1},
+  result: {
+    paddingBottom: 20,
+  },
   title: {
     textAlign: 'center',
     fontSize: 30,
@@ -199,7 +204,7 @@ const styles = StyleSheet.create({
   wordBox: {
     display: 'flex',
     flexDirection: 'column',
-    height: 145,
+    height: 105,
     width: 145,
     marginLeft: 35,
     marginTop: 2,

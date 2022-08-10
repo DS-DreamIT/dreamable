@@ -9,19 +9,19 @@ const TopBar = ({navigation, type, date}) => {
   return (
     <>
       {type === 'HOME' ? (
-        <TouchableOpacity onPress={goHome}>
-          <View style={styles.view}>
+        <View style={styles.view}>
+          <TouchableOpacity onPress={goHome} style={styles.touchable}>
             <Image source={require('../../assets/icons/arrow-back.png')} />
             <Text style={styles.text}>{date}</Text>
-          </View>
-        </TouchableOpacity>
+          </TouchableOpacity>
+        </View>
       ) : (
-        <TouchableOpacity onPress={goBack}>
-          <View style={styles.view}>
+        <View style={styles.view}>
+          <TouchableOpacity onPress={goBack} style={styles.touchable}>
             <Image source={require('../../assets/icons/arrow-back.png')} />
             <Text style={styles.text}>{date}</Text>
-          </View>
-        </TouchableOpacity>
+          </TouchableOpacity>
+        </View>
       )}
     </>
   )
@@ -35,10 +35,13 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
+  touchable: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
   text: {
     fontSize: 24,
-    color: '#fff',
-    fontFamily: 'SCDream3',
+    color: '#ffffff',
   },
 })
 
