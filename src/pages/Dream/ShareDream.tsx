@@ -86,7 +86,7 @@ export default function ShareDream({navigation, route}) {
   useEffect(() => {
     AsyncStorage.getItem('nickname').then(nickname => {
       const name = JSON.stringify(nickname)
-      setNickname(name.substring(1, nickname?.length - 1))
+      setNickname(name.replace(/"/g, ''))
     })
   }, [nickname])
 

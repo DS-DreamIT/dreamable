@@ -90,9 +90,11 @@ export default function OthersDiaryPage({navigation, route}) {
                 />
               </View>
             ) : (
-              <Text style={styles.warningText}>
-                {route.params.mood}에 해당하는 꿈이 아직 없어요
-              </Text>
+              <View style={styles.dreamBox}>
+                <Text style={styles.warningText}>
+                  {route.params.mood}에 해당하는 꿈이 아직 없어요
+                </Text>
+              </View>
             )}
           </>
         ) : (
@@ -139,11 +141,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   warningText: {
-    color: '#FFFFFF',
+    color: '#000000',
     fontSize: 20,
     alignSelf: 'center',
     marginTop: 15,
-    margin: 30,
+    margin: 20,
+    fontFamily: 'SCDream4',
   },
   moodText: {
     color: '#FFFFFF',

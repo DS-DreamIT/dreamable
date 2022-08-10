@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import {
   Image,
   ImageBackground,
@@ -6,10 +6,16 @@ import {
   Text,
   View,
   TouchableOpacity,
+  Alert,
 } from 'react-native'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 // @ts-ignore
 export default function OthersMainPage({navigation}) {
+  const [refreshing, setRefreshing] = useState(false)
+  const [click, setClick] = useState(false)
+  const [prevClickTime, setPrevClickTime] = useState('')
+
   const moodWord = [
     '행복',
     '중립',
@@ -33,15 +39,37 @@ export default function OthersMainPage({navigation}) {
     return setTextRandomMood[setTextRandomMood.length - 1]
   }
 
-  const [refreshing, setRefreshing] = useState(false)
-
-  const onRefreshFalse = () => {
-    setRefreshing(true)
-  }
-
   const onRefreshTrue = () => {
     setRefreshing(false)
   }
+
+  const check = async () => {
+    const time = new Date().getDate()
+    await AsyncStorage.setItem('time', time.toString())
+    setClick(false)
+    setRefreshing(false)
+  }
+
+  useEffect(() => {
+    let today = new Date().getDate()
+    AsyncStorage.getItem('time').then(time => {
+      setPrevClickTime(JSON.parse(time))
+    })
+    console.log('처음' + prevClickTime)
+    if (prevClickTime === null) {
+      setClick(true)
+      setRefreshing(true)
+    } else {
+      const diff = Math.floor(
+        (today - Number(prevClickTime)) / (1000 * 60 * 60 * 24),
+      )
+      console.log(diff)
+      if (diff > 0) {
+        setClick(true)
+        setRefreshing(true)
+      }
+    }
+  }, [prevClickTime])
 
   return (
     <ImageBackground
@@ -49,7 +77,9 @@ export default function OthersMainPage({navigation}) {
       style={styles.bgImage}>
       <TouchableOpacity
         onPress={() => {
-          refreshing ? onRefreshTrue() : onRefreshFalse()
+          refreshing
+            ? onRefreshTrue()
+            : Alert.alert('잠시만요 !', '하루에 한 번만 새로고침 할 수 있어요!')
         }}>
         <Image
           source={require('../../assets/icons/refresh.png')}
@@ -63,9 +93,20 @@ export default function OthersMainPage({navigation}) {
         <TouchableOpacity
           style={styles.leftCloudy}
           onPress={() => {
-            navigation.navigate('OthersDiaryPage', {
-              mood: setTextRandomMood[0],
-            })
+            {
+              click
+                ? navigation.navigate(
+                    'OthersDiaryPage',
+                    {
+                      mood: setTextRandomMood[0],
+                    },
+                    check(),
+                  )
+                : Alert.alert(
+                    '잠시만요 !',
+                    '하루에 한 번만 타인의 꿈을 볼 수 있습니다.',
+                  )
+            }
           }}>
           <Image
             source={require('../../assets/icons/cloudy.png')}
@@ -80,9 +121,20 @@ export default function OthersMainPage({navigation}) {
         <TouchableOpacity
           style={styles.rightCloudy}
           onPress={() => {
-            navigation.navigate('OthersDiaryPage', {
-              mood: setTextRandomMood[1],
-            })
+            {
+              click
+                ? navigation.navigate(
+                    'OthersDiaryPage',
+                    {
+                      mood: setTextRandomMood[1],
+                    },
+                    check(),
+                  )
+                : Alert.alert(
+                    '잠시만요 !',
+                    '하루에 한 번만 타인의 꿈을 볼 수 있습니다.',
+                  )
+            }
           }}>
           <Image
             source={require('../../assets/icons/cloudy.png')}
@@ -97,9 +149,20 @@ export default function OthersMainPage({navigation}) {
         <TouchableOpacity
           style={styles.leftCloudy}
           onPress={() => {
-            navigation.navigate('OthersDiaryPage', {
-              mood: setTextRandomMood[2],
-            })
+            {
+              click
+                ? navigation.navigate(
+                    'OthersDiaryPage',
+                    {
+                      mood: setTextRandomMood[2],
+                    },
+                    check(),
+                  )
+                : Alert.alert(
+                    '잠시만요 !',
+                    '하루에 한 번만 타인의 꿈을 볼 수 있습니다.',
+                  )
+            }
           }}>
           <Image
             source={require('../../assets/icons/cloudy.png')}
