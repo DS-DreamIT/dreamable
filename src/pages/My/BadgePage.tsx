@@ -3,6 +3,7 @@ import {View, Text, StyleSheet, ImageBackground, Image, TouchableOpacity, Alert}
 import BadgeData from '../../assets/data/BadgeData'
 import TopBar from '../../components/Common/TopBar'
 import Config from 'react-native-config'
+import * as Progress from 'react-native-progress'
 
 
 
@@ -21,6 +22,7 @@ export default function BadgePage({navigation}) {
     let data=BadgeData
     let yn=false
     const [badges, setBadges] = useState([])
+    const [spinner, setSpinner] = useState(true)
     const userId = '62df4bc8f1ff31b19db9ace9'
 
 
@@ -37,6 +39,7 @@ export default function BadgePage({navigation}) {
               // 유저 뱃지 배열 불러옴
               setBadges(response.user.badge)
               console.log(response.user)
+              setSpinner(false)
             }
           })
       }, [])
@@ -77,6 +80,17 @@ export default function BadgePage({navigation}) {
                 source={require('../../assets/icons/star.png')}
                 style={styles.backstar6PNG}
         />
+        {spinner ? (
+              <View style={[styles.spinner]}>
+                <Progress.Circle
+                  size={30}
+                  indeterminate={true}
+                  borderColor={'#ffffff'}
+                />
+              </View>
+            ) : (
+              <Text/>
+            )}
         
         <View>
             {data.map((BadgeData, index)=>{
@@ -89,7 +103,7 @@ export default function BadgePage({navigation}) {
                             <TouchableOpacity onPress={() => Alert.alert(BadgeData.eng, BadgeData.description)}>
                             <View key={index} style={styles.happystyle}>
                                 <Image source={BadgeData.src} style={styles.badgestyle}></Image>
-                                <Text>{BadgeData.eng}</Text>
+                                <Text style={styles.badgetext}>{BadgeData.eng}</Text>
                             </View>
                             </TouchableOpacity>
                             
@@ -105,7 +119,7 @@ export default function BadgePage({navigation}) {
                             <TouchableOpacity onPress={() => Alert.alert(BadgeData.eng, BadgeData.description)}>
                                 <View key={index} style={styles.neutralitystyle}>
                                 <Image source={BadgeData.src} style={styles.badgestyle}></Image>
-                                <Text>{BadgeData.eng}</Text>
+                                <Text style={styles.badgetext}>{BadgeData.eng}</Text>
                             </View>
                             </TouchableOpacity>
                             
@@ -120,7 +134,7 @@ export default function BadgePage({navigation}) {
                             <TouchableOpacity onPress={() => Alert.alert(BadgeData.eng, BadgeData.description)}>
                                 <View key={index} style={styles.sadstyle}>
                                 <Image source={BadgeData.src} style={styles.badgestyle}></Image>
-                                <Text>{BadgeData.eng}</Text>
+                                <Text style={styles.badgetext}>{BadgeData.eng}</Text>
                             </View>
                             </TouchableOpacity>
                             
@@ -135,7 +149,7 @@ export default function BadgePage({navigation}) {
                             <TouchableOpacity onPress={() => Alert.alert(BadgeData.eng, BadgeData.description)}>
                                 <View key={index} style={styles.fearstyle}>
                                  <Image source={BadgeData.src} style={styles.badgestyle}></Image>
-                                 <Text>{BadgeData.eng}</Text>
+                                 <Text style={styles.badgetext}>{BadgeData.eng}</Text>
                             </View>
                             </TouchableOpacity>
                             
@@ -150,7 +164,7 @@ export default function BadgePage({navigation}) {
                             <TouchableOpacity onPress={() => Alert.alert(BadgeData.eng, BadgeData.description)}>
                                 <View key={index} style={styles.angerstyle}>
                                 <Image source={BadgeData.src} style={styles.badgestyle}></Image>
-                                <Text>{BadgeData.eng}</Text>
+                                <Text style={styles.badgetext}>{BadgeData.eng}</Text>
                             </View>
                             </TouchableOpacity>
                             
@@ -165,7 +179,7 @@ export default function BadgePage({navigation}) {
                             <TouchableOpacity onPress={() => Alert.alert(BadgeData.eng, BadgeData.description)}>
                                 <View key={index} style={styles.unreststyle}>
                                 <Image source={BadgeData.src} style={styles.badgestyle}></Image>
-                                <Text>{BadgeData.eng}</Text>
+                                <Text style={styles.badgetext}>{BadgeData.eng}</Text>
                             </View>
                             </TouchableOpacity>
                             
@@ -180,7 +194,7 @@ export default function BadgePage({navigation}) {
                             <TouchableOpacity onPress={() => Alert.alert(BadgeData.eng, BadgeData.description)}>
                                 <View key={index} style={styles.surprisestyle}>
                                 <Image source={BadgeData.src} style={styles.badgestyle}></Image>
-                                <Text>{BadgeData.eng}</Text>
+                                <Text style={styles.badgetext}>{BadgeData.eng}</Text>
                             </View>
                             </TouchableOpacity>
                             
@@ -195,7 +209,7 @@ export default function BadgePage({navigation}) {
                             <TouchableOpacity onPress={() => Alert.alert(BadgeData.eng, BadgeData.description)}>
                                 <View key={index} style={styles.flutterstyle}>
                                 <Image source={BadgeData.src} style={styles.badgestyle}></Image>
-                                <Text>{BadgeData.eng}</Text>
+                                <Text style={styles.badgetext}>{BadgeData.eng}</Text>
                             </View>
                             </TouchableOpacity>
                             
@@ -210,7 +224,7 @@ export default function BadgePage({navigation}) {
                             <TouchableOpacity onPress={() => Alert.alert(BadgeData.eng, BadgeData.description)}>
                                 <View key={index} style={styles.fullmoonstyle}>
                                 <Image source={BadgeData.src} style={styles.badgeallstyle}></Image>
-                                <Text>{BadgeData.eng}</Text>
+                                <Text style={styles.badgetext}>{BadgeData.eng}</Text>
                             </View>
                             </TouchableOpacity>
                             
@@ -225,7 +239,7 @@ export default function BadgePage({navigation}) {
                             <TouchableOpacity onPress={() => Alert.alert(BadgeData.eng, BadgeData.description)}>
                                 <View key={index} style={styles.dreampiecestyle}>
                                 <Image source={BadgeData.src} style={styles.badgeallstyle}></Image>
-                                <Text>{BadgeData.eng}</Text>
+                                <Text style={styles.badgetext}>{BadgeData.eng}</Text>
                             </View>
                             </TouchableOpacity>
                             
@@ -240,7 +254,7 @@ export default function BadgePage({navigation}) {
                             <TouchableOpacity onPress={() => Alert.alert(BadgeData.eng, BadgeData.description)}>
                                 <View key={index} style={styles.writingbeginnerstyle}>
                                 <Image source={BadgeData.src} style={styles.badgeallstyle}></Image>
-                                <Text>{BadgeData.eng}</Text>
+                                <Text style={styles.badgetext}>{BadgeData.eng}</Text>
                             </View>
                             </TouchableOpacity>
                             
@@ -255,7 +269,7 @@ export default function BadgePage({navigation}) {
                             <TouchableOpacity onPress={() => Alert.alert(BadgeData.eng, BadgeData.description)}>
                                 <View key={index} style={styles.dreamtravelstyle}>
                                 <Image source={BadgeData.src} style={styles.badgeallstyle}></Image>
-                                <Text>{BadgeData.eng}</Text>
+                                <Text style={styles.badgetext}>{BadgeData.eng}</Text>
                             </View>
                             </TouchableOpacity>
                             
@@ -270,7 +284,7 @@ export default function BadgePage({navigation}) {
                             <TouchableOpacity onPress={() => Alert.alert(BadgeData.eng, BadgeData.description)}>
                                 <View key={index} style={styles.likeadreamstyle}>
                                 <Image source={BadgeData.src} style={styles.badgeallstyle}></Image>
-                                <Text>{BadgeData.eng}</Text>
+                                <Text style={styles.badgetext}>{BadgeData.eng}</Text>
                             </View>
                             </TouchableOpacity>
                             
@@ -285,7 +299,7 @@ export default function BadgePage({navigation}) {
                             <TouchableOpacity onPress={() => Alert.alert(BadgeData.eng, BadgeData.description)}>
                                 <View key={index} style={styles.dreamunlockstyle}>
                                 <Image source={BadgeData.src} style={styles.badgeallstyle}></Image>
-                                <Text>{BadgeData.eng}</Text>
+                                <Text style={styles.badgetext}>{BadgeData.eng}</Text>
                             </View>
                             </TouchableOpacity>
                             
@@ -375,7 +389,7 @@ const styles = StyleSheet.create({
   },
   happystyle: {
     position: 'absolute',
-    marginTop: 60,
+    marginTop: 50,
     left: 35,
   },
   neutralitystyle: {
@@ -385,22 +399,22 @@ const styles = StyleSheet.create({
   },
   sadstyle: {
     position: 'absolute',
-    marginTop: 260,
+    marginTop: 270,
     left: 35,
   },
   fearstyle: {
     position: 'absolute',
-    marginTop: 360,
+    marginTop: 380,
     left: 35,
   },
   angerstyle: {
     position: 'absolute',
-    marginTop: 460,
+    marginTop: 490,
     left: 35,
   },
   unreststyle: {
     position: 'absolute',
-    marginTop: 60,
+    marginTop: 50,
     left: 150,
   },
   surprisestyle: {
@@ -410,38 +424,48 @@ const styles = StyleSheet.create({
   },
   flutterstyle: {
     position: 'absolute',
-    marginTop: 260,
+    marginTop: 270,
     left: 150,
   },
   fullmoonstyle: {
     position: 'absolute',
-    marginTop: 370,
+    marginTop: 380,
     left: 165,
   },
   dreampiecestyle: {
     position: 'absolute',
-    marginTop: 480,
+    marginTop: 490,
     left: 165,
   },
   writingbeginnerstyle: {
     position: 'absolute',
-    marginTop: 75,
+    marginTop: 65,
     left: 280,
   },
   dreamtravelstyle: {
     position: 'absolute',
-    marginTop: 175,
+    marginTop: 165,
     left: 280,
   },
   likeadreamstyle: {
     position: 'absolute',
-    marginTop: 275,
+    marginTop: 265,
     left: 280,
   },
   dreamunlockstyle: {
     position: 'absolute',
-    marginTop: 375,
+    marginTop: 365,
     left: 280,
+  },
+  badgetext: {
+    fontFamily: 'RobotoLightItalic',
+    color: '#ffffff',
+    textAlign: 'center'
+  },
+  spinner: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 
 })
