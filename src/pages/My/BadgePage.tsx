@@ -125,7 +125,7 @@ export default function BadgePage({navigation}) {
                       <Image
                         source={BadgeData.src}
                         style={styles.badgestyle}></Image>
-                      <Text style={styles.badgetext}>{BadgeData.eng}</Text>
+                      <Text style={styles.badgetext}>{BadgeData.kor}</Text>
                     </View>
                   </TouchableOpacity>
                 )
@@ -142,7 +142,7 @@ export default function BadgePage({navigation}) {
                       <Image
                         source={BadgeData.src}
                         style={styles.badgestyle}></Image>
-                      <Text style={styles.badgetext}>{BadgeData.eng}</Text>
+                      <Text style={styles.badgetext}>{BadgeData.kor}</Text>
                     </View>
                   </TouchableOpacity>
                 )
@@ -159,7 +159,7 @@ export default function BadgePage({navigation}) {
                       <Image
                         source={BadgeData.src}
                         style={styles.badgestyle}></Image>
-                      <Text style={styles.badgetext}>{BadgeData.eng}</Text>
+                      <Text style={styles.badgetext}>{BadgeData.kor}</Text>
                     </View>
                   </TouchableOpacity>
                 )
@@ -176,7 +176,7 @@ export default function BadgePage({navigation}) {
                       <Image
                         source={BadgeData.src}
                         style={styles.badgestyle}></Image>
-                      <Text style={styles.badgetext}>{BadgeData.eng}</Text>
+                      <Text style={styles.badgetext}>{BadgeData.kor}</Text>
                     </View>
                   </TouchableOpacity>
                 )
@@ -193,7 +193,7 @@ export default function BadgePage({navigation}) {
                       <Image
                         source={BadgeData.src}
                         style={styles.badgestyle}></Image>
-                      <Text style={styles.badgetext}>{BadgeData.eng}</Text>
+                      <Text style={styles.badgetext}>{BadgeData.kor}</Text>
                     </View>
                   </TouchableOpacity>
                 )
@@ -210,7 +210,7 @@ export default function BadgePage({navigation}) {
                       <Image
                         source={BadgeData.src}
                         style={styles.badgestyle}></Image>
-                      <Text style={styles.badgetext}>{BadgeData.eng}</Text>
+                      <Text style={styles.badgetext}>{BadgeData.kor}</Text>
                     </View>
                   </TouchableOpacity>
                 )
@@ -227,7 +227,7 @@ export default function BadgePage({navigation}) {
                       <Image
                         source={BadgeData.src}
                         style={styles.badgestyle}></Image>
-                      <Text style={styles.badgetext}>{BadgeData.eng}</Text>
+                      <Text style={styles.badgetext}>{BadgeData.kor}</Text>
                     </View>
                   </TouchableOpacity>
                 )
@@ -244,7 +244,7 @@ export default function BadgePage({navigation}) {
                       <Image
                         source={BadgeData.src}
                         style={styles.badgestyle}></Image>
-                      <Text style={styles.badgetext}>{BadgeData.eng}</Text>
+                      <Text style={styles.badgetext}>{BadgeData.kor}</Text>
                     </View>
                   </TouchableOpacity>
                 )
@@ -261,7 +261,7 @@ export default function BadgePage({navigation}) {
                       <Image
                         source={BadgeData.src}
                         style={styles.badgeallstyle}></Image>
-                      <Text style={styles.badgetext}>{BadgeData.eng}</Text>
+                      <Text style={styles.badgetext}>{BadgeData.kor}</Text>
                     </View>
                   </TouchableOpacity>
                 )
@@ -278,7 +278,7 @@ export default function BadgePage({navigation}) {
                       <Image
                         source={BadgeData.src}
                         style={styles.badgeallstyle}></Image>
-                      <Text style={styles.badgetext}>{BadgeData.eng}</Text>
+                      <Text style={styles.badgetext}>{BadgeData.kor}</Text>
                     </View>
                   </TouchableOpacity>
                 )
@@ -295,7 +295,7 @@ export default function BadgePage({navigation}) {
                       <Image
                         source={BadgeData.src}
                         style={styles.badgeallstyle}></Image>
-                      <Text style={styles.badgetext}>{BadgeData.eng}</Text>
+                      <Text style={styles.badgetext}>{BadgeData.kor}</Text>
                     </View>
                   </TouchableOpacity>
                 )
@@ -312,7 +312,7 @@ export default function BadgePage({navigation}) {
                       <Image
                         source={BadgeData.src}
                         style={styles.badgeallstyle}></Image>
-                      <Text style={styles.badgetext}>{BadgeData.eng}</Text>
+                      <Text style={styles.badgetext}>{BadgeData.kor}</Text>
                     </View>
                   </TouchableOpacity>
                 )
@@ -329,7 +329,7 @@ export default function BadgePage({navigation}) {
                       <Image
                         source={BadgeData.src}
                         style={styles.badgeallstyle}></Image>
-                      <Text style={styles.badgetext}>{BadgeData.eng}</Text>
+                      <Text style={styles.badgetext}>{BadgeData.kor}</Text>
                     </View>
                   </TouchableOpacity>
                 )
@@ -346,7 +346,7 @@ export default function BadgePage({navigation}) {
                       <Image
                         source={BadgeData.src}
                         style={styles.badgeallstyle}></Image>
-                      <Text style={styles.badgetext}>{BadgeData.eng}</Text>
+                      <Text style={styles.badgetext}>{BadgeData.kor}</Text>
                     </View>
                   </TouchableOpacity>
                 )
@@ -389,7 +389,7 @@ const styles = StyleSheet.create({
   },
   backPNG: {
     position: 'absolute',
-    top: 80,
+    top: 70,
     left: 60,
   },
   backstarPNG: {
@@ -432,7 +432,7 @@ const styles = StyleSheet.create({
   },
   happystyle: {
     position: 'absolute',
-    marginTop: 50,
+    marginTop: 40,
     left: 35,
   },
   neutralitystyle: {
@@ -442,22 +442,22 @@ const styles = StyleSheet.create({
   },
   sadstyle: {
     position: 'absolute',
-    marginTop: 270,
+    marginTop: 280,
     left: 35,
   },
   fearstyle: {
     position: 'absolute',
-    marginTop: 380,
+    marginTop: 400,
     left: 35,
   },
   angerstyle: {
     position: 'absolute',
-    marginTop: 490,
-    left: 35,
+    marginTop: 400,
+    left: 150,
   },
   unreststyle: {
     position: 'absolute',
-    marginTop: 50,
+    marginTop: 40,
     left: 150,
   },
   surprisestyle: {
@@ -467,18 +467,18 @@ const styles = StyleSheet.create({
   },
   flutterstyle: {
     position: 'absolute',
-    marginTop: 270,
+    marginTop: 280,
     left: 150,
   },
   fullmoonstyle: {
     position: 'absolute',
-    marginTop: 380,
-    left: 165,
+    marginTop: 285,
+    left: 280,
   },
   dreampiecestyle: {
     position: 'absolute',
-    marginTop: 490,
-    left: 165,
+    marginTop: 395,
+    left: 280,
   },
   writingbeginnerstyle: {
     position: 'absolute',
@@ -487,21 +487,21 @@ const styles = StyleSheet.create({
   },
   dreamtravelstyle: {
     position: 'absolute',
-    marginTop: 165,
+    marginTop: 175,
     left: 280,
   },
   likeadreamstyle: {
     position: 'absolute',
-    marginTop: 265,
+    marginTop: 285,
     left: 280,
   },
   dreamunlockstyle: {
     position: 'absolute',
-    marginTop: 365,
+    marginTop: 395,
     left: 280,
   },
   badgetext: {
-    fontFamily: 'RobotoLightItalic',
+    fontFamily: 'SCDream3',
     color: '#ffffff',
     textAlign: 'center',
   },
