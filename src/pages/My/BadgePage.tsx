@@ -216,7 +216,7 @@ export default function BadgePage({navigation}) {
                 )
               }
             } else if (index == 6) {
-              if (badges.includes('SurpriseBadge') == true) {
+              if (badges.includes('SurprisedBadge') == true) {
                 badgecount += 1
                 return (
                   <TouchableOpacity
@@ -284,7 +284,7 @@ export default function BadgePage({navigation}) {
                 )
               }
             } else if (index == 10) {
-              if (badges.includes('WritingbeginnerBadge') == true) {
+              if (badges.includes('WritingBeginnerBadge') == true) {
                 badgecount += 1
                 return (
                   <TouchableOpacity
@@ -301,7 +301,7 @@ export default function BadgePage({navigation}) {
                 )
               }
             } else if (index == 11) {
-              if (badges.includes('DreamtravelBadge') == true) {
+              if (badges.includes('DreamTravelerBadge') == true) {
                 badgecount += 1
                 return (
                   <TouchableOpacity
@@ -318,7 +318,7 @@ export default function BadgePage({navigation}) {
                 )
               }
             } else if (index == 12) {
-              if (badges.includes('LikeadreamBadge') == true) {
+              if (badges.includes('LikeADreamBadge') == true) {
                 badgecount += 1
                 return (
                   <TouchableOpacity
