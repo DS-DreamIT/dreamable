@@ -44,6 +44,7 @@ const registerDate = selectedDate => {
 
 // @ts-ignore
 const todayEmotion = (selectedDate, getDatas, navigation) => {
+  console.disableYellowBox = true;
   const index = dataIndex(selectedDate, getDatas)
   let emotions = ''
 
