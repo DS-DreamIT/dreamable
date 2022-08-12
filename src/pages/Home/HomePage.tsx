@@ -29,6 +29,7 @@ export default function HomePage({navigation}) {
   }, [])
 
   useEffect(() => {
+    console.disableYellowBox = true;
     if (userId) {
       fetch(`${Config.API_URL}/api/user/${userId}`, {
         method: 'GET',
