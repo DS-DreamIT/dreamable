@@ -21,6 +21,7 @@ export default function OthersDiaryPage({navigation, route}) {
   const [spinner, setSpinner] = useState(true)
 
   useEffect(() => {
+    console.disableYellowBox = true
     AsyncStorage.getItem('user').then(user => {
       setUserId(JSON.parse(user).id)
       setSpinner(false)

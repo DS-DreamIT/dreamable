@@ -106,6 +106,8 @@ export default function App() {
       signOut: async () => {
         try {
           await AsyncStorage.removeItem('user')
+          await AsyncStorage.removeItem('nickname')
+          await AsyncStorage.removeItem('time')
         } catch (e) {
           console.log(e)
         }
