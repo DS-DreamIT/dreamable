@@ -30,11 +30,14 @@ const Uploadfiles = props => {
     await launchImageLibrary({}, res => {
       if (res.didCancel) {
         console.log('User cancelled image picker')
+        setImg(false)
       } else if (res.errorCode) {
         console.log('ImagePicker Error: ', res.errorCode)
+        setImg(false)
       } else if (res.assets) {
         //정상적으로 사진을 반환 받았을 때
         console.log('ImagePicker res', res)
+        setImg(true)
         image.name = res.assets[0]?.fileName
         image.type = res.assets[0]?.type
         image.uri =
@@ -43,7 +46,6 @@ const Uploadfiles = props => {
             : res.assets[0]?.uri?.replace('file://', '')
       }
     })
-    setImg(true)
     props.data.append('Image', image)
   }
 
