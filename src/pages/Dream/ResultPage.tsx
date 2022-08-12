@@ -17,6 +17,7 @@ import MoodCard from '../../components/Card/MoodCard'
 import Config from 'react-native-config'
 import KeywordCard from '../../components/Card/KeywordCard'
 import EmotionData from '../../assets/data/EmotionData'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 const title = '당신의 꿈은 어땠을까요?'
 const word = '꿈 단어'
@@ -29,8 +30,15 @@ const date = format(new Date(), 'yyyy-MM-dd')
 export default function ResultPage({navigation, route}) {
   const diaryID = route.params.diaryID
   const date = route.params.day
+  const [userId, setUserId] = useState('')
   const [diary, setDiary] = useState([])
   const [result, setResult] = useState({})
+
+  useEffect(() => {
+    AsyncStorage.getItem('user').then(user => {
+      setUserId(JSON.parse(user).id)
+    })
+  }, [])
 
   useEffect(() => {
     if (diary.length != 0) {
@@ -40,7 +48,7 @@ export default function ResultPage({navigation, route}) {
   }, [diary])
 
   useEffect(() => {
-    fetch(`${Config.API_URL}/api/diary/${diaryID}`, {
+    fetch(`${Config.API_URL}/api/diary/${diaryID}/user/${userId}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -51,9 +59,10 @@ export default function ResultPage({navigation, route}) {
         if (response.success) {
           // 유저 다이어리 목록 불러옴
           setDiary(response.diary)
+          console.log(diaryID)
         }
       })
-  }, [])
+  }, [userId])
 
   const [modalVisible, setModalVisible] = useState(false)
 

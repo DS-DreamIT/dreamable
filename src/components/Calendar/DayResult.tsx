@@ -57,7 +57,7 @@ const todayEmotion = (selectedDate, getDatas, navigation) => {
         이 날은 꾼 꿈이 없네요!
       </Text>
     </View>
-  ) : registerDate(selectedDate) > 5 ? (
+  ) : registerDate(selectedDate) >= 5 ? (
     <View style={styles.flex}>
       {emotions ? (
         <Text style={{fontSize: 20, fontFamily: 'SCDream3'}}>
