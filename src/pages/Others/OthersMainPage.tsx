@@ -55,7 +55,6 @@ export default function OthersMainPage({navigation}) {
     AsyncStorage.getItem('time').then(time => {
       setPrevClickTime(JSON.parse(time))
     })
-    console.log('처음' + prevClickTime)
     if (prevClickTime === null) {
       setClick(true)
       setRefreshing(true)
