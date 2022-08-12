@@ -169,7 +169,9 @@ export default function ResultPage({navigation, route}) {
                 </TouchableOpacity>
               </View>
               <ScrollView style={styles.diaryBox}>
-                <Text style={styles.diaryText}>{diary.content}</Text>
+                <View style={styles.result}>
+                  <Text style={styles.diaryText}>{diary.content}</Text>
+                </View>
               </ScrollView>
             </View>
             <View style={styles.diaryContainer}>
