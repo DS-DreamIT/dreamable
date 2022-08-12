@@ -18,6 +18,7 @@ import Config from 'react-native-config'
 import KeywordCard from '../../components/Card/KeywordCard'
 import EmotionData from '../../assets/data/EmotionData'
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import * as Progress from 'react-native-progress'
 
 const title = '당신의 꿈은 어땠을까요?'
 const word = '꿈 단어'
@@ -30,6 +31,7 @@ const date = format(new Date(), 'yyyy-MM-dd')
 export default function ResultPage({navigation, route}) {
   const diaryID = route.params.diaryID
   const date = route.params.day
+  const [spinner, setSpinner] = useState(true)
   const [userId, setUserId] = useState('')
   const [diary, setDiary] = useState([])
   const [result, setResult] = useState({})
@@ -45,9 +47,11 @@ export default function ResultPage({navigation, route}) {
       const result = EmotionData.find(data => data.kor === diary.emotion[0])
       result ? setResult(result) : setResult({})
     }
+    setSpinner(false)
   }, [diary])
 
   useEffect(() => {
+    setSpinner(true)
     fetch(`${Config.API_URL}/api/diary/${diaryID}/user/${userId}`, {
       method: 'GET',
       headers: {
@@ -100,84 +104,94 @@ export default function ResultPage({navigation, route}) {
             </View>
           </View>
         </Modal>
-        <View style={[styles.flex]}>
-          <Text style={styles.title}>{title}</Text>
-          <View style={styles.wordContainer}>
-            <View>
-              <Text style={styles.text}>{word}</Text>
-              <View style={styles.wordBox}>
-                {Object.keys(diary).length ? (
-                  diary.keyword.length == 0 ? (
-                    <Text style={styles.diaryText}>
-                      키워드가 없는 꿈을 꾸었어요.
-                    </Text>
-                  ) : (
-                    //@ts-ignore
-                    diary.keyword.map((keywordData, index) => {
-                      return <KeywordCard keyword={keywordData} />
-                    })
-                  )
-                ) : (
-                  <></>
-                )}
-              </View>
-            </View>
-            <View>
-              <Text style={styles.text}>{analysis}</Text>
-              <View style={styles.wordBox}>
-                {Object.keys(diary).length ? (
-                  diary.emotion.length == 0 ? (
-                    <Text style={styles.diaryText}>
-                      감정이 없는 꿈을 꾸었어요.
-                    </Text>
-                  ) : (
-                    //@ts-ignore
-                    diary.emotion.map((emotionData, index) => {
-                      return <MoodCard type={emotionData} />
-                    })
-                  )
-                ) : (
-                  <></>
-                )}
-              </View>
-            </View>
+        {spinner ? (
+          <View style={[styles.spinner]}>
+            <Progress.Circle
+              size={30}
+              indeterminate={true}
+              borderColor={'#ffffff'}
+            />
           </View>
-          <View style={styles.diaryContainer}>
+        ) : (
+          <View style={[styles.flex]}>
+            <Text style={styles.title}>{title}</Text>
             <View style={styles.wordContainer}>
-              <Text style={styles.text}>{story}</Text>
-              <TouchableOpacity
-                style={styles.getImageContainer}
-                onPress={() => setModalVisible(true)}>
-                <Text style={styles.getImageText}>꿈 이미지 보기</Text>
-                <Image
-                  style={styles.getImage}
-                  source={require('../../assets/icons/upload-gallery-selected.png')}
-                />
-              </TouchableOpacity>
-            </View>
-            <ScrollView style={styles.diaryBox}>
-              <Text style={styles.diaryText}>{diary.content}</Text>
-            </ScrollView>
-          </View>
-          <View style={styles.diaryContainer}>
-            <Text style={styles.text}>{analresult}</Text>
-            <ScrollView style={styles.resultBox}>
-              <View style={styles.result}>
-                {Object.keys(diary).length ? (
-                  diary.emotion.length == 0 ? (
-                    <Text style={styles.diaryText}>
-                      감정이 없는 꿈을 꾸었기에 분석 결과가 없어요.
-                    </Text>
+              <View>
+                <Text style={styles.text}>{word}</Text>
+                <View style={styles.wordBox}>
+                  {Object.keys(diary).length ? (
+                    diary.keyword.length == 0 ? (
+                      <Text style={styles.diaryText}>
+                        키워드가 없는 꿈을 꾸었어요.
+                      </Text>
+                    ) : (
+                      //@ts-ignore
+                      diary.keyword.map((keywordData, index) => {
+                        return <KeywordCard keyword={keywordData} />
+                      })
+                    )
                   ) : (
-                    <Text style={styles.diaryText}>{result.long}</Text>
-                  )
-                ) : (
-                  <></>
-                )}
+                    <></>
+                  )}
+                </View>
               </View>
-            </ScrollView>
+              <View>
+                <Text style={styles.text}>{analysis}</Text>
+                <View style={styles.wordBox}>
+                  {Object.keys(diary).length ? (
+                    diary.emotion.length == 0 ? (
+                      <Text style={styles.diaryText}>
+                        감정이 없는 꿈을 꾸었어요.
+                      </Text>
+                    ) : (
+                      //@ts-ignore
+                      diary.emotion.map((emotionData, index) => {
+                        return <MoodCard type={emotionData} />
+                      })
+                    )
+                  ) : (
+                    <></>
+                  )}
+                </View>
+              </View>
+            </View>
+            <View style={styles.diaryContainer}>
+              <View style={styles.wordContainer}>
+                <Text style={styles.text}>{story}</Text>
+                <TouchableOpacity
+                  style={styles.getImageContainer}
+                  onPress={() => setModalVisible(true)}>
+                  <Text style={styles.getImageText}>꿈 이미지 보기</Text>
+                  <Image
+                    style={styles.getImage}
+                    source={require('../../assets/icons/upload-gallery-selected.png')}
+                  />
+                </TouchableOpacity>
+              </View>
+              <ScrollView style={styles.diaryBox}>
+                <Text style={styles.diaryText}>{diary.content}</Text>
+              </ScrollView>
+            </View>
+            <View style={styles.diaryContainer}>
+              <Text style={styles.text}>{analresult}</Text>
+              <ScrollView style={styles.resultBox}>
+                <View style={styles.result}>
+                  {Object.keys(diary).length ? (
+                    diary.emotion.length == 0 ? (
+                      <Text style={styles.diaryText}>
+                        감정이 없는 꿈을 꾸었기에 분석 결과가 없어요.
+                      </Text>
+                    ) : (
+                      <Text style={styles.diaryText}>{result.long}</Text>
+                    )
+                  ) : (
+                    <></>
+                  )}
+                </View>
+              </ScrollView>
+            </View>
           </View>
-        </View>
+        )}
       </ImageBackground>
     </SafeAreaView>
   )
@@ -187,6 +201,11 @@ const styles = StyleSheet.create({
   flex: {flex: 1},
   result: {
     paddingBottom: 20,
+  },
+  spinner: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   title: {
     textAlign: 'center',
@@ -243,7 +262,7 @@ const styles = StyleSheet.create({
     flex: 0.5,
     borderRadius: 5,
     borderColor: '#cccccc',
-    backgroundColor: '#ffffff88',
+    backgroundColor: '#ffffffBB',
     padding: 10,
   },
   text: {
