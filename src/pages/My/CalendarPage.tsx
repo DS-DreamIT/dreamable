@@ -53,6 +53,7 @@ export default function CalendarPage({navigation}) {
         acc[formattedDate] = {dots: getEomtions(current)}
         return acc
       }, {})
+
       setMarkedDates(mark)
       setSpinner(false)
     }
@@ -71,6 +72,9 @@ export default function CalendarPage({navigation}) {
           if (response.success) {
             // 유저 다이어리 목록 불러옴
             setDiaries(response.diaries)
+            if (response.diaries.length == 0) {
+              setSpinner(false)
+            }
           }
         })
     }

@@ -129,68 +129,66 @@ export default function ShareDream({navigation, route}) {
           <View style={styles.sepline} />
 
           <ViewShot ref={captureRef} options={{format: 'jpg', quality: 1}}>
-            <View>
-              <View style={styles.bigbox}>
-                <Text style={styles.smalltitle}>{smallTitle}</Text>
-                <View>
-                  <Image
-                    style={[styles.image]}
-                    source={require('../../assets/icons/cloudy.png')}
-                  />
-                  {route.params.emotion.length === 0 ||
-                  route.params.emotion.length === undefined ? (
-                    <></>
-                  ) : (
-                    <></>
-                  )}
-                  {route.params.emotion.length === 1 ? (
-                    <Text style={styles.oneMoodText}>
+            <View style={styles.bigbox}>
+              <Text style={styles.smalltitle}>{smallTitle}</Text>
+              <View>
+                <Image
+                  style={[styles.image]}
+                  source={require('../../assets/icons/cloudy.png')}
+                />
+                {route.params.emotion.length === 0 ||
+                route.params.emotion.length === undefined ? (
+                  <></>
+                ) : (
+                  <></>
+                )}
+                {route.params.emotion.length === 1 ? (
+                  <Text style={styles.oneMoodText}>
+                    #{route.params.emotion[0]}
+                  </Text>
+                ) : (
+                  <></>
+                )}
+                {route.params.emotion.length === 2 ? (
+                  <>
+                    <Text style={styles.twoFirstMoodText}>
                       #{route.params.emotion[0]}
                     </Text>
-                  ) : (
-                    <></>
-                  )}
-                  {route.params.emotion.length === 2 ? (
-                    <>
-                      <Text style={styles.twoFirstMoodText}>
-                        #{route.params.emotion[0]}
-                      </Text>
-                      <Text style={styles.twoSecondMoodText}>
-                        #{route.params?.emotion[1]}
-                      </Text>
-                    </>
-                  ) : (
-                    <></>
-                  )}
-                  {route.params.emotion.length === 3 ? (
-                    <>
-                      <Text style={styles.threeFirstMoodText}>
-                        #{route.params.emotion[0]}
-                      </Text>
-                      <Text style={styles.threeSecondMoodText}>
-                        #{route.params?.emotion[1]}
-                      </Text>
-                      <Text style={styles.threeThirdMoodText}>
-                        #{route.params?.emotion[2]}
-                      </Text>
-                    </>
-                  ) : (
-                    <></>
-                  )}
-                </View>
-                <View style={styles.smallbox}>
-                  <Text style={styles.smallBoxText}>
-                    오늘 {nickname}님의 꿈에서는{' '}
-                    {route.params?.emotion.map(emotion => (
-                      <Text style={styles.smallBoxText}>'{emotion}' </Text>
-                    ))}
-                    의 감정이 느껴져요.{' '}
-                    {route.params?.keyword.map(keyword => (
-                      <Text style={styles.keywordText}>'{keyword}' </Text>
-                    ))}
-                    에 관한 꿈을 꾸셨네요. {advice()}
-                  </Text>
-                </View>
+                    <Text style={styles.twoSecondMoodText}>
+                      #{route.params?.emotion[1]}
+                    </Text>
+                  </>
+                ) : (
+                  <></>
+                )}
+                {route.params.emotion.length === 3 ? (
+                  <>
+                    <Text style={styles.threeFirstMoodText}>
+                      #{route.params.emotion[0]}
+                    </Text>
+                    <Text style={styles.threeSecondMoodText}>
+                      #{route.params?.emotion[1]}
+                    </Text>
+                    <Text style={styles.threeThirdMoodText}>
+                      #{route.params?.emotion[2]}
+                    </Text>
+                  </>
+                ) : (
+                  <></>
+                )}
+              </View>
+              <View style={styles.smallbox}>
+                <Text style={styles.smallBoxText}>
+                  오늘 {nickname}님의 꿈에서는{' '}
+                  {route.params?.emotion.map(emotion => (
+                    <Text style={styles.smallBoxText}>'{emotion}' </Text>
+                  ))}
+                  의 감정이 느껴져요.{' '}
+                  {route.params?.keyword.map(keyword => (
+                    <Text style={styles.keywordText}>'{keyword}' </Text>
+                  ))}
+                  에 관한 꿈을 꾸셨네요. {advice()}
+                </Text>
               </View>
             </View>
           </ViewShot>
