@@ -12,7 +12,6 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 
 // @ts-ignore
 export default function OthersMainPage({navigation}) {
-  const [refreshing, setRefreshing] = useState(false)
   const [click, setClick] = useState(false)
   const [prevClickTime, setPrevClickTime] = useState('')
 
@@ -39,55 +38,39 @@ export default function OthersMainPage({navigation}) {
     return setTextRandomMood[setTextRandomMood.length - 1]
   }
 
-  const onRefreshTrue = () => {
-    setRefreshing(false)
-  }
+  // const check = async () => {
+  //   const time = new Date().getDate()
+  //   await AsyncStorage.setItem('time', time.toString())
+  //   setClick(false)
+  // }
 
-  const check = async () => {
-    const time = new Date().getDate()
-    await AsyncStorage.setItem('time', time.toString())
-    setClick(false)
-    setRefreshing(false)
-  }
-
-  useEffect(() => {
-    let today = new Date().getDate()
-    AsyncStorage.getItem('time').then(time => {
-      setPrevClickTime(JSON.parse(time))
-    })
-    if (prevClickTime === null) {
-      setClick(true)
-      setRefreshing(true)
-    } else {
-      const diff = Math.floor(
-        (today - Number(prevClickTime)) / (1000 * 60 * 60 * 24),
-      )
-      console.log(diff)
-      if (diff > 0) {
-        setClick(true)
-        setRefreshing(true)
-      }
-    }
-  }, [prevClickTime])
+  // useEffect(() => {
+  //   let today = new Date().getDate()
+  //   AsyncStorage.getItem('time').then(time => {
+  //     setPrevClickTime(JSON.parse(time))
+  //   })
+  //   if (prevClickTime === null) {
+  //     setClick(true)
+  //   } else {
+  //     const diff = Math.floor(
+  //       (today - Number(prevClickTime)) / (1000 * 60 * 60 * 24),
+  //     )
+  //     console.log(diff)
+  //     if (diff > 0) {
+  //       setClick(true)
+  //     }
+  //   }
+  // }, [prevClickTime])
 
   return (
     <ImageBackground
       source={require('../../assets/images/background-others.png')}
       style={styles.bgImage}>
-      <TouchableOpacity
-        onPress={() => {
-          refreshing
-            ? onRefreshTrue()
-            : Alert.alert('잠시만요 !', '하루에 한 번만 새로고침 할 수 있어요!')
-        }}>
-        <Image
-          source={require('../../assets/icons/refresh.png')}
-          style={styles.refreshImg}
-        />
-      </TouchableOpacity>
-      <Text style={styles.mainText}>
-        하루에 단 한 번,{'\n'} 타인의 꿈을 소개해드려요.
-      </Text>
+      <View style={styles.mainView}>
+        <Text style={styles.mainText}>
+          하루에 단 한 번,{'\n'} 타인의 꿈을 소개해드려요.
+        </Text>
+      </View>
       <View style={styles.leftCloudyView}>
         <TouchableOpacity
           style={styles.leftCloudy}
@@ -191,6 +174,9 @@ const styles = StyleSheet.create({
     marginRight: 10,
     alignSelf: 'flex-end',
     tintColor: '#FFFFFF',
+  },
+  mainView: {
+    marginTop: 50,
   },
   mainText: {
     fontFamily: 'SCDream5-Regular',
