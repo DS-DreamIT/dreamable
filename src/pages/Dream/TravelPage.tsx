@@ -22,27 +22,29 @@ export default function TravelPage({navigation, route}) {
   }, [])
 
   useEffect(() => {
-    fetch(
-      `${Config.API_URL}/api/diary/emotion/${
-        route.params.emotion[createRandomNum()]
-      }/user/${userId}`,
-      {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
+    if (userId) {
+      fetch(
+        `${Config.API_URL}/api/diary/emotion/${
+          route.params.emotion[createRandomNum()]
+        }/user/${userId}`,
+        {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
         },
-      },
-    )
-      .then(response => response.json())
-      .then(response => {
-        if (response.success) {
-          console.log(othersDiary)
-          if (othersDiary.length === 0) {
-            console.log(response.diary)
-            setOthersDiary(response.diary)
+      )
+        .then(response => response.json())
+        .then(response => {
+          if (response.success) {
+            console.log(othersDiary)
+            if (othersDiary.length === 0) {
+              console.log(response.diary)
+              setOthersDiary(response.diary)
+            }
           }
-        }
-      })
+        })
+    }
   }, [userId])
 
   return (

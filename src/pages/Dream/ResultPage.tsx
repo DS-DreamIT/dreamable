@@ -51,21 +51,23 @@ export default function ResultPage({navigation, route}) {
   }, [diary])
 
   useEffect(() => {
-    setSpinner(true)
-    fetch(`${Config.API_URL}/api/diary/${diaryID}/user/${userId}`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-      .then(response => response.json())
-      .then(response => {
-        if (response.success) {
-          // 유저 다이어리 목록 불러옴
-          setDiary(response.diary)
-          console.log(diaryID)
-        }
+    if (userId) {
+      setSpinner(true)
+      fetch(`${Config.API_URL}/api/diary/${diaryID}/user/${userId}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
       })
+        .then(response => response.json())
+        .then(response => {
+          if (response.success) {
+            // 유저 다이어리 목록 불러옴
+            setDiary(response.diary)
+            console.log(diaryID)
+          }
+        })
+    }
   }, [userId])
 
   const [modalVisible, setModalVisible] = useState(false)
