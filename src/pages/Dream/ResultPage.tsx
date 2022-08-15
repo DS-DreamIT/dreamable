@@ -11,6 +11,7 @@ import {
   ScrollView,
   Button,
   Modal,
+  Alert,
 } from 'react-native'
 import TopBar from '../../components/Common/TopBar'
 import MoodCard from '../../components/Card/MoodCard'
@@ -65,6 +66,9 @@ export default function ResultPage({navigation, route}) {
             // 유저 다이어리 목록 불러옴
             setDiary(response.diary)
             console.log(diaryID)
+          } else {
+            setSpinner(false)
+            Alert.alert('꿈을 저장할 수 없어요', '다음에 다시 시도해주세요')
           }
         })
     }
