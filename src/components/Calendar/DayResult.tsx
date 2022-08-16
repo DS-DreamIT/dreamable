@@ -44,7 +44,7 @@ const registerDate = selectedDate => {
 
 // @ts-ignore
 const todayEmotion = (selectedDate, getDatas, navigation) => {
-  console.disableYellowBox = true;
+  console.disableYellowBox = true
   const index = dataIndex(selectedDate, getDatas)
   let emotions = ''
 
@@ -58,7 +58,7 @@ const todayEmotion = (selectedDate, getDatas, navigation) => {
         이 날은 꾼 꿈이 없네요!
       </Text>
     </View>
-  ) : registerDate(selectedDate) >= 5 ? (
+  ) : registerDate(selectedDate) >= 3 ? (
     <View style={styles.flex}>
       {emotions ? (
         <Text style={{fontSize: 20, fontFamily: 'SCDream3'}}>
@@ -86,7 +86,7 @@ const todayEmotion = (selectedDate, getDatas, navigation) => {
   ) : (
     <View>
       <Text style={{fontSize: 20, fontFamily: 'SCDream3'}}>
-        꿈 열어보기까지 D-{5 - registerDate(selectedDate)}
+        꿈 열어보기까지 D-{3 - registerDate(selectedDate)}
       </Text>
     </View>
   )
