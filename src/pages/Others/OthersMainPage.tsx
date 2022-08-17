@@ -38,29 +38,36 @@ export default function OthersMainPage({navigation}) {
     return setTextRandomMood[setTextRandomMood.length - 1]
   }
 
-  // const check = async () => {
-  //   const time = new Date().getDate()
-  //   await AsyncStorage.setItem('time', time.toString())
-  //   setClick(false)
-  // }
+  const check = async () => {
+    const time = new Date().getDate()
+    await AsyncStorage.setItem('time', time.toString())
+    setClick(false)
+  }
 
-  // useEffect(() => {
-  //   let today = new Date().getDate()
-  //   AsyncStorage.getItem('time').then(time => {
-  //     setPrevClickTime(JSON.parse(time))
-  //   })
-  //   if (prevClickTime === null) {
-  //     setClick(true)
-  //   } else {
-  //     const diff = Math.floor(
-  //       (today - Number(prevClickTime)) / (1000 * 60 * 60 * 24),
-  //     )
-  //     console.log(diff)
-  //     if (diff > 0) {
-  //       setClick(true)
-  //     }
-  //   }
-  // }, [prevClickTime])
+  useEffect(() => {
+    async function checkDate() {
+      console.disableYellowBox = true
+      let today = new Date().getDate()
+      AsyncStorage.getItem('time').then(time => {
+        setPrevClickTime(JSON.parse(time))
+      })
+      if (
+        prevClickTime === null ||
+        prevClickTime === undefined ||
+        prevClickTime === ''
+      ) {
+        setClick(true)
+      } else {
+        const diff = Math.floor(
+          (today - Number(prevClickTime)) / (1000 * 60 * 60 * 24),
+        )
+        if (diff > 0) {
+          setClick(true)
+        }
+      }
+    }
+    checkDate()
+  }, [])
 
   return (
     <ImageBackground

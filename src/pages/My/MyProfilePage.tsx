@@ -36,7 +36,6 @@ export default function MyProfilePage({navigation}) {
         .then(response => response.json())
         .then(response => {
           if (response.success) {
-            // 유저 정보 불러옴
             setUser(response.user)
           }
         })
@@ -44,7 +43,6 @@ export default function MyProfilePage({navigation}) {
         .then(response => response.json())
         .then(response => {
           if (response.success) {
-            console.log(response.diary_count)
             setCount(response.diary_count)
           }
         })
@@ -128,6 +126,12 @@ export default function MyProfilePage({navigation}) {
             />
           </TouchableOpacity>
         </View>
+        <View style={styles.coconutContent}>
+          <Image
+            source={require('../../assets/images/coconut.png')}
+            style={styles.coconut}
+          />
+        </View>
       </ImageBackground>
     </View>
   )
@@ -137,6 +141,14 @@ const styles = StyleSheet.create({
   bgImage: {
     width: '100%',
     height: '100%',
+  },
+  coconut: {
+    width: 120,
+    height: 100,
+  },
+  coconutContent: {
+    alignItems: 'center',
+    marginTop: 30,
   },
   view: {
     flex: 1,

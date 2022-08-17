@@ -29,6 +29,7 @@ export default function HomePage({navigation}) {
   }, [])
 
   useEffect(() => {
+    console.disableYellowBox = true
     if (userId) {
       fetch(`${Config.API_URL}/api/user/${userId}`, {
         method: 'GET',
@@ -53,7 +54,7 @@ export default function HomePage({navigation}) {
           setDiaries1(temp1)
           setDiaries2(temp2)
         })
-        
+
       fetch(`${Config.API_URL}/api/diary/recent/user/${userId}`)
         .then(response => response.json())
         .then(response => {
@@ -64,7 +65,6 @@ export default function HomePage({navigation}) {
               (today.getDate() - createdAt.getDate()) / (1000 * 60 * 60 * 24),
             )
             if (diff > 0) setWriteRight(true)
-            console.log(diff)
           }
         })
     }

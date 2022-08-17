@@ -6,7 +6,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 
 // @ts-ignore
 export default function TravelPage({navigation, route}) {
-  const [othersDiary, setOthersDiary] = useState([]) // 다른 사용자 일기
+  const [othersDiary, setOthersDiary] = useState([])
   const [userId, setUserId] = useState('')
 
   const createRandomNum = () => {
@@ -22,27 +22,27 @@ export default function TravelPage({navigation, route}) {
   }, [])
 
   useEffect(() => {
-    fetch(
-      `${Config.API_URL}/api/diary/emotion/${
-        route.params.emotion[createRandomNum()]
-      }/user/${userId}`,
-      {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
+    if (userId) {
+      fetch(
+        `${Config.API_URL}/api/diary/emotion/${
+          route.params.emotion[createRandomNum()]
+        }/user/${userId}`,
+        {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
         },
-      },
-    )
-      .then(response => response.json())
-      .then(response => {
-        if (response.success) {
-          console.log(othersDiary)
-          if (othersDiary.length === 0) {
-            console.log(response.diary)
-            setOthersDiary(response.diary)
+      )
+        .then(response => response.json())
+        .then(response => {
+          if (response.success) {
+            if (othersDiary.length === 0) {
+              setOthersDiary(response.diary)
+            }
           }
-        }
-      })
+        })
+    }
   }, [userId])
 
   return (

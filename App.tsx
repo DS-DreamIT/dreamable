@@ -106,6 +106,8 @@ export default function App() {
       signOut: async () => {
         try {
           await AsyncStorage.removeItem('user')
+          await AsyncStorage.removeItem('nickname')
+          await AsyncStorage.removeItem('time')
         } catch (e) {
           console.log(e)
         }
@@ -182,38 +184,6 @@ export default function App() {
     <AuthContext.Provider value={authContext}>
       <NavigationContainer>
         {loginState.userToken?.length > 0 ? (
-          // <Stack.Navigator screenOptions={{headerShown: false}}>
-          //   <Stack.Screen name="MainNavigator" component={MainNavigator} />
-          //   <Stack.Screen
-          //     name="Home"
-          //     component={Home}
-          //     options={{title: 'Home'}}
-          //   />
-          //   <Stack.Screen
-          //     name="BrowsePage"
-          //     component={BrowsePage}
-          //     options={{title: 'Browse'}}
-          //   />
-          //   <Stack.Screen
-          //     name="Mypage"
-          //     component={MyPage}
-          //     options={{title: 'Mypage'}}
-          //   />
-          //   <Stack.Screen
-          //     name="SelectPage"
-          //     component={SelectPage}
-          //     options={{title: 'SelectPage'}}
-          //   />
-          //   <Stack.Screen name="AdvicePage" component={AdvicePage} />
-          //   <Stack.Screen name="ShareDream" component={ShareDream} />
-          //   <Stack.Screen name="TravelPage" component={TravelPage} />
-          //   <Stack.Screen name="WritingPage" component={WritingPage} />
-          //   <Stack.Screen name="Gallery" component={Gallery} />
-          //   <Stack.Screen name="MyProfilePage" component={MyProfilePage} />
-          //   <Stack.Screen name="ResultPage" component={ResultPage} />
-          //   <Stack.Screen name="CalendarPage" component={CalendarPage} />
-          //   <Stack.Screen name="SelectCard" component={SelectCard} />
-          // </Stack.Navigator>
           <MainNavigator />
         ) : (
           <Stack.Navigator screenOptions={{headerShown: false}}>

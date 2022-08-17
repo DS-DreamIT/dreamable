@@ -69,9 +69,7 @@ export default function BadgePage({navigation}) {
         .then(response => response.json())
         .then(response => {
           if (response.success) {
-            // 유저 뱃지 배열 불러옴
             setBadges(response.user.badge)
-            console.log(response.user)
             setSpinner(false)
           }
         })
@@ -86,7 +84,6 @@ export default function BadgePage({navigation}) {
         <TopBar navigation={navigation} type={'BACK'} />
         {data.map((BadgeData, index) => {
           if (index === 0) {
-            console.log(badges)
             if (badges.includes('HappyBadge') === true) {
               return (
                 <Modal
@@ -95,7 +92,7 @@ export default function BadgePage({navigation}) {
                   visible={happyModal}>
                   <View style={styles.modalcontainer}>
                     <View style={styles.modalBox}>
-                      <Text style={styles.modalTitle}>{BadgeData.eng}</Text>
+                      <Text style={styles.modalTitle}>{BadgeData.kor}</Text>
                       <Text style={styles.modalText}>
                         {BadgeData.description}
                       </Text>
@@ -118,7 +115,7 @@ export default function BadgePage({navigation}) {
                   visible={neutralityModal}>
                   <View style={styles.modalcontainer}>
                     <View style={styles.modalBox}>
-                      <Text style={styles.modalTitle}>{BadgeData.eng}</Text>
+                      <Text style={styles.modalTitle}>{BadgeData.kor}</Text>
                       <Text style={styles.modalText}>
                         {BadgeData.description}
                       </Text>
@@ -141,7 +138,7 @@ export default function BadgePage({navigation}) {
                   visible={sadModal}>
                   <View style={styles.modalcontainer}>
                     <View style={styles.modalBox}>
-                      <Text style={styles.modalTitle}>{BadgeData.eng}</Text>
+                      <Text style={styles.modalTitle}>{BadgeData.kor}</Text>
                       <Text style={styles.modalText}>
                         {BadgeData.description}
                       </Text>
@@ -164,7 +161,7 @@ export default function BadgePage({navigation}) {
                   visible={fearModal}>
                   <View style={styles.modalcontainer}>
                     <View style={styles.modalBox}>
-                      <Text style={styles.modalTitle}>{BadgeData.eng}</Text>
+                      <Text style={styles.modalTitle}>{BadgeData.kor}</Text>
                       <Text style={styles.modalText}>
                         {BadgeData.description}
                       </Text>
@@ -187,7 +184,7 @@ export default function BadgePage({navigation}) {
                   visible={angerModal}>
                   <View style={styles.modalcontainer}>
                     <View style={styles.modalBox}>
-                      <Text style={styles.modalTitle}>{BadgeData.eng}</Text>
+                      <Text style={styles.modalTitle}>{BadgeData.kor}</Text>
                       <Text style={styles.modalText}>
                         {BadgeData.description}
                       </Text>
@@ -210,7 +207,7 @@ export default function BadgePage({navigation}) {
                   visible={unrestModal}>
                   <View style={styles.modalcontainer}>
                     <View style={styles.modalBox}>
-                      <Text style={styles.modalTitle}>{BadgeData.eng}</Text>
+                      <Text style={styles.modalTitle}>{BadgeData.kor}</Text>
                       <Text style={styles.modalText}>
                         {BadgeData.description}
                       </Text>
@@ -233,7 +230,7 @@ export default function BadgePage({navigation}) {
                   visible={surprisedModal}>
                   <View style={styles.modalcontainer}>
                     <View style={styles.modalBox}>
-                      <Text style={styles.modalTitle}>{BadgeData.eng}</Text>
+                      <Text style={styles.modalTitle}>{BadgeData.kor}</Text>
                       <Text style={styles.modalText}>
                         {BadgeData.description}
                       </Text>
@@ -256,7 +253,7 @@ export default function BadgePage({navigation}) {
                   visible={flutterModal}>
                   <View style={styles.modalcontainer}>
                     <View style={styles.modalBox}>
-                      <Text style={styles.modalTitle}>{BadgeData.eng}</Text>
+                      <Text style={styles.modalTitle}>{BadgeData.kor}</Text>
                       <Text style={styles.modalText}>
                         {BadgeData.description}
                       </Text>
@@ -279,7 +276,7 @@ export default function BadgePage({navigation}) {
                   visible={fullmoonModal}>
                   <View style={styles.modalcontainer}>
                     <View style={styles.modalBox}>
-                      <Text style={styles.modalTitle}>{BadgeData.eng}</Text>
+                      <Text style={styles.modalTitle}>{BadgeData.kor}</Text>
                       <Text style={styles.modalText}>
                         {BadgeData.description}
                       </Text>
@@ -302,7 +299,7 @@ export default function BadgePage({navigation}) {
                   visible={dreampieceModal}>
                   <View style={styles.modalcontainer}>
                     <View style={styles.modalBox}>
-                      <Text style={styles.modalTitle}>{BadgeData.eng}</Text>
+                      <Text style={styles.modalTitle}>{BadgeData.kor}</Text>
                       <Text style={styles.modalText}>
                         {BadgeData.description}
                       </Text>
@@ -325,7 +322,7 @@ export default function BadgePage({navigation}) {
                   visible={writingbeginnerModal}>
                   <View style={styles.modalcontainer}>
                     <View style={styles.modalBox}>
-                      <Text style={styles.modalTitle}>{BadgeData.eng}</Text>
+                      <Text style={styles.modalTitle}>{BadgeData.kor}</Text>
                       <Text style={styles.modalText}>
                         {BadgeData.description}
                       </Text>
@@ -348,7 +345,7 @@ export default function BadgePage({navigation}) {
                   visible={dreamtravelerModal}>
                   <View style={styles.modalcontainer}>
                     <View style={styles.modalBox}>
-                      <Text style={styles.modalTitle}>{BadgeData.eng}</Text>
+                      <Text style={styles.modalTitle}>{BadgeData.kor}</Text>
                       <Text style={styles.modalText}>
                         {BadgeData.description}
                       </Text>
@@ -371,7 +368,7 @@ export default function BadgePage({navigation}) {
                   visible={likeadreamModal}>
                   <View style={styles.modalcontainer}>
                     <View style={styles.modalBox}>
-                      <Text style={styles.modalTitle}>{BadgeData.eng}</Text>
+                      <Text style={styles.modalTitle}>{BadgeData.kor}</Text>
                       <Text style={styles.modalText}>
                         {BadgeData.description}
                       </Text>
@@ -394,7 +391,7 @@ export default function BadgePage({navigation}) {
                   visible={dreamunlockModal}>
                   <View style={styles.modalcontainer}>
                     <View style={styles.modalBox}>
-                      <Text style={styles.modalTitle}>{BadgeData.eng}</Text>
+                      <Text style={styles.modalTitle}>{BadgeData.kor}</Text>
                       <Text style={styles.modalText}>
                         {BadgeData.description}
                       </Text>
@@ -454,8 +451,6 @@ export default function BadgePage({navigation}) {
         <View>
           {data.map((BadgeData, index) => {
             if (index == 0) {
-              console.log('요기')
-              console.log(badges)
               if (badges.includes('HappyBadge') == true) {
                 badgecount += 1
                 return (
@@ -728,8 +723,8 @@ const styles = StyleSheet.create({
     height: 100,
   },
   badgeallstyle: {
-    width: 70,
-    height: 70,
+    width: 80,
+    height: 80,
   },
   happystyle: {
     position: 'absolute',

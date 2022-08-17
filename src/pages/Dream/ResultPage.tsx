@@ -11,6 +11,7 @@ import {
   ScrollView,
   Button,
   Modal,
+  Alert,
 } from 'react-native'
 import TopBar from '../../components/Common/TopBar'
 import MoodCard from '../../components/Card/MoodCard'
@@ -51,21 +52,24 @@ export default function ResultPage({navigation, route}) {
   }, [diary])
 
   useEffect(() => {
-    setSpinner(true)
-    fetch(`${Config.API_URL}/api/diary/${diaryID}/user/${userId}`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-      .then(response => response.json())
-      .then(response => {
-        if (response.success) {
-          // 유저 다이어리 목록 불러옴
-          setDiary(response.diary)
-          console.log(diaryID)
-        }
+    if (userId) {
+      setSpinner(true)
+      fetch(`${Config.API_URL}/api/diary/${diaryID}/user/${userId}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
       })
+        .then(response => response.json())
+        .then(response => {
+          if (response.success) {
+            setDiary(response.diary)
+          } else {
+            setSpinner(false)
+            Alert.alert('꿈을 저장할 수 없어요', '다음에 다시 시도해주세요')
+          }
+        })
+    }
   }, [userId])
 
   const [modalVisible, setModalVisible] = useState(false)

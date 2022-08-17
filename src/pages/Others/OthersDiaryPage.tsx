@@ -21,6 +21,7 @@ export default function OthersDiaryPage({navigation, route}) {
   const [spinner, setSpinner] = useState(true)
 
   useEffect(() => {
+    console.disableYellowBox = true
     AsyncStorage.getItem('user').then(user => {
       setUserId(JSON.parse(user).id)
       setSpinner(false)
@@ -31,7 +32,7 @@ export default function OthersDiaryPage({navigation, route}) {
     if (userId) {
       fetch(`${Config.API_URL}/api/diary/${diary._id}/likes/user/${userId}`, {
         method: 'PUT',
-      }).then(response => console.log(response.user))
+      }).then()
     }
   }
   const clickLike = () => {

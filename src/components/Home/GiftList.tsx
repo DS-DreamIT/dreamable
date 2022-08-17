@@ -15,7 +15,6 @@ const GiftList = ({data, navigation}) => {
       }
     })
     if (!color) {
-      // 감정이 없는 꿈
       color = '#858585'
     }
     return (
