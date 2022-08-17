@@ -2,20 +2,8 @@ import React from 'react'
 import {StyleSheet, View, Text} from 'react-native'
 import {TouchableOpacity} from 'react-native-gesture-handler'
 
-//type PropTypes = {
-//  keyword: string[]
-//  emotion: string[]
-//  text: string
-//_onClick: Function
-//_onClick: NavigationAction
-//navigation: NavigationAction
-//}
-
 // @ts-ignore
 export default function SelectCard({navigation, keyword, emotion, text, move}) {
-  console.log(keyword)
-  console.log(emotion)
-
   return (
     <View style={styles.container}>
       <TouchableOpacity>

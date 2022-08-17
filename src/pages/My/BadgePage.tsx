@@ -69,9 +69,7 @@ export default function BadgePage({navigation}) {
         .then(response => response.json())
         .then(response => {
           if (response.success) {
-            // 유저 뱃지 배열 불러옴
             setBadges(response.user.badge)
-            console.log(response.user)
             setSpinner(false)
           }
         })
@@ -86,7 +84,6 @@ export default function BadgePage({navigation}) {
         <TopBar navigation={navigation} type={'BACK'} />
         {data.map((BadgeData, index) => {
           if (index === 0) {
-            console.log(badges)
             if (badges.includes('HappyBadge') === true) {
               return (
                 <Modal
@@ -454,8 +451,6 @@ export default function BadgePage({navigation}) {
         <View>
           {data.map((BadgeData, index) => {
             if (index == 0) {
-              console.log('요기')
-              console.log(badges)
               if (badges.includes('HappyBadge') == true) {
                 badgecount += 1
                 return (

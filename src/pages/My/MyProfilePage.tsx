@@ -36,7 +36,6 @@ export default function MyProfilePage({navigation}) {
         .then(response => response.json())
         .then(response => {
           if (response.success) {
-            // 유저 정보 불러옴
             setUser(response.user)
           }
         })
@@ -44,7 +43,6 @@ export default function MyProfilePage({navigation}) {
         .then(response => response.json())
         .then(response => {
           if (response.success) {
-            console.log(response.diary_count)
             setCount(response.diary_count)
           }
         })

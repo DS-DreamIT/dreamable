@@ -37,7 +37,6 @@ export default function WritingPage({navigation}) {
     } else {
       Alert.alert('Warning', '충분한 분석을 위해 10글자 이상 입력해주세요.')
     }
-    console.log(userId)
     fetch(`${Config.API_URL}/api/diary/user/${userId}`, {
       method: 'POST',
       headers: {},
@@ -46,7 +45,6 @@ export default function WritingPage({navigation}) {
       .then(response => response.json())
       .then(response => {
         if (response.success) {
-          console.log(response.diary)
           navigation.navigate('SelectPage', {
             screen: 'SelectPage',
             id: response.diary._id,

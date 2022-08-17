@@ -21,13 +21,11 @@ const title = 'Share your Dreams'
 const smallTitle = 'Personal Dream'
 
 // @ts-ignore
-//const captureRef = useRef<any | undefined | null>()
 export default function ShareDream({navigation, route}) {
   const captureRef = useRef(null)
   const getPhotoUri = async (): Promise<string> => {
     // @ts-ignore
     const uri = await captureRef.current.capture()
-    console.log('Image saved to', uri)
     return uri
   }
 
@@ -45,13 +43,11 @@ export default function ShareDream({navigation, route}) {
 
       if (social === null) {
         const result = await Share.open(options)
-        console.log('result with no social', result)
       } else {
         const result = await Share.shareSingle({
           ...options,
           social,
         })
-        console.log(`result with social ${social}`, result)
       }
     } catch (e) {
       console.log('화면 캡쳐 failed', e)
@@ -71,14 +67,12 @@ export default function ShareDream({navigation, route}) {
   }
 
   const onSave = async () => {
-    console.log('here?')
     if (Platform.OS === 'android' && !(await hasAndroidPermission())) {
       return
     }
 
     const uri = await getPhotoUri()
     const result = await CameraRoll.save(uri)
-    console.log('result', result)
   }
 
   const [nickname, setNickname] = useState('')

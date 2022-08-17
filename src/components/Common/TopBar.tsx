@@ -3,9 +3,9 @@ import {StyleSheet, View, Image, Text, TouchableOpacity} from 'react-native'
 
 // @ts-ignore
 const TopBar = ({navigation, type, date}) => {
-  const goBack = useCallback(() => navigation.pop(), []) // 오류
+  const goBack = useCallback(() => navigation.pop(), [])
   const goHome = useCallback(() => navigation.navigate('Home'), [])
-  // https://joylee-developer.tistory.com/175
+
   return (
     <>
       {type === 'HOME' ? (

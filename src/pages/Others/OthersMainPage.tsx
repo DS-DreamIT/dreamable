@@ -61,7 +61,6 @@ export default function OthersMainPage({navigation}) {
         const diff = Math.floor(
           (today - Number(prevClickTime)) / (1000 * 60 * 60 * 24),
         )
-        console.log(diff)
         if (diff > 0) {
           setClick(true)
         }

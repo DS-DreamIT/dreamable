@@ -63,9 +63,7 @@ export default function ResultPage({navigation, route}) {
         .then(response => response.json())
         .then(response => {
           if (response.success) {
-            // 유저 다이어리 목록 불러옴
             setDiary(response.diary)
-            console.log(diaryID)
           } else {
             setSpinner(false)
             Alert.alert('꿈을 저장할 수 없어요', '다음에 다시 시도해주세요')

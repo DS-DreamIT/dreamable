@@ -32,7 +32,7 @@ export default function OthersDiaryPage({navigation, route}) {
     if (userId) {
       fetch(`${Config.API_URL}/api/diary/${diary._id}/likes/user/${userId}`, {
         method: 'PUT',
-      }).then(response => console.log(response.user))
+      }).then()
     }
   }
   const clickLike = () => {

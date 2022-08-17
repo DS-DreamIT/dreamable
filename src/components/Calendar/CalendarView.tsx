@@ -65,9 +65,6 @@ const CalendarView = ({markedDates, selectedDate, getDatas, navigation}) => {
           headerStyle={styles.customHeader}
           onDayPress={onDayPress}
           monthFormat={'yyyy MMMM'}
-          onMonthChange={month => {
-            console.log('month changed', month)
-          }}
           hideExtraDays={true}
           disableMonthChange={true}
           onPressArrowLeft={subtractMonth => subtractMonth()}

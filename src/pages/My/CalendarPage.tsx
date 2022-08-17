@@ -34,15 +34,13 @@ export default function CalendarPage({navigation}) {
     })
   }, [])
 
-  // 사용자가 작성한 일기 데이터
   useEffect(() => {
-    // data를 배열 형태로 받아오기
     if (diaries.length != 0) {
       const getEntries = Object.entries(diaries).map((entrie, idx) => {
         return entrie
       })
       setSpinner(true)
-      // reduce를 사용하여 객체 처리
+
       let mark = getEntries.reduce((acc, current) => {
         //@ts-ignore
         const formattedDate = format(
@@ -70,7 +68,6 @@ export default function CalendarPage({navigation}) {
         .then(response => response.json())
         .then(response => {
           if (response.success) {
-            // 유저 다이어리 목록 불러옴
             setDiaries(response.diaries)
             if (response.diaries.length == 0) {
               setSpinner(false)

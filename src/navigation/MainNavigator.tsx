@@ -18,7 +18,7 @@ export default function MainNavigator() {
   const screenOptions = ({ route }: { route: RouteProp<ParamListBase, string> }) => {
     const { name } = route
     return {
-      headerShown: false, // 헤더 삭제
+      headerShown: false, 
       tabBarLabel: ({ focused, color, size }: TabBarProps) => {
         switch (name) { 
           case 'home':
